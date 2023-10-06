@@ -1,0 +1,27 @@
+---
+import "@fontsource-variable/inter";
+import Blog from "~/components/blog.astro";
+import Intro from "~/components/intro.astro";
+import News from "~/components/news/news.astro";
+import Splash from "~/components/splash.astro";
+import Technologies from "~/components/technologies.astro";
+import TextBlock from "~/components/text-block.astro";
+import PhotoGallery from "~/components/photo-gallery.astro";
+import Layout from "../layouts/Layout.astro";
+import Vacancies from "~/components/vacancies/vacancies.astro";
+import Footer from "~/components/footer.astro";
+---
+
+<Layout title="">
+  <Splash />
+  <Intro />
+  <Technologies />
+  <Blog />
+  <TextBlock
+    text="Мы решаем реально интересные хайлоад-задачи и применяем лучшие практики для построения инфраструктуры, позволяющей поддерживать проекты красиво и эффективно."
+  />
+  <PhotoGallery />
+  <Vacancies />
+  <News />
+  <Footer absolute={false} color="black" />
+</Layout>

@@ -1,0 +1,191 @@
+---
+import GalleryLinkElement from "./gallery-link-element.astro";
+import "@splidejs/splide/css/core";
+import First from "~/assets/photoes/1.png";
+import Second from "~/assets/photoes/2.png";
+import Third from "~/assets/photoes/3.png";
+import Fourth from "~/assets/photoes/4.png";
+import Fivth from "~/assets/photoes/5.png";
+import Sixth from "~/assets/photoes/6.png";
+import Seventh from "~/assets/photoes/7.png";
+import PhotoesHeader from "~/assets/photo-header.svg";
+
+const images = [
+  {
+    src: First.src,
+    title: "HighLoad конференция",
+    subtitle: "Стенд OK.TECH",
+  },
+  {
+    src: Second.src,
+    title: "Чикуня житель офиса",
+    subtitle: "Офис OK",
+  },
+  {
+    src: Third.src,
+    title: "Делимся опытом",
+    subtitle: "Москва",
+  },
+  {
+    src: Fourth.src,
+    title: "Выступаем на ML OK.TECH",
+    subtitle: "Оранжерея Санкт-Петербурга",
+  },
+  {
+    src: Fivth.src,
+    title: "Выступаем на ML OK.TECH",
+    subtitle: "Оранжерея Санкт-Петербурга",
+  },
+  {
+    src: Sixth.src,
+    title: "Офис, игровая комната",
+    subtitle: "Офис Санкт-Петербурга",
+  },
+  {
+    src: Seventh.src,
+    title: "Кухня",
+    subtitle: "Офис Санкт-Петербурга",
+  },
+];
+---
+
+<section class="section-y overflow-hidden px-4">
+  <div class="head text-animation-title flex">
+    <img src={PhotoesHeader.src} class="max-w-none animate-textAnimation" />
+    <img src={PhotoesHeader.src} class="max-w-none animate-textAnimation" />
+  </div>
+  <div class="hidden grid-cols-3 grid-rows-6 gap-4 lg:grid">
+    {
+      images.map((image) => (
+        <div class="element relative overflow-hidden rounded-3xl">
+          <div class="image-blur absolute h-full w-full rounded-lg p-6 backdrop-blur-2xl">
+            <div class="text-headline">{image.subtitle}</div>
+            <div class="text-title-2">{image.title}</div>
+          </div>
+          <img
+            class="image h-full w-full rounded-lg object-cover"
+            src={image.src}
+            alt=""
+            loading="lazy"
+          />
+        </div>
+      ))
+    }
+    <GalleryLinkElement />
+  </div>
+  <div id="main-slider" class="splide lg:hidden">
+    <div class="splide__track rounded-3xl">
+      <ul class="splide__list">
+        {
+          images.map((image) => (
+            <li class="splide__slide object-cover">
+              <img src={image.src} class="h-[625px]" />
+            </li>
+          ))
+        }
+        <li class="splide__slide">
+          <GalleryLinkElement />
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="thumbnail-slider" class="splide pt-4 lg:hidden">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          images.map((image) => (
+            <li class="splide__slide rounded-3xl">
+              <img src={image.src} />
+            </li>
+          ))
+        }
+        <li class="splide__slide border-none">
+          <div class="h-full w-full rounded-3xl bg-black"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style type="text/scss">
+  .image-blur {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  .text,
+  .image-blur {
+    transition: opacity 0.3s;
+  }
+  .image {
+    transition: filter 0.3s;
+  }
+  .element {
+    &:nth-of-type(1),
+    &:nth-of-type(4),
+    &:nth-of-type(7) {
+      grid-row: span 2;
+    }
+    &:nth-of-type(3) {
+      grid-row: 2;
+      grid-column: 2;
+    }
+    &:nth-of-type(5),
+    &:nth-of-type(6) {
+      grid-row: span 2;
+      grid-column: span 2;
+    }
+    &:nth-of-type(8) {
+      grid-column: 1;
+      grid-row: 3 / span 2;
+    }
+    &:hover {
+      .image-blur {
+        opacity: 1;
+      }
+    }
+  }
+</style>
+
+<script>
+  import Splide from "@splidejs/splide";
+
+  const main = new Splide("#main-slider", {
+    type: "fade",
+    heightRatio: 0.5,
+    height: "625px",
+    pagination: false,
+    arrows: false,
+    cover: true,
+    breakpoints: {
+      600: {
+        height: "400px",
+      },
+    },
+  });
+
+  const thumbnails = new Splide("#thumbnail-slider", {
+    rewind: true,
+    fixedWidth: 80,
+    fixedHeight: 80,
+    isNavigation: true,
+    gap: 10,
+    arrows: false,
+    pagination: false,
+    cover: true,
+    dragMinThreshold: {
+      mouse: 4,
+      touch: 10,
+    },
+    breakpoints: {
+      640: {
+        fixedWidth: 80,
+        fixedHeight: 80,
+      },
+    },
+  });
+
+  main.sync(thumbnails);
+  main.mount();
+  thumbnails.mount();
+</script>

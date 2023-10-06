@@ -1,0 +1,66 @@
+---
+import Footer from "~/components/footer.astro";
+import Layout from "../layouts/Layout.astro";
+import Icon from "astro-icon";
+
+const offices = [
+  {
+    city: "Москва",
+    adress: "Ленинградский просп. 39, стр. 79, БЦ «SkyLight»",
+  },
+  {
+    city: "Санкт-Петербург",
+    adress: "ул. Херсонская 12-14, БЦ «Ренессанс Правда»",
+  },
+  {
+    city: "Казань",
+    adress: "ул. Спартаковская, д. 2, ИТ-парк им. Башира Рамеева",
+  },
+  {
+    city: "Сочи",
+    adress: "Адлерский район, пр. Триумфальный, д. 1",
+  },
+  {
+    city: "Нижний Новгород",
+    adress: "ул. Ковалихинская, д. 8, эт. 8",
+  },
+];
+---
+
+<Layout title="Контакты">
+  <div class="h-screen bg-secondary text-black">
+    <div class="section-x flex justify-between pt-[120px]">
+      <div class="text-large-title max-w-[940px]">
+        Пишите нам на почту <div
+          class="w-fit border-b-[8px] border-black pb-[14px]"
+        >
+          hi@ok.ru
+        </div>
+      </div>
+      <div class="flex min-w-[262px] flex-col justify-between">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col">
+            <div class="text-title-3">Студентам</div>
+            <div class="text-headline">students@ok.ru</div>
+          </div>
+          <div class="flex flex-col">
+            <div class="text-title-3">По рекламе</div>
+            <div class="text-headline">pr@ok.ru</div>
+          </div>
+        </div>
+        <Icon name="star" class="h-[37px] self-end" />
+      </div>
+    </div>
+    <div class="section-x mt-14 flex gap-5">
+      {
+        offices.map((office) => (
+          <div>
+            <div class="text-title-3">{office.city}</div>
+            <div class="text-body">{office.adress}</div>
+          </div>
+        ))
+      }
+    </div>
+    <Footer absolute color="black" bgColor="white" />
+  </div>
+</Layout>

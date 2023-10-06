@@ -1,0 +1,108 @@
+---
+import NewsText from "./news-text.astro";
+import NewsPhoto from "./news-photo.astro";
+import NewsMix from "./news-mix.astro";
+
+import First from "~/assets/news/1.png";
+import Second from "~/assets/news/2.png";
+import Third from "~/assets/news/3.png";
+import Fourth from "~/assets/news/4.png";
+import Fivth from "~/assets/news/5.png";
+import Sixth from "~/assets/news/6.png";
+---
+
+<div
+  class="section-y section-x inline-flex flex-col items-start justify-start gap-12"
+>
+  <div class="flex flex-col items-start justify-start gap-6">
+    <div class="text-large-title text-black">новости</div>
+    <div class="text-title-2 text-black">Блог ведет Редакция ОК</div>
+  </div>
+  <div class="flex flex-col items-start justify-start gap-4">
+    <div class="grid items-start justify-start gap-4 lg:grid-cols-3">
+      <div
+        class="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-4"
+      >
+        <NewsText
+          title="Кейс Rambler&Co: как привлечь 5 тысяч подписчиков с помощью рамок в группу бренда в ОК"
+          date="14 сентября 2023"
+          color="grizzly"
+          hoverColor="grizzlyHover"
+          textColor="black"
+        />
+        <NewsPhoto src={First.src} />
+        <NewsText
+          title="Доходы разработчиков игр в Одноклассниках от рекламы выросли за год на 40%"
+          date="22 февраля 2023"
+          color="black"
+          hoverColor="[#111111]"
+          textColor="white"
+        />
+        <NewsText
+          title="Как вести бизнес в ОК: инструкция для новичков"
+          date="28 июня 2023"
+          color="grizzly"
+          hoverColor="grizzlyHover"
+          textColor="black"
+          height="290px"
+        />
+      </div>
+      <div
+        class="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-4"
+      >
+        <NewsMix
+          title="Академия контента 2.0: Level Up!"
+          date="7 сентября 2023"
+          src={Second.src}
+        />
+        <NewsText
+          title="Новый взгляд на аналитику ошибок в production, или Работающая альтернатива Crashlytics"
+          date="29 августа 2023"
+          color="primary"
+          hoverColor="primaryHover"
+          textColor="black"
+        />
+        <NewsMix
+          title="История одного блогера: «Алгоритмы Одноклассников замечательно продвигают авторов»"
+          date="15 марта 2023"
+          src={Third.src}
+        />
+        <NewsMix
+          title="Статистика в ОК: как смотреть и на что обращать внимание?"
+          date="7 июля 2023"
+          src={Fourth.src}
+        />
+      </div>
+      <div
+        class="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-4"
+      >
+        <NewsText
+          title="OK Media Challenge 2023: итоги второй недели"
+          date="12 сентября 2023"
+          color="black"
+          textColor="white"
+          hoverColor="[#111111]"
+        />
+        <NewsMix
+          title="Игровой дайджест. Май 2023"
+          date="11 мая 2023"
+          src={Fivth.src}
+        />
+        <NewsPhoto src={Sixth.src} />
+        <NewsText
+          title="Как работают «классы» в Одноклассниках?"
+          date="4 мая 2023"
+          color="primary"
+          hoverColor="primaryHover"
+          textColor="black"
+          height="375px"
+        />
+      </div>
+    </div>
+    <div
+      class="inline-flex h-[164px] w-full flex-col items-center justify-center gap-1 rounded-[300px] bg-zinc-100 px-8 py-[22px]"
+    >
+      <div class="text-button text-black">читать больше</div>
+    </div>
+  </div>
+</div>

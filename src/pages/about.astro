@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AboutBg from "src/assets/about_bg.png";
+import TeamPhoto from "src/assets/team-photo.png";
+import FooterImage from "src/assets/footer-image.png";
+import Icon from "astro-icon";
+import Footer from "~/components/footer.astro";
+---
+
+<Layout title="О нас">
+  <section>
+    <img src={AboutBg.src} class="w-full" alt="" />
+  </section>
+
+  <section class="section-x section-y">
+    <div class="flex flex-col gap-12">
+      <div class="text-large-title text-black">ок</div>
+      <div class="text-title-1 flex flex-col justify-start text-black">
+        <div>
+          Одна из самых популярных социальных сетей в рунете, которая объединяет
+          миллионы людей
+          <br /><br />
+           Ежедневно мы решаем десятки интересных и подчас нетривиальных
+          Highload-задач, чтобы ОК был для пользователей комфортным местом, куда
+          хочется возвращаться снова и снова
+        </div>
+        <Icon name="star" class="h-[37px] w-[37px]" />
+      </div>
+      <button
+        class="flex h-[65px] w-full items-center justify-center rounded-[300px] bg-black px-8 py-[22px] lg:w-[384px]"
+      >
+        <div class="text-button font-medium text-white">хочу к вам</div>
+      </button>
+    </div>
+  </section>
+
+  <section class="section-x section-y">
+    <div class="flex flex-col justify-between text-black lg:flex-row">
+      <div class="text-large-title">продукт</div>
+      <div class="flex flex-col gap-12 lg:flex-row">
+        <div class="flex flex-col gap-12">
+          <div class="flex flex-col gap-2">
+            <div class="text-title-1">7</div>
+            <div class="text-body">дата-центров</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-title-1">11%</div>
+            <div class="text-body">desktop only</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-title-1">данных</div>
+            <div class="text-body">более 1 эксабайта</div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-12">
+          <div class="flex flex-col gap-2">
+            <div class="text-title-1">до 40 млн</div>
+            <div class="text-body">уникальных пользователей каждый месяц</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-title-1">76%</div>
+            <div class="text-body">mobile only</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-title-1">700 млн</div>
+            <div class="text-body">просмотров видео в сутки</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-x section-y">
+    <img src={TeamPhoto.src} class="rounded-3xl" alt="" />
+  </section>
+
+  <section class="section-x section-y flex flex-col gap-12 text-black">
+    <div class="text-large-title">как мы работаем</div>
+    <div class="grid grid-cols-3 gap-12">
+      <div>
+        <div class="text-title-1">Офис</div>
+        <div class="text-body">
+          современный, комфортный офис и гибкий график рабочего дня — каждый
+          выбирает, в какие часы работать
+        </div>
+      </div>
+      <div>
+        <div class="text-title-1">Офис</div>
+        <div class="text-body">
+          современный, комфортный офис и гибкий график рабочего дня — каждый
+          выбирает, в какие часы работать
+        </div>
+      </div>
+      <div>
+        <div class="text-title-1">Офис</div>
+        <div class="text-body">
+          современный, комфортный офис и гибкий график рабочего дня — каждый
+          выбирает, в какие часы работать
+        </div>
+      </div>
+      <div>
+        <div class="text-title-1">Офис</div>
+        <div class="text-body">
+          современный, комфортный офис и гибкий график рабочего дня — каждый
+          выбирает, в какие часы работать
+        </div>
+      </div>
+      <div>
+        <div class="text-title-1">Офис</div>
+        <div class="text-body">
+          современный, комфортный офис и гибкий график рабочего дня — каждый
+          выбирает, в какие часы работать
+        </div>
+      </div>
+      <div>
+        <div class="text-title-1">Офис</div>
+        <div class="text-body">
+          современный, комфортный офис и гибкий график рабочего дня — каждый
+          выбирает, в какие часы работать
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class={`div relative bg-[url(${FooterImage})]`}>
+    <img src={FooterImage.src} alt="" />
+    <Footer absolute color="white" />
+  </div>
+</Layout>

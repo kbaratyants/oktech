@@ -1,0 +1,12 @@
+---
+export interface Props {
+  src: string;
+  link?: string;
+  height?: string;
+}
+const { src, link } = Astro.props;
+---
+
+<div class=`rounded-3xl h-[430px] w-full overflow-hidden hover:brightness-90`>
+  <img {src} class="h-full w-full object-cover" />
+</div>

@@ -1,0 +1,27 @@
+---
+import Starfield from "~/components/starfield.astro";
+---
+
+<section class="relative mb-[90px] h-screen bg-black">
+  <Starfield />
+</section>
+
+<noscript>
+  <style>
+    #splash-bg-fallback {
+      display: block;
+    }
+  </style>
+</noscript>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    :global(#starfield) {
+      display: none;
+    }
+
+    #splash-bg-fallback {
+      display: block;
+    }
+  }
+</style>

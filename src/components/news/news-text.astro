@@ -1,0 +1,25 @@
+---
+export interface Props {
+  title: string;
+  date: string;
+  color: string;
+  hoverColor: string;
+  textColor: string;
+  link?: string;
+  height?: string;
+}
+const { title, date, color, textColor, height, hoverColor } = Astro.props;
+---
+
+<div
+  class:list={`h-[${
+    height || "430px"
+  }] hover:bg-${hoverColor} w-full transition-colors bg-${color} flex flex-col items-start justify-start rounded-3xl`}
+>
+  <div
+    class=`p-6 flex-col justify-end items-start gap-4 flex text-${textColor}`
+  >
+    <div class="text-title-3">{title}</div>
+    <div class="text-headline">{date}</div>
+  </div>
+</div>

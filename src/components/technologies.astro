@@ -1,0 +1,37 @@
+---
+const technologies = [
+  { title: "frontend", subtitle: "HTML, CSS, JavaScript" },
+  { title: "android", subtitle: "C++, Java, PHP, Kotlin" },
+  { title: "ios", subtitle: "Swift, Objective-C" },
+  { title: "backend", subtitle: "JavaScript, Python, Ruby, PHP, Java, C#" },
+  { title: "QA", subtitle: "HTML/CSS, Python, SQL, Java/JavaScript" },
+  { title: "data base", subtitle: "MongoDB, MySQL, NoSQL, RoomDB" },
+];
+---
+
+<section class="section-y section-x">
+  <div class="text-large-title mb-12 font-normal text-black">
+    стек <br /> технологий
+  </div>
+  <div class="grid gap-12 lg:grid-flow-col lg:grid-rows-2">
+    {
+      technologies.map(({ title, subtitle }) => (
+        <div class="flex flex-col items-start justify-start gap-2">
+          <div class="text-title-1 font-normal leading-9 text-black">
+            {" "}
+            {title}{" "}
+          </div>
+          <div class="text-body font-normal leading-none text-black">
+            {" "}
+            {subtitle}{" "}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <button
+    class="mt-12 flex h-[65px] w-full items-center justify-center rounded-[300px] bg-black px-8 py-[22px] lg:w-[384px]"
+  >
+    <div class="text-button font-medium text-white">хочу к вам</div>
+  </button>
+</section>

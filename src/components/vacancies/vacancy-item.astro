@@ -1,0 +1,20 @@
+---
+export interface Props {
+  link?: string;
+  title: string;
+}
+
+const { title, link } = Astro.props;
+---
+
+<div
+  class="section-x flex h-[378px] flex-col items-center justify-center bg-black"
+>
+  <div class="text-headline">вакансия</div>
+  <div class="text-title-1">{title} ↗</div>
+  <div
+    class="text-button mt-8 flex h-[65px] w-[384px] items-center justify-center rounded-[300px] bg-secondary"
+  >
+    узнать подробнее
+  </div>
+</div>

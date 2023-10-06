@@ -1,0 +1,20 @@
+---
+export interface Props {
+  title: string;
+  date: string;
+  src: string;
+  link?: string;
+  height?: string;
+}
+const { title, date, src, height } = Astro.props;
+---
+
+<div
+  class=`h-[${height}] bg-zinc-100 hover:bg-zinc-200 rounded-3xl flex-col justify-start items-start flex`
+>
+  <img class="rounded-tl-3xl rounded-tr-3xl object-cover" {src} />
+  <div class="flex flex-col items-start justify-start gap-4 p-6">
+    <div class="text-title-3 text-black">{title}</div>
+    <div class="text-headline text-black">{date}</div>
+  </div>
+</div>

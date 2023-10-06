@@ -1,0 +1,41 @@
+---
+import Icon from "astro-icon";
+
+const stats = [
+  { amount: "36 млн", title: "пользователей в месяц" },
+  { amount: "15 млрд", title: "отправок подарочков в месяц" },
+  { amount: "150 PB", title: "суммарный объем аналитических хранилищ" },
+];
+---
+
+<section
+  class="section-x section-y flex w-full flex-col justify-center gap-24 lg:flex-row"
+>
+  <div class="flex flex-col items-start justify-start gap-12">
+    <div class="text-large-title font-normal text-black">кто мы</div>
+    <div class="flex items-start justify-start gap-60">
+      <div class="flex flex-col items-start justify-between gap-[88px]">
+        <div
+          class="text-title-1 font-normal leading-[52.80px] tracking-tight text-black"
+        >
+          Мы технологичная команда, получающая удовольствие от бренда, контента
+          и цифровых технологий
+        </div>
+        <Icon name="star" class="h-9 hover:animate-starAnimation" />
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="sm:flex-row flex flex-col items-start justify-start gap-[54px] rounded-[32px] lg:flex-col"
+  >
+    {
+      stats.map(({ amount, title }) => (
+        <div class="sm:w-1/2 w-full min-w-[220px] md:w-1/4">
+          {amount && <div class="text-title-1 text-black">{amount}</div>}
+          {title && <div class="text-body text-black">{title}</div>}
+        </div>
+      ))
+    }
+  </div>
+</section>

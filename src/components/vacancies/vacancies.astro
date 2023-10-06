@@ -1,0 +1,54 @@
+---
+import VacancyItem from "./vacancy-item.astro";
+import "@splidejs/splide/css/core";
+import "./vacancies.scss";
+
+const vacancies = [
+  {
+    title: 'Разработчик iOS проект "Монетизация"',
+    link: "/",
+  },
+  {
+    title: 'Java разработчик проект "Игры"',
+    link: "/",
+  },
+  {
+    title: "Data scientist / Machine learning engineer",
+    link: "/",
+  },
+];
+---
+
+<section class="section-x section-y">
+  <div class="splide" id="vacancies-slider">
+    <div class="splide__track rounded-2xl">
+      <ul class="splide__list">
+        {
+          vacancies.map((vacancy) => (
+            <li class="splide__slide">
+              <VacancyItem title={vacancy.title} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Splide from "@splidejs/splide";
+
+  const splide = new Splide("#vacancies-slider", {
+    type: "loop",
+    arrows: false,
+    autoplay: true,
+    interval: 3500,
+    pauseOnHover: true,
+    classes: {
+      pagination: "splide__pagination", // container
+      page: "splide__pagination__page nav-btn", // each button
+    },
+  });
+
+  splide.mount();
+</script>

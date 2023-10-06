@@ -1,0 +1,15 @@
+---
+export interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<section class="section-y align-center flex justify-center px-4 lg:px-52">
+  <div
+    class="text-title-1 my-auto text-center font-normal leading-[52.80px] tracking-tight text-black"
+  >
+    {text}
+  </div>
+</section>
