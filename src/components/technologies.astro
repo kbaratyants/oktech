@@ -10,28 +10,49 @@ const technologies = [
 ---
 
 <section class="section-y section-x">
-  <div class="text-large-title mb-12 font-normal text-black">
+  <div class="text-large-title">
     стек <br /> технологий
   </div>
-  <div class="grid gap-12 lg:grid-flow-col lg:grid-rows-2">
+  <div class="technologies">
     {
       technologies.map(({ title, subtitle }) => (
-        <div class="flex flex-col items-start justify-start gap-2">
-          <div class="text-title-1 font-normal leading-9 text-black">
-            {" "}
-            {title}{" "}
-          </div>
-          <div class="text-body font-normal leading-none text-black">
-            {" "}
-            {subtitle}{" "}
-          </div>
+        <div class="technology">
+          <div class="text-title-1">{title}</div>
+          <div class="text-body">{subtitle}</div>
         </div>
       ))
     }
   </div>
-  <button
-    class="mt-12 flex h-[65px] w-full items-center justify-center rounded-[300px] bg-black px-8 py-[22px] lg:w-[384px]"
-  >
-    <div class="text-button font-medium text-white">хочу к вам</div>
-  </button>
+  <a href="/techradar">
+    <button class="main-button text-button">тех радар</button>
+  </a>
 </section>
+
+<style lang="scss">
+  @import "../styles/global.scss";
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    color: black;
+  }
+  
+  .technologies {
+    display: grid;
+    gap: 48px;
+  }
+  
+  .technology {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  @include desktop {
+    .technologies {
+      grid-auto-flow: column;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

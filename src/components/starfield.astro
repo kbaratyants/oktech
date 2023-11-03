@@ -52,19 +52,20 @@
     }
   }
 
-  const stars = Array.from({ length: COUNT }, () => new Star(0, 0, 0));
-  let rafId = 0;
+  const createStarField = () => {
+    const stars = Array.from({ length: COUNT }, () => new Star(0, 0, 0));
+    let rafId = 0;
 
-  const canvas = document.querySelector(
-    "#starfield-canvas",
-  ) as HTMLCanvasElement;
-  invariant(canvas, "canvas should not be null");
-  const ctx = canvas.getContext("2d");
+    const canvas = document.querySelector(
+      "#starfield-canvas",
+    ) as HTMLCanvasElement;
+    invariant(canvas, "canvas should not be null");
+    const ctx = canvas.getContext("2d");
 
-  const container = document.querySelector("#starfield") as HTMLElement;
-  invariant(container, "container should not be null");
-  const resizeObserver = new ResizeObserver(setup);
-  resizeObserver.observe(container);
+    const container = document.querySelector("#starfield") as HTMLElement;
+    invariant(container, "container should not be null");
+    const resizeObserver = new ResizeObserver(setup);
+    resizeObserver.observe(container);
 
   function setup() {
     invariant(ctx, "canvas context should not be null");
@@ -102,4 +103,9 @@
     ctx.fillRect(-width / 2, -height / 2, width, height);
     rafId = requestAnimationFrame(frame);
   }
+  }
+  
+  createStarField();
+  
+  document.addEventListener('astro:after-swap', createStarField)
 </script>

@@ -1,23 +1,46 @@
 ---
 export interface Props {
-  absolute: boolean;
-  color: string;
-  bgColor?: string;
+  classes: string;
 }
 
 const date = new Date().getFullYear();
 
-const { absolute, color, bgColor } = Astro.props;
+const { classes } = Astro.props;
 ---
 
-<footer
-  class={`${
-    absolute ? "absolute bottom-0 w-full" : "relative"
-  } flex flex-col lg:flex-row lg:justify-between border-t border-${color} text-center items-center justify-center text-${color} bg-${bgColor} text-footer px-4`}
->
-  <div>hi@ok.ru</div>
-
-  <div>
-    © 2006–{date}, OK.TECH
-  </div>
+<footer class={ `${classes} text-footer` }>
+  <div> hi@ok.ru </div>
+  <div> © 2006–{date}, OK.TECH </div>
 </footer>
+
+<style lang="scss">
+  @import "../styles/global.scss";
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top-width: 1px;
+    background-color: white;
+    border-color: black;
+    text-align: center;
+    padding: 0 16px;
+    color: black;
+    &.absolute {
+      position: absolute;
+      bottom: 0;
+    }
+    &.transparent {
+      color: white;
+      border-color: white;
+      background-color: transparent;
+    }
+  }
+  
+  @include desktop {
+    footer {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>

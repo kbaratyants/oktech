@@ -1,0 +1,63 @@
+@import "./color.scss";
+@import "./fonts.scss";
+@import "./media.scss";
+@import "./slyder.scss";
+
+.section-y {
+  padding-top: calc(60px + 30 * (100vw - 375px) / 1065);
+  padding-bottom: calc(60px + 30 * (100vw - 375px) / 1065);
+}
+
+.section-x {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+button {
+  transition: background-color 0.3s;
+}
+
+.main-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 65px;
+  padding: 22px 32px;
+  color: white;
+  background-color: black;
+  border-radius: 300px;
+  &:hover {
+    background-color: $black-hover;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@include tablet {
+  .section-x {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@include desktop {
+  .section-x {
+    padding-left: 95px;
+    padding-right: 95px;
+  }
+  
+  .main-button {
+    width: 384px;
+  }
+}

@@ -1,85 +1,80 @@
 ---
 import GalleryLinkElement from "./gallery-link-element.astro";
 import "@splidejs/splide/css/core";
-import First from "~/assets/photoes/1.png";
-import Second from "~/assets/photoes/2.png";
-import Third from "~/assets/photoes/3.png";
-import Fourth from "~/assets/photoes/4.png";
-import Fivth from "~/assets/photoes/5.png";
-import Sixth from "~/assets/photoes/6.png";
-import Seventh from "~/assets/photoes/7.png";
-import PhotoesHeader from "~/assets/photo-header.svg";
+import First from "@assets/photoes/1.png";
+import Second from "@assets/photoes/2.png";
+import Third from "@assets/photoes/3.png";
+import Fourth from "@assets/photoes/4.png";
+import Fivth from "@assets/photoes/5.png";
+import Sixth from "@assets/photoes/6.png";
+import Seventh from "@assets/photoes/7.png";
+import PhotoesHeader from "@assets/photo-header.svg";
+import { Image } from "astro:assets";
 
 const images = [
   {
-    src: First.src,
+    src: First,
     title: "HighLoad конференция",
     subtitle: "Стенд OK.TECH",
   },
   {
-    src: Second.src,
-    title: "Чикуня житель офиса",
-    subtitle: "Офис OK",
+    src: Second,
+    title: "Просто красивое растение",
+    subtitle: "Мероприятие OK",
   },
   {
-    src: Third.src,
+    src: Third,
     title: "Делимся опытом",
     subtitle: "Москва",
   },
   {
-    src: Fourth.src,
+    src: Fourth,
+    title: "OK Tech Talk «A/B тестирование»",
+    subtitle: 'Москва, "Дом Атлантов"',
+  },
+  {
+    src: Fivth,
     title: "Выступаем на ML OK.TECH",
     subtitle: "Оранжерея Санкт-Петербурга",
   },
   {
-    src: Fivth.src,
-    title: "Выступаем на ML OK.TECH",
-    subtitle: "Оранжерея Санкт-Петербурга",
-  },
-  {
-    src: Sixth.src,
+    src: Sixth,
     title: "Офис, игровая комната",
     subtitle: "Офис Санкт-Петербурга",
   },
   {
-    src: Seventh.src,
+    src: Seventh,
     title: "Кухня",
     subtitle: "Офис Санкт-Петербурга",
   },
 ];
 ---
-
-<section class="section-y overflow-hidden px-4">
-  <div class="head text-animation-title flex">
-    <img src={PhotoesHeader.src} class="max-w-none animate-textAnimation" />
-    <img src={PhotoesHeader.src} class="max-w-none animate-textAnimation" />
+<section class="section-y">
+  <div class="header text-animation-title">
+    <Image src={PhotoesHeader} alt="photo title" class="header-item animate-textAnimation" />
+    <Image src={PhotoesHeader} alt="photo title" class="header-item animate-textAnimation" />
   </div>
-  <div class="hidden grid-cols-3 grid-rows-6 gap-4 lg:grid">
+  <div class="gallery-container">
     {
       images.map((image) => (
-        <div class="element relative overflow-hidden rounded-3xl">
-          <div class="image-blur absolute h-full w-full rounded-lg p-6 backdrop-blur-2xl">
+        <div class="image-container">
+          <div class="image-blur">
             <div class="text-headline">{image.subtitle}</div>
             <div class="text-title-2">{image.title}</div>
           </div>
-          <img
-            class="image h-full w-full rounded-lg object-cover"
-            src={image.src}
-            alt=""
-            loading="lazy"
-          />
+          <Image class="image" src={image.src} alt={image.title} loading="lazy" />
         </div>
       ))
     }
     <GalleryLinkElement />
   </div>
-  <div id="main-slider" class="splide lg:hidden">
-    <div class="splide__track rounded-3xl">
+  <div id="photo-slider" class="splide">
+    <div class="splide__track">
       <ul class="splide__list">
         {
           images.map((image) => (
-            <li class="splide__slide object-cover">
-              <img src={image.src} class="h-[625px]" />
+            <li class="splide__slide">
+              <Image src={image.src} alt={image.title} />
             </li>
           ))
         }
@@ -89,60 +84,148 @@ const images = [
       </ul>
     </div>
   </div>
-  <div id="thumbnail-slider" class="splide pt-4 lg:hidden">
+  <div id="thumbnail-slider" class="splide">
     <div class="splide__track">
       <ul class="splide__list">
         {
           images.map((image) => (
-            <li class="splide__slide rounded-3xl">
-              <img src={image.src} />
+            <li class="splide__slide">
+              <div class="slide-blur"> * </div>
+              <Image src={image.src} alt={image.title} />
             </li>
           ))
         }
-        <li class="splide__slide border-none">
-          <div class="h-full w-full rounded-3xl bg-black"></div>
+        <li class="splide__slide">
+          <div class="vacancy">
+            <div class="slide-blur"> * </div>
+          </div>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<style type="text/scss">
-  .image-blur {
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 1;
+<style lang="scss">
+  @import "../styles/media.scss";
+
+  section {
+    overflow: hidden;
   }
-  .text,
-  .image-blur {
+
+  .header {
+    display: flex;
+
+    &-item {
+      max-width: none;
+    }
+  }
+
+  .gallery-container {
+    display: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .text {
     transition: opacity 0.3s;
   }
   .image {
+    height: 100%;
+    width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
     transition: filter 0.3s;
-  }
-  .element {
-    &:nth-of-type(1),
-    &:nth-of-type(4),
-    &:nth-of-type(7) {
-      grid-row: span 2;
+
+    &-blur {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      border-radius: 8px;
+      padding: 24px;
+      backdrop-filter: blur(40px);
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      transition: opacity 0.3s;
+      color: white;
     }
-    &:nth-of-type(3) {
-      grid-row: 2;
-      grid-column: 2;
-    }
-    &:nth-of-type(5),
-    &:nth-of-type(6) {
-      grid-row: span 2;
-      grid-column: span 2;
-    }
-    &:nth-of-type(8) {
-      grid-column: 1;
-      grid-row: 3 / span 2;
-    }
-    &:hover {
-      .image-blur {
-        opacity: 1;
+
+    &-container {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+
+      &:nth-of-type(1),
+      &:nth-of-type(4),
+      &:nth-of-type(7) {
+        grid-row: span 2;
       }
+      &:nth-of-type(3) {
+        grid-row: 2;
+        grid-column: 2;
+      }
+      &:nth-of-type(5),
+      &:nth-of-type(6) {
+        grid-row: span 2;
+        grid-column: span 2;
+      }
+      &:nth-of-type(8) {
+        grid-column: 1;
+        grid-row: 3 / span 2;
+      }
+      &:hover {
+        .image-blur {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  
+  .splide {
+    display: block;
+    
+    &__slide {      
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    &__track {
+    }
+  }
+  
+  #thumbnail-slider {
+    padding-top: 16px;
+    .slide-blur{ 
+      display: none;
+    }
+    .is-active {
+      .slide-blur {
+        position: absolute;
+        display: block;
+        text-align: center;
+        font-size: 64px;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        backdrop-filter: brightness(0.6);
+        border-radius: 24px;
+      }
+    }
+  }
+
+  .vacancy {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+  }
+  
+  @include desktop {
+    .gallery-container {
+      display: grid;
+    }
+    
+    .splide {
+      display: none;
     }
   }
 </style>
@@ -150,42 +233,48 @@ const images = [
 <script>
   import Splide from "@splidejs/splide";
 
-  const main = new Splide("#main-slider", {
-    type: "fade",
-    heightRatio: 0.5,
-    height: "625px",
-    pagination: false,
-    arrows: false,
-    cover: true,
-    breakpoints: {
-      600: {
-        height: "400px",
+  const mountGallery = () => {
+    const main = new Splide("#photo-slider", {
+      type: "fade",
+      heightRatio: 0.5,
+      height: "625px",
+      pagination: false,
+      arrows: false,
+      cover: true,
+      breakpoints: {
+        600: {
+          height: "400px",
+        },
       },
-    },
-  });
-
-  const thumbnails = new Splide("#thumbnail-slider", {
-    rewind: true,
-    fixedWidth: 80,
-    fixedHeight: 80,
-    isNavigation: true,
-    gap: 10,
-    arrows: false,
-    pagination: false,
-    cover: true,
-    dragMinThreshold: {
-      mouse: 4,
-      touch: 10,
-    },
-    breakpoints: {
-      640: {
-        fixedWidth: 80,
-        fixedHeight: 80,
+    });
+  
+    const thumbnails = new Splide("#thumbnail-slider", {
+      rewind: true,
+      fixedWidth: 80,
+      fixedHeight: 80,
+      isNavigation: true,
+      gap: 10,
+      arrows: false,
+      pagination: false,
+      cover: true,
+      dragMinThreshold: {
+        mouse: 4,
+        touch: 10,
       },
-    },
-  });
-
-  main.sync(thumbnails);
-  main.mount();
-  thumbnails.mount();
+      breakpoints: {
+        640: {
+          fixedWidth: 80,
+          fixedHeight: 80,
+        },
+      },
+    });
+  
+    main.sync(thumbnails);
+    main.mount();
+    thumbnails.mount();
+  }
+  
+  mountGallery();
+  
+  document.addEventListener("astro:after-swap", mountGallery);
 </script>

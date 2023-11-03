@@ -32,7 +32,7 @@ module.exports = {
         offset: "var(--color-text-offset)",
       },
       backgroundColor: {
-        primary: "var(--color-secondary)",
+        primary: "#FF7700",
         default: "var(--color-background)",
         offset: "var(--color-background-offset)",
       },

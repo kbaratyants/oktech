@@ -2,40 +2,82 @@
 import Icon from "astro-icon";
 
 const stats = [
-  { amount: "36 млн", title: "пользователей в месяц" },
-  { amount: "15 млрд", title: "отправок подарочков в месяц" },
-  { amount: "150 PB", title: "суммарный объем аналитических хранилищ" },
+  { amount: "60 млрд", title: "уникального контента в месяц" },
+  { amount: "30 млрд", title: "отправок подарков  в год" },
+  { amount: "1 эксабайт", title: "данных и 50 тысяч Docker-контейнеров" },
 ];
 ---
 
-<section
-  class="section-x section-y flex w-full flex-col justify-center gap-24 lg:flex-row"
->
-  <div class="flex flex-col items-start justify-start gap-12">
-    <div class="text-large-title font-normal text-black">кто мы</div>
-    <div class="flex items-start justify-start gap-60">
-      <div class="flex flex-col items-start justify-between gap-[88px]">
-        <div
-          class="text-title-1 font-normal leading-[52.80px] tracking-tight text-black"
-        >
-          Мы технологичная команда, получающая удовольствие от бренда, контента
-          и цифровых технологий
-        </div>
-        <Icon name="star" class="h-9 hover:animate-starAnimation" />
+<section class="section-x section-y">
+  <div class="content">
+    <div class="text-large-title">кто мы</div>
+    <div class="subtitle">
+      <div class="text-title-1">
+        Команда OK.TECH объединяет сотни специалистов разработки, дизайна, маркетинга, машинного обучения, поддержки пользователей и не только. 
+        Каждый из нас влияет на то, каким увидят ОК миллионы пользователей. Мы можем творить историю и делаем это. 
       </div>
+      <Icon name="star" class="star" />
     </div>
   </div>
 
-  <div
-    class="sm:flex-row flex flex-col items-start justify-start gap-[54px] rounded-[32px] lg:flex-col"
-  >
+  <div class="stats">
     {
       stats.map(({ amount, title }) => (
-        <div class="sm:w-1/2 w-full min-w-[220px] md:w-1/4">
-          {amount && <div class="text-title-1 text-black">{amount}</div>}
-          {title && <div class="text-body text-black">{title}</div>}
+        <div class="stats-item">
+          {amount && <div class="text-title-1">{amount}</div>}
+          {title && <div class="text-body">{title}</div>}
         </div>
       ))
     }
   </div>
 </section>
+
+<style lang="scss">
+  @import "../styles/global.scss";
+
+  section {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 96px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    color: black;
+  }
+
+  .subtitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 88px;
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 54px;
+    border-radius: 32px;
+    color: black;
+
+    &-item {
+      min-width: 250px;
+      width: 100%;
+    }
+  }
+  .star {
+    height: 36px;
+  }
+  @include desktop {
+    section {
+      flex-direction: row;
+    }
+  }
+</style>

@@ -1,20 +1,48 @@
 ---
+import { Image } from 'astro:assets';
 export interface Props {
   title: string;
   date: string;
-  src: string;
+  src: ImageMetadata;
+  alt: string;
   link?: string;
-  height?: string;
 }
-const { title, date, src, height } = Astro.props;
+const { title, date, src, link, alt } = Astro.props;
 ---
-
-<div
-  class=`h-[${height}] bg-zinc-100 hover:bg-zinc-200 rounded-3xl flex-col justify-start items-start flex`
->
-  <img class="rounded-tl-3xl rounded-tr-3xl object-cover" {src} />
-  <div class="flex flex-col items-start justify-start gap-4 p-6">
-    <div class="text-title-3 text-black">{title}</div>
-    <div class="text-headline text-black">{date}</div>
+<a href={link}>
+  <div class=`news-mix`>
+    <Image class="image" {src} {alt}/>
+    <div class="text flex flex-col gap-4 p-6">
+      <div class="text-title-3">{title}</div>
+      <div class="text-headline">{date}</div>
+    </div>
   </div>
-</div>
+</a>
+
+
+<style lang="scss">
+  @import "../../styles/global.scss";
+  .news-mix {
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    color: black;
+    background-color: $c-light-gray;
+    
+    &:hover {
+      background-color: $c-light-gray-hover;
+    }
+  }
+  
+  .image {
+    object-fit: cover;
+    border-radius: 24px 24px 0 0;
+  }
+  
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+</style>

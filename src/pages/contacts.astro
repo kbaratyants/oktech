@@ -1,5 +1,5 @@
 ---
-import Footer from "~/components/footer.astro";
+import Footer from "@components/footer.astro";
 import Layout from "../layouts/Layout.astro";
 import Icon from "astro-icon";
 
@@ -25,42 +25,138 @@ const offices = [
     adress: "ул. Ковалихинская, д. 8, эт. 8",
   },
 ];
+
+const mails = [
+  {
+    title: "Студентам",
+    url: "students@ok.ru",
+  },
+  {
+    title: "По рекламе",
+    url: "pr@ok.ru",
+  },
+];
 ---
 
 <Layout title="Контакты">
-  <div class="h-screen bg-secondary text-black">
-    <div class="section-x flex justify-between pt-[120px]">
-      <div class="text-large-title max-w-[940px]">
-        Пишите нам на почту <div
-          class="w-fit border-b-[8px] border-black pb-[14px]"
-        >
-          hi@ok.ru
+  <div class="contacts">
+    <div class="contacts__container section-x">
+      <div class="contacts__content">
+        <div class="contacts__mail text-large-title">
+          Пишите нам на почту
+          <div class="hi-mail">hi@ok.ru</div>
+        </div>
+        <div class="mails">
+          <div class="mails__container">
+            {
+              mails.map((mail) => (
+                <div class="mails-item">
+                  <div class="text-title-3">{mail.title}</div>
+                  <div class="text-headline">{mail.url}</div>
+                </div>
+              ))
+            }
+          </div>
+          <Icon name="star" class="star" />
         </div>
       </div>
-      <div class="flex min-w-[262px] flex-col justify-between">
-        <div class="flex flex-col gap-6">
-          <div class="flex flex-col">
-            <div class="text-title-3">Студентам</div>
-            <div class="text-headline">students@ok.ru</div>
-          </div>
-          <div class="flex flex-col">
-            <div class="text-title-3">По рекламе</div>
-            <div class="text-headline">pr@ok.ru</div>
-          </div>
-        </div>
-        <Icon name="star" class="h-[37px] self-end" />
+      <div class="adresses">
+        {
+          offices.map((office) => (
+            <div>
+              <div class="text-title-3">{office.city}</div>
+              <div class="text-body">{office.adress}</div>
+            </div>
+          ))
+        }
       </div>
     </div>
-    <div class="section-x mt-14 flex gap-5">
-      {
-        offices.map((office) => (
-          <div>
-            <div class="text-title-3">{office.city}</div>
-            <div class="text-body">{office.adress}</div>
-          </div>
-        ))
-      }
-    </div>
-    <Footer absolute color="black" bgColor="white" />
+    <Footer classes="" />
   </div>
 </Layout>
+
+<style lang="scss">
+  @import "@styles/global.scss";
+
+  .contacts {
+    height: 100%;
+    background-color: $c-accent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    &__container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 120px;
+      padding-bottom: 120px;
+      gap: 120px;
+    }
+  }
+
+  .hi-mail {
+    width: fit-content;
+    border-bottom-width: 8px;
+    border-color: black;
+    padding-bottom: 14px;
+  }
+
+  .mails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    &-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 262px;
+    }
+  }
+
+  .star {
+    height: 37px;
+    align-self: self-start;
+  }
+
+  .adresses {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @include desktop {
+    .star {
+      align-self: end;
+    }
+    
+    .contacts {
+      height: 100vh;
+      &__content {
+        flex-direction: row;
+      }
+      
+      .adresses {
+        flex-direction: row;
+        gap: 48px;
+      }
+      &__container {
+        flex-direction: column;
+        gap: 0;
+        padding-bottom: 24px;
+      }
+    }
+  }
+</style>

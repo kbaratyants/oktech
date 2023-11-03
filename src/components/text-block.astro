@@ -6,10 +6,26 @@ export interface Props {
 const { text } = Astro.props;
 ---
 
-<section class="section-y align-center flex justify-center px-4 lg:px-52">
-  <div
-    class="text-title-1 my-auto text-center font-normal leading-[52.80px] tracking-tight text-black"
-  >
+<section class="section-y">
+  <div class="text-title-1">
     {text}
   </div>
 </section>
+
+<style lang="scss">
+  @import "../styles/global.scss";
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    text-align: center;
+    color: black;
+  }
+
+  @include desktop {
+    section {
+      padding: 0 210px;
+    }
+  }
+</style>

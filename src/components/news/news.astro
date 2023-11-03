@@ -3,106 +3,157 @@ import NewsText from "./news-text.astro";
 import NewsPhoto from "./news-photo.astro";
 import NewsMix from "./news-mix.astro";
 
-import First from "~/assets/news/1.png";
-import Second from "~/assets/news/2.png";
-import Third from "~/assets/news/3.png";
-import Fourth from "~/assets/news/4.png";
-import Fivth from "~/assets/news/5.png";
-import Sixth from "~/assets/news/6.png";
+import First from "@assets/news/1.png";
+import Second from "@assets/news/2.png";
+import Third from "@assets/news/3.png";
+import Fourth from "@assets/news/4.png";
+import Fivth from "@assets/news/5.png";
+import Sixth from "@assets/news/6.png";
 ---
 
-<div
-  class="section-y section-x inline-flex flex-col items-start justify-start gap-12"
->
-  <div class="flex flex-col items-start justify-start gap-6">
-    <div class="text-large-title text-black">новости</div>
-    <div class="text-title-2 text-black">Блог ведет Редакция ОК</div>
+<section class="section-y section-x">
+  <div class="header">
+    <div class="text-large-title">новости</div>
+    <div class="text-title-2">Блог ведет Редакция ОК</div>
   </div>
-  <div class="flex flex-col items-start justify-start gap-4">
-    <div class="grid items-start justify-start gap-4 lg:grid-cols-3">
-      <div
-        class="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-4"
-      >
+  <div class="content">
+    <div class="news">
+      <div class="column">
         <NewsText
           title="Кейс Rambler&Co: как привлечь 5 тысяч подписчиков с помощью рамок в группу бренда в ОК"
           date="14 сентября 2023"
-          color="grizzly"
-          hoverColor="grizzlyHover"
-          textColor="black"
+          color="gray"
+          link="https://insideok.ru/blog/kejs-rambler-co-kak-privlech-5-tysjach-podpischikov-s-pomoshhju-ramok-v-gruppu-brenda-v-ok/"
         />
-        <NewsPhoto src={First.src} />
+        <NewsPhoto src={First} link="https://insideok.ru/blog/ok-odna-iz-nemnogih-ploshhadok-gde-artistam-pomogajut-razvivat-svoj-profil/" alt="woman" />
         <NewsText
           title="Доходы разработчиков игр в Одноклассниках от рекламы выросли за год на 40%"
           date="22 февраля 2023"
           color="black"
-          hoverColor="[#111111]"
-          textColor="white"
+          link="https://insideok.ru/blog/dohody-razrabotchikov-igr-v-odnoklassnikah-ot-reklamy-vyrosli-za-god-na-40/"
         />
         <NewsText
           title="Как вести бизнес в ОК: инструкция для новичков"
           date="28 июня 2023"
-          color="grizzly"
-          hoverColor="grizzlyHover"
-          textColor="black"
+          color="gray"
           height="290px"
+          link="https://insideok.ru/blog/kak-vesti-biznes-v-ok-instrukcija-dlja-novichkov/"
         />
       </div>
-      <div
-        class="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-4"
-      >
+      <div class="column">
         <NewsMix
           title="Академия контента 2.0: Level Up!"
           date="7 сентября 2023"
-          src={Second.src}
+          link="https://ok.ru/page/academia2"
+          src={Second}
+          alt="group of people"
         />
         <NewsText
           title="Новый взгляд на аналитику ошибок в production, или Работающая альтернатива Crashlytics"
           date="29 августа 2023"
-          color="primary"
-          hoverColor="primaryHover"
-          textColor="black"
+          color="accent"
+          link="https://habr.com/ru/companies/vk/articles/757416/"
         />
         <NewsMix
           title="История одного блогера: «Алгоритмы Одноклассников замечательно продвигают авторов»"
           date="15 марта 2023"
-          src={Third.src}
+          link="https://insideok.ru/blog/istorija-odnogo-blogera-pochemu-vse-takie-aktivnye-kuda-ja-popal/"
+          src={Third}
+          alt="blogger"
         />
         <NewsMix
           title="Статистика в ОК: как смотреть и на что обращать внимание?"
           date="7 июля 2023"
-          src={Fourth.src}
+          link="https://insideok.ru/blog/statistika-v-ok-kak-smotret-i-na-chto-obrashhat-vnimanie/"
+          src={Fourth}
+          alt="statistics"
         />
       </div>
-      <div
-        class="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-4"
-      >
+      <div class="column">
         <NewsText
           title="OK Media Challenge 2023: итоги второй недели"
           date="12 сентября 2023"
           color="black"
-          textColor="white"
-          hoverColor="[#111111]"
+          link="https://insideok.ru/blog/ok-media-challenge-2023-itogi-vtoroj-nedeli/"
         />
         <NewsMix
           title="Игровой дайджест. Май 2023"
           date="11 мая 2023"
-          src={Fivth.src}
+          link="https://insideok.ru/blog/igrovoj-dajdzhest-maj-2022-2/"
+          src={Fivth}
+          alt="man"
         />
-        <NewsPhoto src={Sixth.src} />
+        <NewsPhoto src={Sixth} link="https://insideok.ru/blog/polzovateli-ostajutsja-v-socsetjah-no-peresmatrivajut-svoi-interesy/" alt="call operator" />
         <NewsText
           title="Как работают «классы» в Одноклассниках?"
           date="4 мая 2023"
-          color="primary"
-          hoverColor="primaryHover"
-          textColor="black"
+          color="accent"
           height="375px"
+          link="https://insideok.ru/blog/kak-rabotajut-klassy-v-odnoklassnikah/"
         />
       </div>
     </div>
-    <div
-      class="inline-flex h-[164px] w-full flex-col items-center justify-center gap-1 rounded-[300px] bg-zinc-100 px-8 py-[22px]"
-    >
-      <div class="text-button text-black">читать больше</div>
-    </div>
+    <a href="https://insideok.ru/">
+      <button>
+        <div class="text-button">читать больше</div>
+      </button>
+    </a>
   </div>
-</div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/global.scss";
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: black;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .news {
+    display: grid;
+    gap: 16px;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 164px;
+    width: 100%;
+    border-radius: 300px;
+    padding: 22px 32px;
+    color: black;
+    background-color: $c-light-gray;
+
+    &:hover {
+      background-color: $c-light-gray-hover;
+    }
+  }
+
+  @include desktop {
+    .news {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

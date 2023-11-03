@@ -7,14 +7,36 @@ export interface Props {
 const { title, link } = Astro.props;
 ---
 
-<div
-  class="section-x flex h-[378px] flex-col items-center justify-center bg-black"
->
-  <div class="text-headline">вакансия</div>
-  <div class="text-title-1">{title} ↗</div>
-  <div
-    class="text-button mt-8 flex h-[65px] w-[384px] items-center justify-center rounded-[300px] bg-secondary"
-  >
-    узнать подробнее
+<a href={link}>
+  <div class="vacancy-item">
+    <div class="text-headline">вакансия</div>
+    <div class="text-title-1"> {title} ↗ </div>
+    <button class="text-button"> узнать подробнее </button>
   </div>
-</div>
+</a>
+
+<style lang="scss">
+  @import "../../styles/global.scss";
+  .vacancy-item {
+    display: flex;
+    height: 378px;
+    padding: 0 32px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: black;
+  }
+  
+  button {
+    margin-top: 32px;
+    padding: 22px 32px;
+    background-color: $c-accent;
+    border-radius: 300px;
+    
+    &:hover {
+      background-color: $c-accent-hover;
+    }
+  }
+</style>

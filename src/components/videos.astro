@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+
+import GurovVideo from "@assets/videos/Gurov.mp4";
+import GurovPreview from "@assets/videos/Gurov.png";
+import ManevichVideo from "@assets/videos/Manevich.mp4";
+import ManevichPreview from "@assets/videos/Manevich.png";
+import RadchenkovaPreview from "@assets/videos/Radchenkova.png";
+import RadchenkovaVideo from "@assets/videos/Radchenkova.mp4";
+import TomilovPreview from "@assets/videos/Tomilov.png";
+import TomilovVideo from "@assets/videos/Tomilov.mp4";
+import VasilevVideo from "@assets/videos/Vasilev.mp4";
+import VasilevPreview from "@assets/videos/Vasilev.png";
+
+import "@splidejs/splide/css/core";
+import '@splidejs/splide-extension-video/dist/css/splide-extension-video.min.css';
+
+const videos = [
+    {
+        video: ManevichVideo,
+        preview: ManevichPreview,
+    },
+    {
+        video: GurovVideo,
+        preview: GurovPreview,
+    },
+    {
+        video: RadchenkovaVideo,
+        preview: RadchenkovaPreview,
+    },
+    {
+        video: TomilovVideo,
+        preview: TomilovPreview,
+    },
+    {
+        video: VasilevVideo,
+        preview: VasilevPreview,
+    }
+]
+
+---
+<section class="section-y">
+    <div id="video-slider" class="splide">
+        <div class="splide__track">
+            <ul class="splide__list">
+                {
+                    videos.map(video => (
+                        <li class="splide__slide" data-splide-html-video={video.video}>
+                            <Image src={video.preview} alt="video preview"  />
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+  @import "../styles/media.scss";
+
+  section {
+    overflow: hidden;
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  .header {
+    display: flex;
+
+    &-item {
+      max-width: none;
+    }
+  }
+
+  .splide {
+    display: block;
+    
+    &__slide {      
+      border-radius: 24px;
+      overflow: hidden;
+    }
+  }
+</style>
+
+<script>
+    import { Video } from '@splidejs/splide-extension-video';
+    import { Intersection } from '@splidejs/splide-extension-intersection';
+    import { Splide } from '@splidejs/splide';
+
+
+    const splide = new Splide( '#video-slider', {
+        arrows: false,
+        mute: true,
+        autoplay: true,
+        // intersection: {
+        //     inView: {
+        //         autoplay: true,
+        //     },
+        //     outView: {
+        //         autoplay: false,
+        //     },
+        // },
+        video: {
+            mute: true,
+            playerOptions: {
+                htmlVideo: {
+                    autoplay: true,
+                    loop: true,
+                }
+            }
+        },
+    }).mount( { Video, Intersection } );
+    
+    splide.on('click', () => {
+        console.log('click');
+        
+    })
+</script>

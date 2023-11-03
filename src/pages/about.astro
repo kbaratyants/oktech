@@ -1,129 +1,244 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import AboutBg from "src/assets/about_bg.png";
-import TeamPhoto from "src/assets/team-photo.png";
-import FooterImage from "src/assets/footer-image.png";
-import Icon from "astro-icon";
-import Footer from "~/components/footer.astro";
+import AboutBg from "@assets/about_bg.png";
+import TeamPhoto from "@assets/team-photo.png";
+import Footer from "@components/footer.astro";
+import FooterImage from "@assets/footer-image.png";
+import Scrollup from "@components/scrollup.svelte";
+import { Icon } from "astro-icon";
+import { Image, getImage } from "astro:assets";
+
+const optimizedImageTop = await getImage({ src: AboutBg });
+const optimizedImageBottom = await getImage({ src: FooterImage });
+
+const productData = [
+  {
+    number: '36,5 млн',
+    title: 'пользователей в месяц'
+  },
+  {
+    number: '16 языков',
+    title: 'сайт переведен для аудитории из разных стран'
+  },
+  {
+    number: '89%',
+    title: 'пользователей заходят с мобильных устройств '
+  },
+  {
+    number: '700 млн',
+    title: 'просмотров видео в сутки'
+  },
+  {
+    number: '> 20 команд',
+    title: 'работает над развитием ОК'
+  },
+  {
+    number: '7 дата-центров',
+    title: 'которые обрабатывают миллионы запросов'
+  },
+];
+
+const workData = [
+  {
+    title: 'Нет лишней бюрократии и токсичности',
+    subtitle: 'В ОК заложена культура открытости и комфортного взаимодействия как с коллегами, так и с руководителями.'
+  },
+  {
+    title: 'Специалисты — основная ценность',
+    subtitle: 'Каждый сотрудник может рассчитывать на разные бонусы — например, на страховку, ИТ-ипотеку, компенсацию питания и спорта.'
+  },
+  {
+    title: 'Вместе не только работаем',
+    subtitle: 'В нерабочее время можно участвовать в клубах по интересам, выступать на конференциях, учиться или обучать других.'
+  },
+  {
+    title: 'Неограниченные карьерные перспективы',
+    subtitle: 'Можно получить как стабильность, так и возможность карьерного роста по вертикали или горизонтали.'
+  },
+  {
+    title: 'Инвестиции во внутренних специалистов — приоритет',
+    subtitle: 'Наш труд ценится, поэтому в команде OK.TECH вознаграждение на уровне ведущих компаний рынка.'
+  },
+  {
+    title: 'Заботимся о комфорте',
+    subtitle: 'В OK.TECH гибкий график начала рабочего дня, а также современный офис с зонами отдыха и спортзалом.'
+  },
+]
 ---
 
 <Layout title="О нас">
-  <section>
-    <img src={AboutBg.src} class="w-full" alt="" />
+  <section class="top" style=`background-image: url(${optimizedImageTop.src});`>
   </section>
 
-  <section class="section-x section-y">
-    <div class="flex flex-col gap-12">
-      <div class="text-large-title text-black">ок</div>
-      <div class="text-title-1 flex flex-col justify-start text-black">
-        <div>
-          Одна из самых популярных социальных сетей в рунете, которая объединяет
-          миллионы людей
-          <br /><br />
-           Ежедневно мы решаем десятки интересных и подчас нетривиальных
-          Highload-задач, чтобы ОК был для пользователей комфортным местом, куда
-          хочется возвращаться снова и снова
-        </div>
-        <Icon name="star" class="h-[37px] w-[37px]" />
+  <section class="about section-x section-y">
+    <div class="text-large-title">ок</div>
+    <div class="text-title-1 about__content">
+      <div>
+        ОК — не просто социальная сеть, а место для увлеченных людей, где можно
+        общаться, просматривать публикации, создавать контент, находить
+        информацию о хобби и единомышленников, делиться знаниями и достижениями,
+        проводить досуг, вести бизнес. И за этим всем стоим мы — команда
+        OK.TECH.
       </div>
-      <button
-        class="flex h-[65px] w-full items-center justify-center rounded-[300px] bg-black px-8 py-[22px] lg:w-[384px]"
-      >
-        <div class="text-button font-medium text-white">хочу к вам</div>
-      </button>
+      <Icon name="star" class="star" />
     </div>
+    <button class="main-button text-button"> хочу к вам</button>
   </section>
 
-  <section class="section-x section-y">
-    <div class="flex flex-col justify-between text-black lg:flex-row">
+  <section class="product section-x section-y">
       <div class="text-large-title">продукт</div>
-      <div class="flex flex-col gap-12 lg:flex-row">
-        <div class="flex flex-col gap-12">
-          <div class="flex flex-col gap-2">
-            <div class="text-title-1">7</div>
-            <div class="text-body">дата-центров</div>
-          </div>
-          <div class="flex flex-col gap-2">
-            <div class="text-title-1">11%</div>
-            <div class="text-body">desktop only</div>
-          </div>
-          <div class="flex flex-col gap-2">
-            <div class="text-title-1">данных</div>
-            <div class="text-body">более 1 эксабайта</div>
-          </div>
-        </div>
-        <div class="flex flex-col gap-12">
-          <div class="flex flex-col gap-2">
-            <div class="text-title-1">до 40 млн</div>
-            <div class="text-body">уникальных пользователей каждый месяц</div>
-          </div>
-          <div class="flex flex-col gap-2">
-            <div class="text-title-1">76%</div>
-            <div class="text-body">mobile only</div>
-          </div>
-          <div class="flex flex-col gap-2">
-            <div class="text-title-1">700 млн</div>
-            <div class="text-body">просмотров видео в сутки</div>
-          </div>
-        </div>
+      <div class="product__content">
+        {
+          productData.map(product => (
+            <div class="product__item">
+              <div class="text-title-1">{product.number}</div>
+              <div class="text-body">{product.title}</div>
+            </div>
+          ))
+        }
       </div>
-    </div>
+
   </section>
 
-  <section class="section-x section-y">
-    <img src={TeamPhoto.src} class="rounded-3xl" alt="" />
+  <section class="team-photo section-x section-y">
+    <Image src={TeamPhoto} alt="" />
   </section>
 
-  <section class="section-x section-y flex flex-col gap-12 text-black">
+  <section class="work section-x section-y">
     <div class="text-large-title">как мы работаем</div>
-    <div class="grid grid-cols-3 gap-12">
-      <div>
-        <div class="text-title-1">Офис</div>
-        <div class="text-body">
-          современный, комфортный офис и гибкий график рабочего дня — каждый
-          выбирает, в какие часы работать
-        </div>
-      </div>
-      <div>
-        <div class="text-title-1">Офис</div>
-        <div class="text-body">
-          современный, комфортный офис и гибкий график рабочего дня — каждый
-          выбирает, в какие часы работать
-        </div>
-      </div>
-      <div>
-        <div class="text-title-1">Офис</div>
-        <div class="text-body">
-          современный, комфортный офис и гибкий график рабочего дня — каждый
-          выбирает, в какие часы работать
-        </div>
-      </div>
-      <div>
-        <div class="text-title-1">Офис</div>
-        <div class="text-body">
-          современный, комфортный офис и гибкий график рабочего дня — каждый
-          выбирает, в какие часы работать
-        </div>
-      </div>
-      <div>
-        <div class="text-title-1">Офис</div>
-        <div class="text-body">
-          современный, комфортный офис и гибкий график рабочего дня — каждый
-          выбирает, в какие часы работать
-        </div>
-      </div>
-      <div>
-        <div class="text-title-1">Офис</div>
-        <div class="text-body">
-          современный, комфортный офис и гибкий график рабочего дня — каждый
-          выбирает, в какие часы работать
-        </div>
-      </div>
+    <div class="work__content">
+      {
+        workData.map(item => (
+          <div class="work-item">
+            <div class="text-title-1">{ item.title }</div>
+            <div class="text-body">{ item.subtitle }</div>
+          </div>
+        ))
+      }
     </div>
   </section>
 
-  <div class={`div relative bg-[url(${FooterImage})]`}>
-    <img src={FooterImage.src} alt="" />
-    <Footer absolute color="white" />
+  <div class="bottom" style={`background-image: url(${optimizedImageBottom.src});`}>
+    <div class="bottom__content">
+      <div class="text-title-3">
+        Каждый из нас может влиять на развитие социальных сетей и делает это. Здесь огромное поле для экспериментов и есть нужные для этого ресурсы
+        <br/> <br/>
+        Работая в OK.Tech мы становимся первопроходцами и это помогает нам формировать уникальную экспертизу, опробовать на практике большинство технологий, решений и подходов, представленных в сфере ИТ
+      </div>
+      <button class="main-button">хочу к вам</button>
+    </div>
+    <Footer classes="absolute transparent" />
+    <Scrollup client:load />
   </div>
 </Layout>
+
+<style lang="scss">
+  @import "@styles/global.scss";
+  .top {
+    height: 500px;
+  }
+  
+  .top, .bottom {
+    background: no-repeat center center/cover;
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+  }
+
+  .star {
+    width: 37px;
+    height: 37px;
+    flex-shrink: 0;
+  }
+  
+  .product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+    
+    &__content {
+      display: grid;
+      gap: 48px;
+    }
+  }
+  
+  .team-photo {
+    img {
+      border-radius: 24px;
+      object-fit: cover;
+      height: 440px;
+    }
+  }
+  
+  .work {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    &__content {
+      display: grid;
+      gap: 24px;
+    }
+  }
+  
+  .bottom {
+    position: relative;
+    color: white;
+    
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      padding: 48px 16px 670px;
+    }
+  }
+  @include desktop {
+    .about {
+      &__content {
+        flex-direction: row;
+        gap: 0px;
+      }
+    }
+    
+    .product {
+      flex-direction: row;
+      
+      &__content {
+        grid-template-columns: repeat(2, 250px);
+      }
+    }
+    
+    .team-photo {
+      img {
+        height: 100%;
+      }
+    }
+    
+    .work__content {
+      gap: 48px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .bottom {
+      &__content {
+        padding: 95px 0 300px 95px;
+        max-width: 479px;
+      }
+    }
+  }
+</style>

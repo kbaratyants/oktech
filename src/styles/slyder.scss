@@ -1,0 +1,28 @@
+@import "./media.scss";
+
+.splide__pagination {
+  gap: 8px;
+}
+
+button.splide__pagination__page {
+  width: 88px;
+  height: 8px;
+  border-radius: 12px;
+  background-color: #cacaca;
+}
+
+.splide__pagination__page.is-active {
+  background-color: black;
+}
+
+@include tablet {
+  button.splide__pagination__page {
+    width: 135px;
+  }
+}
+
+@include desktop {
+  button.splide__pagination__page {
+    width: 153px;
+  }
+}

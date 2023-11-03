@@ -1,32 +1,31 @@
 ---
 import VacancyItem from "./vacancy-item.astro";
 import "@splidejs/splide/css/core";
-import "./vacancies.scss";
 
 const vacancies = [
   {
     title: 'Разработчик iOS проект "Монетизация"',
-    link: "/",
+    link: "https://spb.hh.ru/vacancy/85768446?from=vacancy_search_list&query=одноклассники",
   },
   {
     title: 'Java разработчик проект "Игры"',
-    link: "/",
+    link: "https://spb.hh.ru/vacancy/87211164?from=vacancy_search_list&query=%D0%BE%D0%B4%D0%BD%D0%BE%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BD%D0%B8%D0%BA%D0%B8",
   },
   {
     title: "Data scientist / Machine learning engineer",
-    link: "/",
+    link: "https://spb.hh.ru/vacancy/85772796?from=vacancy_search_list&query=%D0%BE%D0%B4%D0%BD%D0%BE%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BD%D0%B8%D0%BA%D0%B8",
   },
 ];
 ---
 
 <section class="section-x section-y">
   <div class="splide" id="vacancies-slider">
-    <div class="splide__track rounded-2xl">
+    <div class="splide__track">
       <ul class="splide__list">
         {
           vacancies.map((vacancy) => (
             <li class="splide__slide">
-              <VacancyItem title={vacancy.title} />
+              <VacancyItem title={vacancy.title} link={vacancy.link}/>
             </li>
           ))
         }
@@ -35,20 +34,30 @@ const vacancies = [
   </div>
 </section>
 
+<style lang="scss">
+  @import "../../styles/global.scss";
+  .splide__track {
+    border-radius: 16px;
+  }
+</style>
+
 <script>
   import Splide from "@splidejs/splide";
 
-  const splide = new Splide("#vacancies-slider", {
-    type: "loop",
-    arrows: false,
-    autoplay: true,
-    interval: 3500,
-    pauseOnHover: true,
-    classes: {
-      pagination: "splide__pagination", // container
-      page: "splide__pagination__page nav-btn", // each button
-    },
-  });
+  const createSlider = () => {
+    console.log("createSlider");
 
-  splide.mount();
+    const splide = new Splide("#vacancies-slider", {
+      type: "loop",
+      arrows: false,
+      autoplay: true,
+      interval: 3500,
+      pauseOnHover: true,
+    });
+  
+    splide.mount();
+  }
+
+  createSlider();
+  document.addEventListener('astro:after-swap', createSlider);
 </script>

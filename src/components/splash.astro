@@ -1,9 +1,11 @@
 ---
-import Starfield from "~/components/starfield.astro";
+import Starfield from "@components/starfield.astro";
 ---
 
-<section class="relative mb-[90px] h-screen bg-black">
-  <Starfield />
+<section>
+  <!-- <Starfield /> -->
+  <!-- <iframe src='https://my.spline.design/oktech-f9034d5fd7fc3b89c39c703c1eed4625/' frameborder='0' width='100%' height='100%'></iframe> -->
+  <canvas id="canvas3d"></canvas>
 </section>
 
 <noscript>
@@ -15,6 +17,13 @@ import Starfield from "~/components/starfield.astro";
 </noscript>
 
 <style>
+  section {
+    position: relative;
+    margin-bottom: 90px;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(#starfield) {
       display: none;
@@ -25,3 +34,14 @@ import Starfield from "~/components/starfield.astro";
     }
   }
 </style>
+
+<script>
+  // @ts-ignore
+  import { Application } from '@splinetool/runtime';
+  import invariant from 'tiny-invariant';
+
+  const canvas = document.getElementById('canvas3d') as HTMLCanvasElement;
+  const app = new Application(canvas);
+  invariant(canvas);
+  app.load('https://prod.spline.design/pFsAaFCZmaas5Ulb/scene.splinecode');
+</script>
