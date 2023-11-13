@@ -8,9 +8,9 @@ const date = new Date().getFullYear();
 const { classes } = Astro.props;
 ---
 
-<footer class={ `${classes} text-footer` }>
-  <div> hi@ok.ru </div>
-  <div> © 2006–{date}, OK.TECH </div>
+<footer class={`${classes} text-footer`}>
+  <a href="mailto:hi@ok.ru"> hi@ok.ru</a>
+  <div>© 2006–{date}, OK.TECH</div>
 </footer>
 
 <style lang="scss">
@@ -20,9 +20,8 @@ const { classes } = Astro.props;
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-top-width: 1px;
+    border-top: solid 1px black;
     background-color: white;
-    border-color: black;
     text-align: center;
     padding: 0 16px;
     color: black;
@@ -36,7 +35,7 @@ const { classes } = Astro.props;
       background-color: transparent;
     }
   }
-  
+
   @include desktop {
     footer {
       flex-direction: row;

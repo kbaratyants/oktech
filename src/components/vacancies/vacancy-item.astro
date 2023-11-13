@@ -7,11 +7,11 @@ export interface Props {
 const { title, link } = Astro.props;
 ---
 
-<a href={link}>
+<a href={link} target="_blank">
   <div class="vacancy-item">
     <div class="text-headline">вакансия</div>
-    <div class="text-title-1"> {title} ↗ </div>
-    <button class="text-button"> узнать подробнее </button>
+    <div class="text-title-1">{title} ↗</div>
+    <button class="text-button"> узнать подробнее</button>
   </div>
 </a>
 
@@ -28,13 +28,13 @@ const { title, link } = Astro.props;
     color: white;
     background-color: black;
   }
-  
+
   button {
     margin-top: 32px;
     padding: 22px 32px;
     background-color: $c-accent;
     border-radius: 300px;
-    
+
     &:hover {
       background-color: $c-accent-hover;
     }

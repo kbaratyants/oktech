@@ -27,6 +27,9 @@ button {
   color: white;
   background-color: black;
   border-radius: 300px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
   &:hover {
     background-color: $black-hover;
   }
@@ -56,8 +59,45 @@ button {
     padding-left: 95px;
     padding-right: 95px;
   }
-  
+
   .main-button {
     width: 384px;
+  }
+}
+
+.black-text .logo-text {
+  fill: black;
+}
+
+.black-logo {
+  .logo-bg {
+    fill: black;
+  }
+  .logo-man {
+    fill: white;
+  }
+  .logo-text {
+    fill: black;
+  }
+}
+
+.logo-text {
+  fill: white;
+}
+
+.logo-man {
+  fill: white;
+}
+
+.logo-bg {
+  fill: $c-accent;
+}
+
+@keyframes textAnimation {
+  from {
+    transform: translateZ(0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
   }
 }

@@ -1,58 +1,112 @@
 ---
-const technologies = [
-  { title: "frontend", subtitle: "HTML, CSS, JavaScript" },
-  { title: "android", subtitle: "C++, Java, PHP, Kotlin" },
-  { title: "ios", subtitle: "Swift, Objective-C" },
-  { title: "backend", subtitle: "JavaScript, Python, Ruby, PHP, Java, C#" },
-  { title: "QA", subtitle: "HTML/CSS, Python, SQL, Java/JavaScript" },
-  { title: "data base", subtitle: "MongoDB, MySQL, NoSQL, RoomDB" },
-];
+import First from "@assets/techradar-button/1.svg";
+import Second from "@assets/techradar-button/2.svg";
+import Third from "@assets/techradar-button/3.svg";
+import Image from "astro/components/Image.astro";
+
+const { technologies } = Astro.props;
+const { title, technologies_list, button_text } = technologies;
 ---
 
 <section class="section-y section-x">
-  <div class="text-large-title">
-    стек <br /> технологий
-  </div>
+  <div class="text-large-title title">{title}</div>
   <div class="technologies">
     {
-      technologies.map(({ title, subtitle }) => (
+      technologies_list.map(({ title, subtitle }) => (
         <div class="technology">
           <div class="text-title-1">{title}</div>
-          <div class="text-body">{subtitle}</div>
+          <div class="content">
+            {subtitle.map((tech) => (
+              <div class="text-body">
+                {tech.title}: {tech.content}
+              </div>
+            ))}
+          </div>
         </div>
       ))
     }
   </div>
-  <a href="/techradar">
-    <button class="main-button text-button">тех радар</button>
+  <a class="techradar-button" href="/techradar">
+    <button class="main-button text-button">{button_text}</button>
+    <Image class="image" src={First} alt="" />
+    <Image class="image" src={Second} alt="" />
+    <Image class="image" src={Third} alt="" />
   </a>
 </section>
 
 <style lang="scss">
   @import "../styles/global.scss";
+
   section {
     display: flex;
     flex-direction: column;
     gap: 48px;
     color: black;
   }
-  
+
+  .title {
+    width: min-content;
+  }
+
   .technologies {
     display: grid;
     gap: 48px;
   }
-  
+
+  .techradar-button {
+    display: none;
+    position: relative;
+    width: max-content;
+  }
+  .techradar-button:hover {
+    .image {
+      opacity: 1;
+    }
+  }
+  .image {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: float linear 1.5s infinite alternate;
+
+    &:nth-of-type(1) {
+      top: 38px;
+      right: 28px;
+    }
+
+    &:nth-of-type(2) {
+      right: 44px;
+      bottom: 28px;
+      animation-delay: 0.1s;
+    }
+
+    &:nth-of-type(3) {
+      top: 5px;
+      left: 15px;
+      animation-delay: 0.2s;
+    }
+  }
   .technology {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 8px;
   }
-
   @include desktop {
     .technologies {
       grid-auto-flow: column;
-      grid-template-rows: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, auto);
+    }
+    .techradar-button {
+      display: block;
+    }
+  }
+  @keyframes float {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 10px, 0);
     }
   }
 </style>

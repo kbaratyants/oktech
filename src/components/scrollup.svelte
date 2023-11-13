@@ -26,10 +26,35 @@
 
 <div>
   {#if isVisible}
-    <div
-      class="w-12 h-12 fixed bottom-6 right-6 custom-border-gray rounded-full bg-black hover:bg-black cursor-pointer flex justify-center items-center transition z-50 text-title-2 text-white"
+    <button
+      class="text-title-2"
       on:click={scrollToTop}
       aria-hidden="true"
-    > ↑ </div>
+    > ↑ </button>
   {/if}
 </div>
+
+
+<style lang="scss">
+  @import "../styles/global.scss";
+  
+  button {
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    border-radius: 100%;
+    background-color: black;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 150ms;
+    z-index: 10;
+    color: white;
+    &:hover {
+      background-color: $black-hover;
+    }
+  }
+</style>

@@ -1,14 +1,10 @@
 ---
-export interface Props {
-  text: string;
-}
-
-const { text } = Astro.props;
+const { text_block } = Astro.props;
 ---
 
 <section class="section-y">
   <div class="text-title-1">
-    {text}
+    {text_block.title}
   </div>
 </section>
 

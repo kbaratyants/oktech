@@ -7,97 +7,40 @@ import FooterImage from "@assets/footer-image.png";
 import Scrollup from "@components/scrollup.svelte";
 import { Icon } from "astro-icon";
 import { Image, getImage } from "astro:assets";
+import { getEntryBySlug } from "astro:content";
 
 const optimizedImageTop = await getImage({ src: AboutBg });
 const optimizedImageBottom = await getImage({ src: FooterImage });
 
-const productData = [
-  {
-    number: '36,5 млн',
-    title: 'пользователей в месяц'
-  },
-  {
-    number: '16 языков',
-    title: 'сайт переведен для аудитории из разных стран'
-  },
-  {
-    number: '89%',
-    title: 'пользователей заходят с мобильных устройств '
-  },
-  {
-    number: '700 млн',
-    title: 'просмотров видео в сутки'
-  },
-  {
-    number: '> 20 команд',
-    title: 'работает над развитием ОК'
-  },
-  {
-    number: '7 дата-центров',
-    title: 'которые обрабатывают миллионы запросов'
-  },
-];
-
-const workData = [
-  {
-    title: 'Нет лишней бюрократии и токсичности',
-    subtitle: 'В ОК заложена культура открытости и комфортного взаимодействия как с коллегами, так и с руководителями.'
-  },
-  {
-    title: 'Специалисты — основная ценность',
-    subtitle: 'Каждый сотрудник может рассчитывать на разные бонусы — например, на страховку, ИТ-ипотеку, компенсацию питания и спорта.'
-  },
-  {
-    title: 'Вместе не только работаем',
-    subtitle: 'В нерабочее время можно участвовать в клубах по интересам, выступать на конференциях, учиться или обучать других.'
-  },
-  {
-    title: 'Неограниченные карьерные перспективы',
-    subtitle: 'Можно получить как стабильность, так и возможность карьерного роста по вертикали или горизонтали.'
-  },
-  {
-    title: 'Инвестиции во внутренних специалистов — приоритет',
-    subtitle: 'Наш труд ценится, поэтому в команде OK.TECH вознаграждение на уровне ведущих компаний рынка.'
-  },
-  {
-    title: 'Заботимся о комфорте',
-    subtitle: 'В OK.TECH гибкий график начала рабочего дня, а также современный офис с зонами отдыха и спортзалом.'
-  },
-]
+const about = await getEntryBySlug("about", "index");
+const { intro, product, work, bottom } = about.data;
 ---
 
-<Layout title="О нас">
+<Layout>
   <section class="top" style=`background-image: url(${optimizedImageTop.src});`>
   </section>
 
   <section class="about section-x section-y">
-    <div class="text-large-title">ок</div>
+    <div class="text-large-title">{intro.title}</div>
     <div class="text-title-1 about__content">
-      <div>
-        ОК — не просто социальная сеть, а место для увлеченных людей, где можно
-        общаться, просматривать публикации, создавать контент, находить
-        информацию о хобби и единомышленников, делиться знаниями и достижениями,
-        проводить досуг, вести бизнес. И за этим всем стоим мы — команда
-        OK.TECH.
-      </div>
+      <div>{intro.subtitle}</div>
       <Icon name="star" class="star" />
     </div>
-    <button class="main-button text-button"> хочу к вам</button>
+    <button class="main-button text-button"> {intro.button_text}</button>
   </section>
 
   <section class="product section-x section-y">
-      <div class="text-large-title">продукт</div>
-      <div class="product__content">
-        {
-          productData.map(product => (
-            <div class="product__item">
-              <div class="text-title-1">{product.number}</div>
-              <div class="text-body">{product.title}</div>
-            </div>
-          ))
-        }
-      </div>
-
+    <div class="text-large-title">{product.title}</div>
+    <div class="product__content">
+      {
+        product.stats.map((product) => (
+          <div class="product__item">
+            <div class="text-title-1">{product.number}</div>
+            <div class="text-body">{product.title}</div>
+          </div>
+        ))
+      }
+    </div>
   </section>
 
   <section class="team-photo section-x section-y">
@@ -105,27 +48,33 @@ const workData = [
   </section>
 
   <section class="work section-x section-y">
-    <div class="text-large-title">как мы работаем</div>
+    <div class="text-large-title">{work.title}</div>
     <div class="work__content">
       {
-        workData.map(item => (
+        work.info.map((item) => (
           <div class="work-item">
-            <div class="text-title-1">{ item.title }</div>
-            <div class="text-body">{ item.subtitle }</div>
+            <div class="text-title-3">{item.title}</div>
+            <div class="text-body">{item.subtitle}</div>
           </div>
         ))
       }
     </div>
   </section>
 
-  <div class="bottom" style={`background-image: url(${optimizedImageBottom.src});`}>
+  <div
+    class="bottom"
+    style={`background-image: url(${optimizedImageBottom.src});`}
+  >
     <div class="bottom__content">
       <div class="text-title-3">
-        Каждый из нас может влиять на развитие социальных сетей и делает это. Здесь огромное поле для экспериментов и есть нужные для этого ресурсы
-        <br/> <br/>
-        Работая в OK.Tech мы становимся первопроходцами и это помогает нам формировать уникальную экспертизу, опробовать на практике большинство технологий, решений и подходов, представленных в сфере ИТ
+        {bottom.title1}
+        <br />
+        <br />
+        {bottom.title2}
       </div>
-      <button class="main-button">хочу к вам</button>
+      <a href="https://spb.hh.ru/employer/15478" target="_blank">
+        <button class="main-button">хочу к вам</button>
+      </a>
     </div>
     <Footer classes="absolute transparent" />
     <Scrollup client:load />
@@ -137,8 +86,9 @@ const workData = [
   .top {
     height: 500px;
   }
-  
-  .top, .bottom {
+
+  .top,
+  .bottom {
     background: no-repeat center center/cover;
   }
 
@@ -146,7 +96,7 @@ const workData = [
     display: flex;
     flex-direction: column;
     gap: 48px;
-    
+
     &__content {
       display: flex;
       flex-direction: column;
@@ -159,19 +109,19 @@ const workData = [
     height: 37px;
     flex-shrink: 0;
   }
-  
+
   .product {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 48px;
-    
+
     &__content {
       display: grid;
       gap: 48px;
     }
   }
-  
+
   .team-photo {
     img {
       border-radius: 24px;
@@ -179,12 +129,12 @@ const workData = [
       height: 440px;
     }
   }
-  
+
   .work {
     display: flex;
     flex-direction: column;
     gap: 48px;
-    
+
     &-item {
       display: flex;
       flex-direction: column;
@@ -195,11 +145,12 @@ const workData = [
       gap: 24px;
     }
   }
-  
+
   .bottom {
     position: relative;
     color: white;
-    
+    margin-top: calc(60px + 30 * (100vw - 375px) / 1065);
+
     &__content {
       display: flex;
       flex-direction: column;
@@ -211,29 +162,29 @@ const workData = [
     .about {
       &__content {
         flex-direction: row;
-        gap: 0px;
+        gap: 200px;
       }
     }
-    
+
     .product {
       flex-direction: row;
-      
+
       &__content {
         grid-template-columns: repeat(2, 250px);
       }
     }
-    
+
     .team-photo {
       img {
         height: 100%;
       }
     }
-    
+
     .work__content {
       gap: 48px;
       grid-template-columns: repeat(3, 1fr);
     }
-    
+
     .bottom {
       &__content {
         padding: 95px 0 300px 95px;
@@ -242,3 +193,33 @@ const workData = [
     }
   }
 </style>
+
+<script>
+  import invariant from "tiny-invariant";
+
+  const top = document.querySelector(".top") as HTMLElement;
+  const bottom = document.querySelector(".bottom") as HTMLElement;
+  const header = document.querySelector("#page-header") as HTMLElement;
+  const logo = document.querySelector("#logo") as HTMLElement;
+  const page = document.documentElement;
+
+  invariant(header, "header should not be null");
+
+  const d = top.offsetHeight - page.scrollTop - header.offsetHeight / 2;
+  const s =
+    page.offsetHeight -
+    bottom.offsetHeight -
+    page.scrollTop -
+    header.offsetHeight / 2;
+  logo.classList.toggle("black-text", d < 0 && s > 0);
+
+  document.addEventListener("scroll", () => {
+    const d = top.offsetHeight - page.scrollTop - header.offsetHeight / 2;
+    const s =
+      page.offsetHeight -
+      bottom.offsetHeight -
+      page.scrollTop -
+      header.offsetHeight / 2;
+    logo.classList.toggle("black-text", d < 0 && s > 0);
+  });
+</script>

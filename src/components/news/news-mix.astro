@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 export interface Props {
   title: string;
   date: string;
@@ -9,16 +9,16 @@ export interface Props {
 }
 const { title, date, src, link, alt } = Astro.props;
 ---
-<a href={link}>
+
+<a href={link} target="_blank">
   <div class=`news-mix`>
-    <Image class="image" {src} {alt}/>
+    <Image class="image" {src} {alt} />
     <div class="text flex flex-col gap-4 p-6">
       <div class="text-title-3">{title}</div>
       <div class="text-headline">{date}</div>
     </div>
   </div>
 </a>
-
 
 <style lang="scss">
   @import "../../styles/global.scss";
@@ -28,17 +28,17 @@ const { title, date, src, link, alt } = Astro.props;
     border-radius: 24px;
     color: black;
     background-color: $c-light-gray;
-    
+
     &:hover {
       background-color: $c-light-gray-hover;
     }
   }
-  
+
   .image {
     object-fit: cover;
     border-radius: 24px 24px 0 0;
   }
-  
+
   .text {
     display: flex;
     flex-direction: column;

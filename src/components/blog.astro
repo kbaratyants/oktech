@@ -1,73 +1,63 @@
 ---
 import Icon from "astro-icon";
 import BlogHeader from "@assets/blog-header.svg";
+
+const { blog } = Astro.props;
+const { button_text, button_url, first_section, second_section } = blog;
 ---
 
 <section class="section-y">
-  <div class="header text-animation-title">
+  <div class="header">
     <img src={BlogHeader.src} class="header-item animate-textAnimation" />
     <img src={BlogHeader.src} class="header-item animate-textAnimation" />
   </div>
   <div class="blog">
     <div class="blog-section">
-      <a href="https://habr.com/ru/companies/vk/articles/757416/">
-        <div class="blog-section-item black">
-          <div class="text-content">
-            <div class="text-headline">Иванов Павел · 15 мин</div>
-            <div class="text-title-2">
-              Как я перестал бояться и научился любить нейронные сети
+      {
+        first_section.map((item) => (
+          <a href={item.link} target="_blank">
+            <div class={`blog-section-item ${item.type}`}>
+              <div class="text-content">
+                <div class="text-headline">{item.headline}</div>
+                <div class="text-title-2">{item.title}</div>
+              </div>
+              <div class="source">
+                {item.sources.map((source) => (
+                  <div class="source-item">
+                    <div class="text-headline">{source}</div>
+                  </div>
+                ))}
+              </div>
+              {item.link_icon && <Icon name="link" class="link" />}
             </div>
-          </div>
-          <div class="source">
-            <div class="source-item">
-              <div class="text-headline">хабр</div>
-            </div>
-            <div class="source-item">
-              <div class="text-headline">ml</div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="https://habr.com/ru/companies/odnoklassniki/articles/675768/">
-        <div class="blog-section-item accent">
-          <div class="text-content">
-            <div class="text-headline">Дарья Никанорова · 1 час 14 мин</div>
-            <div class="text-title-2">Делимся ML экспертизой</div>
-          </div>
-          <div class="source">
-            <div class="source-item">
-              <div class="text-headline">видео</div>
-            </div>
-          </div>
-          <Icon name="link" class="link" />
-        </div>        
-      </a>
+          </a>
+        ))
+      }
     </div>
     <div class="blog-section">
-      <a href="">
-        <div class="blog-section-item gray">
-          <div class="text-content">
-            <div class="text-headline">
-              Андрей Кузнецов · 1 час 53 мин
-            </div>
-            <div class="text-title-2">
-              Разбор Saint HighLoad 2023. В программе докладе от Дзена, ВКонтакте
-              и Яндекса
-            </div>
-          </div>
-          <div class="source">
-            <div class="source-item">
-              <div class="text-headline">
-                видео
+      {
+        second_section.map((item) => (
+          <a href={item.link} target="_blank">
+            <div class={`blog-section-item ${item.type}`}>
+              <div class="text-content">
+                <div class="text-headline">{item.headline}</div>
+                <div class="text-title-2">{item.title}</div>
               </div>
+              <div class="source">
+                {item.sources.map((source) => (
+                  <div class="source-item">
+                    <div class="text-headline">{source}</div>
+                  </div>
+                ))}
+              </div>
+              {item.link_icon && <Icon name="link" class="link" />}
             </div>
-            <Icon name="link" class="link" />
-          </div>
-        </div>
-      </a>
-      <a href="https://habr.com/ru/companies/odnoklassniki/articles/">
+          </a>
+        ))
+      }
+      <a href={button_url} target="_blank">
         <button>
-          <div class="text-button">читать больше</div>
+          <div class="text-button">{button_text}</div>
         </button>
       </a>
     </div>
@@ -77,11 +67,14 @@ import BlogHeader from "@assets/blog-header.svg";
 <style lang="scss">
   @import "../styles/global.scss";
 
+  .header {
+    animation: textAnimation 75s linear infinite;
+  }
   section {
     position: relative;
     overflow: hidden;
   }
-  
+
   .link {
     position: absolute;
     bottom: 24px;

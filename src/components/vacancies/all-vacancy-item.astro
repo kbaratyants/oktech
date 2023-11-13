@@ -1,0 +1,75 @@
+---
+const disciplines = [
+  "SMM",
+  "iOS",
+  "аналитик",
+  "android",
+  "ML",
+  "frontend",
+  "SRE",
+  "Java",
+  "маркетинг",
+  "QA",
+];
+---
+
+<a href="https://spb.hh.ru/employer/15478" target="_blank">
+  <div class="vacancy-item">
+    <div class="text-title-1">Смотреть все Вакансии ↗</div>
+    <div class="discipline">
+      {
+        disciplines.map((discipline) => (
+          <div class="discipline-item">{discipline}</div>
+        ))
+      }
+    </div>
+  </div>
+</a>
+
+<style lang="scss">
+  @import "../../styles/global.scss";
+  .vacancy-item {
+    display: flex;
+    height: 378px;
+    padding: 0 32px;
+    gap: 48px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: $c-accent;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $c-accent-hover;
+    }
+  }
+
+  button {
+    margin-top: 32px;
+    padding: 22px 32px;
+    background-color: $c-accent;
+    border-radius: 300px;
+
+    &:hover {
+      background-color: $c-accent-hover;
+    }
+  }
+
+  .discipline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100px;
+      border: 2px solid;
+      padding: 4px 16px;
+    }
+  }
+</style>

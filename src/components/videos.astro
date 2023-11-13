@@ -12,47 +12,46 @@ import TomilovVideo from "@assets/videos/Tomilov.mp4";
 import VasilevVideo from "@assets/videos/Vasilev.mp4";
 import VasilevPreview from "@assets/videos/Vasilev.png";
 
-import "@splidejs/splide/css/core";
-import '@splidejs/splide-extension-video/dist/css/splide-extension-video.min.css';
+import "@splidejs/splide-extension-video/dist/css/splide-extension-video.min.css";
 
 const videos = [
-    {
-        video: ManevichVideo,
-        preview: ManevichPreview,
-    },
-    {
-        video: GurovVideo,
-        preview: GurovPreview,
-    },
-    {
-        video: RadchenkovaVideo,
-        preview: RadchenkovaPreview,
-    },
-    {
-        video: TomilovVideo,
-        preview: TomilovPreview,
-    },
-    {
-        video: VasilevVideo,
-        preview: VasilevPreview,
-    }
-]
-
+  {
+    video: ManevichVideo,
+    preview: ManevichPreview,
+  },
+  {
+    video: GurovVideo,
+    preview: GurovPreview,
+  },
+  {
+    video: RadchenkovaVideo,
+    preview: RadchenkovaPreview,
+  },
+  {
+    video: TomilovVideo,
+    preview: TomilovPreview,
+  },
+  {
+    video: VasilevVideo,
+    preview: VasilevPreview,
+  },
+];
 ---
+
 <section class="section-y">
-    <div id="video-slider" class="splide">
-        <div class="splide__track">
-            <ul class="splide__list">
-                {
-                    videos.map(video => (
-                        <li class="splide__slide" data-splide-html-video={video.video}>
-                            <Image src={video.preview} alt="video preview"  />
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
+  <div id="video-slider" class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          videos.map((video) => (
+            <li class="splide__slide" data-splide-html-video={video.video}>
+              <Image src={video.preview} alt="video preview" />
+            </li>
+          ))
+        }
+      </ul>
     </div>
+  </div>
 </section>
 
 <style lang="scss">
@@ -60,8 +59,8 @@ const videos = [
 
   section {
     overflow: hidden;
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .header {
@@ -74,45 +73,40 @@ const videos = [
 
   .splide {
     display: block;
-    
-    &__slide {      
+
+    &__slide {
       border-radius: 24px;
       overflow: hidden;
+    }
+  }
+  @include tablet {
+    section {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  @include desktop {
+    section {
+      padding-left: 150px;
+      padding-right: 150px;
     }
   }
 </style>
 
 <script>
-    import { Video } from '@splidejs/splide-extension-video';
-    import { Intersection } from '@splidejs/splide-extension-intersection';
-    import { Splide } from '@splidejs/splide';
+  import { Video } from "@splidejs/splide-extension-video";
+  import { Splide } from "@splidejs/splide";
 
-
-    const splide = new Splide( '#video-slider', {
-        arrows: false,
-        mute: true,
-        autoplay: true,
-        // intersection: {
-        //     inView: {
-        //         autoplay: true,
-        //     },
-        //     outView: {
-        //         autoplay: false,
-        //     },
-        // },
-        video: {
-            mute: true,
-            playerOptions: {
-                htmlVideo: {
-                    autoplay: true,
-                    loop: true,
-                }
-            }
+  new Splide("#video-slider", {
+    arrows: false,
+    video: {
+      playerOptions: {
+        htmlVideo: {
+          autoplay: true,
+          loop: true,
         },
-    }).mount( { Video, Intersection } );
-    
-    splide.on('click', () => {
-        console.log('click');
-        
-    })
+      },
+    },
+  }).mount({ Video });
 </script>

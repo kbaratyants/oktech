@@ -1,30 +1,24 @@
 ---
 import Icon from "astro-icon";
 
-const stats = [
-  { amount: "60 млрд", title: "уникального контента в месяц" },
-  { amount: "30 млрд", title: "отправок подарков  в год" },
-  { amount: "1 эксабайт", title: "данных и 50 тысяч Docker-контейнеров" },
-];
+const { intro } = Astro.props;
+const { title, subtitle, stats } = intro;
 ---
 
 <section class="section-x section-y">
   <div class="content">
-    <div class="text-large-title">кто мы</div>
+    <div class="text-large-title">{title}</div>
     <div class="subtitle">
-      <div class="text-title-1">
-        Команда OK.TECH объединяет сотни специалистов разработки, дизайна, маркетинга, машинного обучения, поддержки пользователей и не только. 
-        Каждый из нас влияет на то, каким увидят ОК миллионы пользователей. Мы можем творить историю и делаем это. 
-      </div>
+      <div class="text-title-1">{subtitle}</div>
       <Icon name="star" class="star" />
     </div>
   </div>
 
   <div class="stats">
     {
-      stats.map(({ amount, title }) => (
+      stats.map(({ number, title }) => (
         <div class="stats-item">
-          {amount && <div class="text-title-1">{amount}</div>}
+          {number && <div class="text-title-1">{number}</div>}
           {title && <div class="text-body">{title}</div>}
         </div>
       ))

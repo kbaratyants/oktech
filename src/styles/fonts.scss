@@ -1,19 +1,24 @@
 @font-face {
-    font-family: 'OKSans';
-    font-weight: 400;
-    font-style: normal;
-    src: url("/fonts/OK_Sans_Display_Regular.woff") format("woff");
+  font-family: "OKSans";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/OK_Sans_Display_Regular.woff") format("woff");
 }
 
 @font-face {
-    font-family: 'OKSans';
-    font-weight: 500;
-    font-style: normal;
-    src: url("/fonts/OK_Sans_Display_Medium.woff") format("woff");
+  font-family: "OKSans";
+  font-weight: 500;
+  font-style: normal;
+  src: url("/fonts/OK_Sans_Display_Medium.woff") format("woff");
+}
+
+html {
+  font-family: OKSans;
 }
 
 .text-footer {
   font-size: calc(48px + 16 * (100vw - 375px) / 1065);
+  line-height: 1.1;
 }
 
 .text-large-title {

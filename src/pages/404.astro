@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getEntryBySlug } from "astro:content";
+
+const about = await getEntryBySlug("e404", "index");
+const { title, subtitle, button_text } = about.data;
+---
+
+<Layout>
+    <div class="container">
+        <div class="text">
+            <div class="text-large-title">{title}</div>
+            <div class="text-title-1">{subtitle}</div>
+        </div>
+        <a href="/">
+            <button class="main-button">{button_text}</button>
+        </a>
+    </div>
+</Layout>
+
+<style lang="scss">
+  @import "@styles/global.scss";
+  
+  .container {
+    display: flex;
+    height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 72px;
+  }
+  
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+  }
+</style>
+
+<script>
+  const logo = document.querySelector("#logo") as HTMLElement;
+  logo.classList.toggle("black-text");
+</script>

@@ -1,22 +1,13 @@
 ---
 import { SEO } from "astro-seo";
-import "@fontsource-variable/inter/index.css";
 import Header from "@components/header.astro";
 import "@styles/index.css";
-
-export interface Props {
-  title: string;
-}
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const resolvedImageWithDomain = new URL(
   "/opengraph.jpg",
-  Astro.site
+  Astro.site,
 ).toString();
-
-const { title } = Astro.props;
-
-const makeTitle = title ? title + " | " + "OK.TECH" : "OK.TECH";
 ---
 
 <!doctype html>
@@ -27,15 +18,14 @@ const makeTitle = title ? title + " | " + "OK.TECH" : "OK.TECH";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <SEO
-      title={makeTitle}
+      title={"OK.TECH"}
       description="OKTECH"
       canonical={canonicalURL}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: `Команда OK.TECH объединяет сотни специалистов разработки, дизайна, маркетинга, машинного обучения, поддержки пользователей и не только. 
-          Каждый из нас влияет на то, каким увидят ОК миллионы пользователей. Мы можем творить историю и делаем это.`,
+          title: `Команда OK.TECH объединяет сотни специалистов разработки, дизайна, маркетинга, машинного обучения, поддержки пользователей и не только. Каждый из нас влияет на то, каким увидят ОК миллионы пользователей. Мы можем творить историю и делаем это.`,
           image: resolvedImageWithDomain,
         },
         image: {
@@ -44,14 +34,14 @@ const makeTitle = title ? title + " | " + "OK.TECH" : "OK.TECH";
       }}
     />
   </head>
-  <body class="h-full overflow-x-hidden">
+  <body>
     <Header />
     <slot />
-  </body>
+  </body><style>
+    body {
+      color: black;
+      overflow-x: hidden;
+      height: 100%;
+    }
+  </style>
 </html>
-
-<style>
-  body {
-    color: black;
-  }
-</style>

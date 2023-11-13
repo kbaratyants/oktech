@@ -2,49 +2,19 @@
 import Footer from "@components/footer.astro";
 import Layout from "../layouts/Layout.astro";
 import Icon from "astro-icon";
+import { getEntryBySlug } from "astro:content";
 
-const offices = [
-  {
-    city: "Москва",
-    adress: "Ленинградский просп. 39, стр. 79, БЦ «SkyLight»",
-  },
-  {
-    city: "Санкт-Петербург",
-    adress: "ул. Херсонская 12-14, БЦ «Ренессанс Правда»",
-  },
-  {
-    city: "Казань",
-    adress: "ул. Спартаковская, д. 2, ИТ-парк им. Башира Рамеева",
-  },
-  {
-    city: "Сочи",
-    adress: "Адлерский район, пр. Триумфальный, д. 1",
-  },
-  {
-    city: "Нижний Новгород",
-    adress: "ул. Ковалихинская, д. 8, эт. 8",
-  },
-];
-
-const mails = [
-  {
-    title: "Студентам",
-    url: "students@ok.ru",
-  },
-  {
-    title: "По рекламе",
-    url: "pr@ok.ru",
-  },
-];
+const about = await getEntryBySlug("contacts", "index");
+const { title, email, offices, mails } = about.data;
 ---
 
-<Layout title="Контакты">
+<Layout>
   <div class="contacts">
     <div class="contacts__container section-x">
       <div class="contacts__content">
         <div class="contacts__mail text-large-title">
-          Пишите нам на почту
-          <div class="hi-mail">hi@ok.ru</div>
+          <div set:html={title}></div>
+          <a href={`mailto:${email}`} class="hi-mail"> {email} </a>
         </div>
         <div class="mails">
           <div class="mails__container">
@@ -52,7 +22,9 @@ const mails = [
               mails.map((mail) => (
                 <div class="mails-item">
                   <div class="text-title-3">{mail.title}</div>
-                  <div class="text-headline">{mail.url}</div>
+                  <a href={`mailto:${mail.url}`} class="text-headline mail">
+                    {mail.url}
+                  </a>
                 </div>
               ))
             }
@@ -60,12 +32,12 @@ const mails = [
           <Icon name="star" class="star" />
         </div>
       </div>
-      <div class="adresses">
+      <div class="addresses">
         {
           offices.map((office) => (
             <div>
               <div class="text-title-3">{office.city}</div>
-              <div class="text-body">{office.adress}</div>
+              <div class="text-body">{office.address}</div>
             </div>
           ))
         }
@@ -88,6 +60,7 @@ const mails = [
     &__content {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       gap: 48px;
     }
     &__container {
@@ -102,6 +75,7 @@ const mails = [
   }
 
   .hi-mail {
+    display: block;
     width: fit-content;
     border-bottom-width: 8px;
     border-color: black;
@@ -123,6 +97,10 @@ const mails = [
       display: flex;
       flex-direction: column;
       min-width: 262px;
+
+      .mail {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -131,7 +109,7 @@ const mails = [
     align-self: self-start;
   }
 
-  .adresses {
+  .addresses {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -141,14 +119,14 @@ const mails = [
     .star {
       align-self: end;
     }
-    
+
     .contacts {
       height: 100vh;
       &__content {
         flex-direction: row;
       }
-      
-      .adresses {
+
+      .addresses {
         flex-direction: row;
         gap: 48px;
       }
@@ -158,5 +136,14 @@ const mails = [
         padding-bottom: 24px;
       }
     }
+
+    .mails-item {
+      text-align: end;
+    }
   }
 </style>
+
+<script>
+  const logo = document.querySelector("#logo") as HTMLElement;
+  logo.classList.toggle("black-logo");
+</script>

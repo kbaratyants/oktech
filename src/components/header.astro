@@ -3,7 +3,7 @@ import { Icon } from "astro-icon";
 
 const navItems = [
   { title: "GITHUB", url: "https://github.com/odnoklassniki", external: true },
-  { title: "Habr", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true },
+  { title: "Habr", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true, },
   { title: "Вакансии", url: "https://spb.hh.ru/employer/15478", external: true },
   { title: "Тех радар", url: "/techradar" },
   { title: "О нас", url: "/about" },
@@ -11,10 +11,21 @@ const navItems = [
 ];
 
 const mobileNavItems = [
-  { title: "Github ↗", url: "https://github.com/odnoklassniki", external: true },
-  { title: "Habr ↗", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true },
-  { title: "Вакансии", url: "https://spb.hh.ru/employer/15478", external: true },
-  { title: "Тех радар", url: "/techradar" },
+  {
+    title: "Github ↗",
+    url: "https://github.com/odnoklassniki",
+    external: true,
+  },
+  {
+    title: "Habr ↗",
+    url: "https://habr.com/ru/companies/odnoklassniki/articles/",
+    external: true,
+  },
+  {
+    title: "Вакансии",
+    url: "https://spb.hh.ru/employer/15478",
+    external: true,
+  },
   { title: "О нас", url: "/about" },
   { title: "Контакты", url: "/contacts" },
 ];
@@ -26,7 +37,7 @@ const { pathname } = Astro.url;
   <a href="/">
     <h1 class="sr-only">OKTECH</h1>
     <img src="" />
-    <Icon name="logo_oktech" id="logo" class="icon" />
+    <Icon name="logomark" id="logo" class="icon" />
   </a>
   <div id="menu-modal" class="modal" aria-hidden="true">
     <div class="modal-content">
@@ -34,9 +45,15 @@ const { pathname } = Astro.url;
         <div class="modal-header">
           <a class="flex justify-center" href="/">
             <h2 class="sr-only">OKTECH</h2>
-            <Icon name="logo_oktech" class="icon" />
+            <Icon name="logomark" class="icon" />
           </a>
-          <button id="close-nav-button" type="button" id="open-nav-button" class="nav-btn" aria-label="Close navigation">
+          <button
+            id="close-nav-button"
+            type="button"
+            id="open-nav-button"
+            class="nav-btn text-button"
+            aria-label="Close navigation"
+          >
             закрыть
           </button>
         </div>
@@ -44,8 +61,12 @@ const { pathname } = Astro.url;
           <ul>
             {
               mobileNavItems.map(({ title, url, external }) => (
-                <li class={`${(pathname === url) ? "active" : ""}`}>
-                  <a href={url} target={external ? '_blank' : '_self'}>
+                <li
+                  class={`${
+                    pathname === `${url}/` || pathname === url ? "active" : ""
+                  }`}
+                >
+                  <a href={url} target={external ? "_blank" : "_self"}>
                     {title}
                   </a>
                 </li>
@@ -60,17 +81,32 @@ const { pathname } = Astro.url;
     <ul>
       {
         navItems.map(({ title, url, external }) => (
-          <li class={`${(pathname === url) ? "active" : ""}`}>
-            <a class="text-button" href={url} target={external ? '_blank' : '_self'}>
-              <div class="nav-btn">
-                {title}
-              </div>
+          <li
+            class={`${
+              pathname === `${url}/` || pathname === url ? "active" : ""
+            }`}
+          >
+            <a
+              class="text-button"
+              href={url}
+              target={external ? "_blank" : "_self"}
+              data-pathname={pathname}
+              data-url={url}
+            >
+              <div class="nav-btn">{title}</div>
             </a>
           </li>
         ))
       }
     </ul>
-    <button id="open-nav-button" type="button" class="nav-btn" aria-label="Navigation"> меню </button>
+    <button
+      id="open-nav-button"
+      type="button"
+      class="nav-btn text-button"
+      aria-label="Navigation"
+    >
+      меню
+    </button>
   </nav>
 </header>
 
@@ -78,46 +114,31 @@ const { pathname } = Astro.url;
   import MicroModal from "micromodal";
   import invariant from "tiny-invariant";
 
-  const mountHeader = () => {
-    const menuModalId = "menu-modal";
+  const menuModalId = "menu-modal";
+  const menu = document.querySelector(`#${menuModalId} ul`);
+  const openNavButton = document.querySelector("#open-nav-button");
+  const closeNavButton = document.querySelector("#close-nav-button");
 
-    const header = document.querySelector("#page-header") as HTMLElement;
-    const logo = document.querySelector("#logo") as HTMLElement;
-    const page = document.documentElement;
-    const menu = document.querySelector(`#${menuModalId} ul`);
-    const openNavButton = document.querySelector("#open-nav-button");
-    const closeNavButton = document.querySelector("#close-nav-button");
+  invariant(menu, "menu should not be null");
+  invariant(openNavButton, "openNavButton should not be null");
+  invariant(closeNavButton, "closeNavButton should not be null");
 
-    invariant(header, "header should not be null");
-    invariant(menu, "menu should not be null");
-    invariant(openNavButton, "openNavButton should not be null");
-    invariant(closeNavButton, "closeNavButton should not be null");
-
-    const openMenu = () => {
-      MicroModal.show(menuModalId, { disableScroll: true });
-    };
-
-    const closeMenu = () => {
-      MicroModal.close(menuModalId);
-    };
-
-    openNavButton.addEventListener("click", openMenu);
-    closeNavButton.addEventListener("click", closeMenu);
-
-    document.addEventListener("scroll", () => {
-      const d = page.clientHeight - page.scrollTop - header.offsetHeight / 2;
-      logo.classList.toggle("invert", d < 0);
-    });
-
-    menu.addEventListener("click", (event) => {
-      if ((event.target as HTMLElement).tagName === "A") {
-        closeMenu();
-      }
-    });
+  const openMenu = () => {
+    MicroModal.show(menuModalId, { disableScroll: true });
   };
-  mountHeader();
 
-  document.addEventListener("astro:after-swap", mountHeader);
+  const closeMenu = () => {
+    MicroModal.close(menuModalId);
+  };
+
+  openNavButton.addEventListener("click", openMenu);
+  closeNavButton.addEventListener("click", closeMenu);
+
+  menu.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).tagName === "A") {
+      closeMenu();
+    }
+  });
 </script>
 
 <style lang="scss">
@@ -158,24 +179,24 @@ const { pathname } = Astro.url;
     ul {
       display: none;
     }
-    
+
     li.active {
       .nav-btn {
         background-color: black;
       }
     }
   }
-  
+
   .mobile-nav {
     ul {
       display: flex;
       flex-direction: column;
-      
+
       a {
         display: block;
         font-size: 60px;
       }
-      
+
       li.active {
         color: $c-accent;
       }
@@ -197,7 +218,7 @@ const { pathname } = Astro.url;
     background-color: rgba(44, 44, 44, 0.4);
     padding: 24px;
     backdrop-filter: blur(12px);
-    
+
     &:hover {
       background-color: rgba(44, 44, 44, 0.5);
     }
@@ -208,7 +229,7 @@ const { pathname } = Astro.url;
       display: flex;
       column-gap: 8px;
     }
-    
+
     #open-nav-button {
       display: none;
     }

@@ -1,8 +1,24 @@
 ---
+import Footer from "@components/footer.astro";
 import TechRadar from "@components/techradar.svelte";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="Tech Radar">
+<Layout>
+  <div class="tech-container">
     <TechRadar client:only />
+    <Footer classes="black" />
+  </div>
 </Layout>
+
+<style>
+  .tech-container {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  const logo = document.querySelector("#logo") as HTMLElement;
+  logo.classList.toggle("black-text");
+</script>

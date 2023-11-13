@@ -1,31 +1,52 @@
 ---
-import "@fontsource-variable/inter";
+import "@splidejs/splide/css/core";
 import Blog from "@components/blog.astro";
 import Intro from "@components/intro.astro";
 import News from "@components/news/news.astro";
-import Splash from "@components/splash.astro";
 import Technologies from "@components/technologies.astro";
 import TextBlock from "@components/text-block.astro";
-import PhotoGallery from "@components/photo-gallery.astro";
+import PhotoGallery from "@components/photo-gallery/photo-gallery.astro";
 import Layout from "../layouts/Layout.astro";
 import Vacancies from "@components/vacancies/vacancies.astro";
 import Footer from "@components/footer.astro";
 import Videos from "@components/videos.astro";
 import Scrollup from "@components/scrollup.svelte";
+import Teaser from "@components/teaser.astro";
+import { getEntryBySlug } from "astro:content";
+
+const homepage = await getEntryBySlug("homepage", "index");
+const { teaser, intro, technologies, blog, text_block, vacancies } =
+  homepage.data;
 ---
 
-<Layout title="">
-  <Splash />
-  <Intro />
+<Layout>
+  <Teaser {teaser} />
+  <Intro {intro} />
+  <Technologies {technologies} />
   <Videos />
-  <Technologies />
-  <Blog />
-  <TextBlock
-    text="Пул задач в ОК шире, чем в большинстве проектов. Это классный драйвер для изучения топовых технологий, подходов и решений в реальных условиях."
-  />
+  <Blog {blog} />
+  <TextBlock {text_block} />
   <PhotoGallery />
-  <Vacancies />
+  <Vacancies {vacancies} />
   <News />
   <Footer classes="black" />
   <Scrollup client:load />
 </Layout>
+
+<script>
+  import invariant from "tiny-invariant";
+
+  const header = document.querySelector("#page-header") as HTMLElement;
+  const logo = document.querySelector("#logo") as HTMLElement;
+  const page = document.documentElement;
+
+  invariant(header, "header should not be null");
+
+  const d = page.clientHeight - page.scrollTop - header.offsetHeight / 2;
+  logo.classList.toggle("black-text", d < 0);
+
+  document.addEventListener("scroll", () => {
+    const d = page.clientHeight - page.scrollTop - header.offsetHeight / 2;
+    logo.classList.toggle("black-text", d < 0);
+  });
+</script>

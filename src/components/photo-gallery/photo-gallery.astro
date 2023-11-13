@@ -14,7 +14,7 @@ import { Image } from "astro:assets";
 const images = [
   {
     src: First,
-    title: "HighLoad конференция",
+    title: "Команда OK.TECH на CodeFest 2023",
     subtitle: "Стенд OK.TECH",
   },
   {
@@ -24,12 +24,12 @@ const images = [
   },
   {
     src: Third,
-    title: "Делимся опытом",
-    subtitle: "Москва",
+    title: "Выступление Антона Федчина, руководителя проекта Одноклассники",
+    subtitle: "На открытии офиса ВК в Казани",
   },
   {
     src: Fourth,
-    title: "OK Tech Talk «A/B тестирование»",
+    title: "OK Tech Talk «ML в production»",
     subtitle: 'Москва, "Дом Атлантов"',
   },
   {
@@ -44,15 +44,24 @@ const images = [
   },
   {
     src: Seventh,
-    title: "Кухня",
+    title: "Кухня в офисе ОК",
     subtitle: "Офис Санкт-Петербурга",
   },
 ];
 ---
-<section class="section-y">
-  <div class="header text-animation-title">
-    <Image src={PhotoesHeader} alt="photo title" class="header-item animate-textAnimation" />
-    <Image src={PhotoesHeader} alt="photo title" class="header-item animate-textAnimation" />
+
+<section class="photo-gallery section-y">
+  <div class="header">
+    <Image
+      src={PhotoesHeader}
+      alt="photo title"
+      class="header-item animate-textAnimation"
+    />
+    <Image
+      src={PhotoesHeader}
+      alt="photo title"
+      class="header-item animate-textAnimation"
+    />
   </div>
   <div class="gallery-container">
     {
@@ -62,7 +71,12 @@ const images = [
             <div class="text-headline">{image.subtitle}</div>
             <div class="text-title-2">{image.title}</div>
           </div>
-          <Image class="image" src={image.src} alt={image.title} loading="lazy" />
+          <Image
+            class="image"
+            src={image.src}
+            alt={image.title}
+            loading="lazy"
+          />
         </div>
       ))
     }
@@ -97,7 +111,7 @@ const images = [
         }
         <li class="splide__slide">
           <div class="vacancy">
-            <div class="slide-blur"> * </div>
+            <div class="slide-blur">*</div>
           </div>
         </li>
       </ul>
@@ -106,14 +120,18 @@ const images = [
 </section>
 
 <style lang="scss">
-  @import "../styles/media.scss";
+  @import "../../styles/media.scss";
 
-  section {
+  .photo-gallery {
     overflow: hidden;
+    color: white;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .header {
     display: flex;
+    animation: textAnimation 75s linear infinite;
 
     &-item {
       max-width: none;
@@ -148,7 +166,6 @@ const images = [
       background-color: rgba(0, 0, 0, 0.2);
       z-index: 1;
       transition: opacity 0.3s;
-      color: white;
     }
 
     &-container {
@@ -181,21 +198,21 @@ const images = [
       }
     }
   }
-  
+
   .splide {
     display: block;
-    
-    &__slide {      
+
+    &__slide {
       border-radius: 24px;
       overflow: hidden;
     }
     &__track {
     }
   }
-  
+
   #thumbnail-slider {
     padding-top: 16px;
-    .slide-blur{ 
+    .slide-blur {
       display: none;
     }
     .is-active {
@@ -218,12 +235,12 @@ const images = [
     width: 100%;
     background-color: black;
   }
-  
+
   @include desktop {
     .gallery-container {
       display: grid;
     }
-    
+
     .splide {
       display: none;
     }
@@ -233,48 +250,42 @@ const images = [
 <script>
   import Splide from "@splidejs/splide";
 
-  const mountGallery = () => {
-    const main = new Splide("#photo-slider", {
-      type: "fade",
-      heightRatio: 0.5,
-      height: "625px",
-      pagination: false,
-      arrows: false,
-      cover: true,
-      breakpoints: {
-        600: {
-          height: "400px",
-        },
+  const main = new Splide("#photo-slider", {
+    type: "fade",
+    heightRatio: 0.5,
+    height: "625px",
+    pagination: false,
+    arrows: false,
+    cover: true,
+    breakpoints: {
+      600: {
+        height: "400px",
       },
-    });
-  
-    const thumbnails = new Splide("#thumbnail-slider", {
-      rewind: true,
-      fixedWidth: 80,
-      fixedHeight: 80,
-      isNavigation: true,
-      gap: 10,
-      arrows: false,
-      pagination: false,
-      cover: true,
-      dragMinThreshold: {
-        mouse: 4,
-        touch: 10,
+    },
+  });
+
+  const thumbnails = new Splide("#thumbnail-slider", {
+    rewind: true,
+    fixedWidth: 80,
+    fixedHeight: 80,
+    isNavigation: true,
+    gap: 10,
+    arrows: false,
+    pagination: false,
+    cover: true,
+    dragMinThreshold: {
+      mouse: 4,
+      touch: 10,
+    },
+    breakpoints: {
+      640: {
+        fixedWidth: 80,
+        fixedHeight: 80,
       },
-      breakpoints: {
-        640: {
-          fixedWidth: 80,
-          fixedHeight: 80,
-        },
-      },
-    });
-  
-    main.sync(thumbnails);
-    main.mount();
-    thumbnails.mount();
-  }
-  
-  mountGallery();
-  
-  document.addEventListener("astro:after-swap", mountGallery);
+    },
+  });
+
+  main.sync(thumbnails);
+  main.mount();
+  thumbnails.mount();
 </script>
