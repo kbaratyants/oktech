@@ -7,7 +7,7 @@ export interface Props {
 const { title, link } = Astro.props;
 ---
 
-<a href={link} target="_blank">
+<a href={link} target="_blank" rel="nofollow">
   <div class="vacancy-item">
     <div class="text-headline">вакансия</div>
     <div class="text-title-1">{title} ↗</div>
@@ -17,6 +17,9 @@ const { title, link } = Astro.props;
 
 <style lang="scss">
   @import "../../styles/global.scss";
+  a {
+    width: 100%;
+  }
   .vacancy-item {
     display: flex;
     height: 378px;
@@ -32,6 +35,7 @@ const { title, link } = Astro.props;
   button {
     margin-top: 32px;
     padding: 22px 32px;
+    color: black;
     background-color: $c-accent;
     border-radius: 300px;
 

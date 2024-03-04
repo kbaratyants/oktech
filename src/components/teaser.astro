@@ -1,27 +1,20 @@
 ---
-import TeaserVideo from "@assets/videos/teaser.mp4";
-import VideoFallback from "@assets/video-fallback.png";
-import Image from "astro/components/Image.astro";
-
 const { teaser } = Astro.props;
 const { title, links } = teaser;
 const date = new Date().getFullYear();
 ---
 
 <section class="teaser">
-  <h2 class="text-title-1">
+  <h2 class="title text-title-1">
     {title}
   </h2>
-  <video id="background-video" autoplay loop muted playsinline>
-    <source src={TeaserVideo} type="video/mp4" />
-  </video>
 
-  <Image id="video-bg-fallback" src={VideoFallback} alt="" />
+  <canvas id="teaser" />
 
   <div class="text text-body">
     {
       links.map((link) => (
-        <a href={link.link} target="_blank" class="text-item">
+        <a href={link.link} target="_blank" class="text-item" rel="nofollow">
           {" "}
           {link.title}{" "}
         </a>
@@ -35,8 +28,14 @@ const date = new Date().getFullYear();
 </section>
 
 <style lang="scss">
+  section {
+    margin-bottom: calc(60px + 30*(100vw - 375px) / 1065);
+    background-color: black;
+  }
+
   h2 {
     max-width: 800px;
+    z-index: 1;
   }
 
   .text {
@@ -44,10 +43,11 @@ const date = new Date().getFullYear();
     justify-content: space-between;
     align-items: flex-end;
     gap: 16px;
+    z-index: 1;
 
     &-item {
       display: block;
-      max-width: 220px;
+      max-width: 195px;
     }
   }
 
@@ -55,7 +55,7 @@ const date = new Date().getFullYear();
     position: absolute;
     right: 0;
     top: 50%;
-    transform: rotate(-90deg) translate(-30%, 30%);
+    transform: rotate(-90deg) translate(50%, 100%);
   }
 
   .teaser {
@@ -68,7 +68,11 @@ const date = new Date().getFullYear();
     color: white;
   }
 
-  #background-video {
+  .title {
+    padding-right: 32px;
+  }
+  
+  #teaser, .stub {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
@@ -77,29 +81,17 @@ const date = new Date().getFullYear();
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: -1;
   }
-
-  #video-bg-fallback {
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+  
+  .stub {
     z-index: -1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #background-video {
-      display: none;
-    }
-
-    #video-bg-fallback {
-      display: block;
-    }
   }
 </style>
+
+<script>
+  import { Application } from '@splinetool/runtime';
+
+  const canvas = document.getElementById('teaser') as HTMLCanvasElement;
+  const app = new Application(canvas);
+  app.load('https://prod.spline.design/pFsAaFCZmaas5Ulb/scene.splinecode');
+</script>

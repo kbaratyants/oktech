@@ -25,13 +25,12 @@
 </script>
 
 <div>
-  {#if isVisible}
-    <button
-      class="text-title-2"
-      on:click={scrollToTop}
-      aria-hidden="true"
-    > ↑ </button>
-  {/if}
+  <button
+    class="text-title-2 scroll-top-btn"
+    class:visible={isVisible}
+    on:click={scrollToTop}
+    aria-hidden="true"
+  > ↑ </button>
 </div>
 
 
@@ -45,7 +44,6 @@
     bottom: 24px;
     right: 24px;
     border-radius: 100%;
-    background-color: black;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -53,8 +51,18 @@
     transition: background-color 150ms;
     z-index: 10;
     color: white;
+    background-color: rgba(44, 44, 44, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background-color 0.3s;
+    opacity: 0;
+
     &:hover {
-      background-color: $black-hover;
+      background-color: rgba(44, 44, 44, 0.5);
+    }
+    
+    &.visible {
+      opacity: 1;
     }
   }
 </style>

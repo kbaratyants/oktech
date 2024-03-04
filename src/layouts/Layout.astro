@@ -3,9 +3,19 @@ import { SEO } from "astro-seo";
 import Header from "@components/header.astro";
 import "@styles/index.css";
 
+export interface Props {
+  title: string;
+  ogTitle: string;
+  description: string;
+  blackLogo?: boolean;
+  blackLogoText?: boolean;
+}
+
+const { title, ogTitle, description, blackLogo, blackLogoText } = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const resolvedImageWithDomain = new URL(
-  "/opengraph.jpg",
+  "/opengraph.jpeg",
   Astro.site,
 ).toString();
 ---
@@ -15,27 +25,51 @@ const resolvedImageWithDomain = new URL(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"> 
+    <link rel="manifest" href="/manifest.webmanifest">
 
     <SEO
-      title={"OK.TECH"}
-      description="OKTECH"
+      title={title}
+      description={description}
       canonical={canonicalURL}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: `Команда OK.TECH объединяет сотни специалистов разработки, дизайна, маркетинга, машинного обучения, поддержки пользователей и не только. Каждый из нас влияет на то, каким увидят ОК миллионы пользователей. Мы можем творить историю и делаем это.`,
+          title: ogTitle,
           image: resolvedImageWithDomain,
         },
-        image: {
-          alt: "OKTECH thumbnail",
+        optional: {
+          description,
+          locale: "ru_RU",
         },
+        article: {
+          authors: ['OK'],
+        }
       }}
     />
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+      ym(96596075, "init", {
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96596075" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
   </head>
   <body>
-    <Header />
+    <Header {blackLogo} {blackLogoText} />
     <slot />
   </body><style>
     body {

@@ -1,14 +1,15 @@
 ---
-import GalleryLinkElement from "./gallery-link-element.astro";
-import "@splidejs/splide/css/core";
-import First from "@assets/photoes/1.png";
-import Second from "@assets/photoes/2.png";
-import Third from "@assets/photoes/3.png";
-import Fourth from "@assets/photoes/4.png";
-import Fivth from "@assets/photoes/5.png";
-import Sixth from "@assets/photoes/6.png";
-import Seventh from "@assets/photoes/7.png";
-import PhotoesHeader from "@assets/photo-header.svg";
+import First from "@assets/photoes/1.jpeg";
+import Second from "@assets/photoes/2.jpeg";
+import Third from "@assets/photoes/3.jpeg";
+import Fourth from "@assets/photoes/4.jpeg";
+import Fivth from "@assets/photoes/5.jpeg";
+import Sixth from "@assets/photoes/6.jpeg";
+import Seventh from "@assets/photoes/7.jpeg";
+import Eighth from "@assets/photoes/8.jpeg";
+import Nineth from "@assets/photoes/9.jpeg";
+import PhotoesHeader1 from "@assets/photo-header1.svg";
+import PhotoesHeader2 from "@assets/photo-header2.svg";
 import { Image } from "astro:assets";
 
 const images = [
@@ -19,8 +20,8 @@ const images = [
   },
   {
     src: Second,
-    title: "Просто красивое растение",
-    subtitle: "Мероприятие OK",
+    title: "Офис ОК",
+    subtitle: 'Санкт-Петербург',
   },
   {
     src: Third,
@@ -29,36 +30,46 @@ const images = [
   },
   {
     src: Fourth,
-    title: "OK Tech Talk «ML в production»",
-    subtitle: 'Москва, "Дом Атлантов"',
+    title: "Офис ОК",
+    subtitle: 'Санкт-Петербург',
   },
   {
     src: Fivth,
-    title: "Выступаем на ML OK.TECH",
-    subtitle: "Оранжерея Санкт-Петербурга",
+    title: "Наша команда OK.TECH на конференции Saint HighLoad++ 2023",
+    subtitle: "Saint HighLoad++",
   },
   {
     src: Sixth,
+    title: "Кухня в офисе ОК",
+    subtitle: "Санкт-Петербург",
+  },
+  {
+    src: Seventh,
     title: "Офис, игровая комната",
     subtitle: "Офис Санкт-Петербурга",
   },
   {
-    src: Seventh,
-    title: "Кухня в офисе ОК",
-    subtitle: "Офис Санкт-Петербурга",
+    src: Eighth,
+    title: "Свой митап «ML в production»",
+    subtitle: "Санкт-Петербург",
+  },
+  {
+    src: Nineth,
+    title: "Организуем OK Tech Talk «А/B-тестирование»",
+    subtitle: "OK Tech Talk",
   },
 ];
 ---
 
 <section class="photo-gallery section-y">
-  <div class="header">
+  <div class="header text-animation-title">
     <Image
-      src={PhotoesHeader}
+      src={PhotoesHeader1}
       alt="photo title"
       class="header-item animate-textAnimation"
     />
     <Image
-      src={PhotoesHeader}
+      src={PhotoesHeader2}
       alt="photo title"
       class="header-item animate-textAnimation"
     />
@@ -80,47 +91,11 @@ const images = [
         </div>
       ))
     }
-    <GalleryLinkElement />
-  </div>
-  <div id="photo-slider" class="splide">
-    <div class="splide__track">
-      <ul class="splide__list">
-        {
-          images.map((image) => (
-            <li class="splide__slide">
-              <Image src={image.src} alt={image.title} />
-            </li>
-          ))
-        }
-        <li class="splide__slide">
-          <GalleryLinkElement />
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div id="thumbnail-slider" class="splide">
-    <div class="splide__track">
-      <ul class="splide__list">
-        {
-          images.map((image) => (
-            <li class="splide__slide">
-              <div class="slide-blur"> * </div>
-              <Image src={image.src} alt={image.title} />
-            </li>
-          ))
-        }
-        <li class="splide__slide">
-          <div class="vacancy">
-            <div class="slide-blur">*</div>
-          </div>
-        </li>
-      </ul>
-    </div>
   </div>
 </section>
 
 <style lang="scss">
-  @import "../../styles/media.scss";
+  @import "../../styles/global.scss";
 
   .photo-gallery {
     overflow: hidden;
@@ -134,14 +109,15 @@ const images = [
     animation: textAnimation 75s linear infinite;
 
     &-item {
+      height: 100%;
       max-width: none;
     }
   }
 
   .gallery-container {
-    display: none;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(6, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(6, minmax(0, 320px));
     gap: 16px;
   }
 
@@ -157,10 +133,12 @@ const images = [
 
     &-blur {
       position: absolute;
+      display: none;
       height: 100%;
       width: 100%;
       border-radius: 8px;
       padding: 24px;
+      -webkit-backdrop-filter: blur(40px);
       backdrop-filter: blur(40px);
       opacity: 0;
       background-color: rgba(0, 0, 0, 0.2);
@@ -173,23 +151,19 @@ const images = [
       border-radius: 24px;
       overflow: hidden;
 
-      &:nth-of-type(1),
-      &:nth-of-type(4),
-      &:nth-of-type(7) {
-        grid-row: span 2;
+      &:nth-of-type(1) {
+        grid-column: span 2;
       }
-      &:nth-of-type(3) {
-        grid-row: 2;
-        grid-column: 2;
+      &:nth-of-type(4) {
+        grid-column: span 2;
       }
-      &:nth-of-type(5),
       &:nth-of-type(6) {
-        grid-row: span 2;
+        grid-row: 5;
         grid-column: span 2;
       }
       &:nth-of-type(8) {
-        grid-column: 1;
-        grid-row: 3 / span 2;
+        grid-row: 6;
+        grid-column: 2;
       }
       &:hover {
         .image-blur {
@@ -198,94 +172,49 @@ const images = [
       }
     }
   }
-
-  .splide {
-    display: block;
-
-    &__slide {
-      border-radius: 24px;
-      overflow: hidden;
-    }
-    &__track {
-    }
-  }
-
-  #thumbnail-slider {
-    padding-top: 16px;
-    .slide-blur {
-      display: none;
-    }
-    .is-active {
-      .slide-blur {
-        position: absolute;
-        display: block;
-        text-align: center;
-        font-size: 64px;
-        z-index: 1;
-        height: 100%;
-        width: 100%;
-        backdrop-filter: brightness(0.6);
-        border-radius: 24px;
-      }
-    }
-  }
-
-  .vacancy {
-    height: 100%;
-    width: 100%;
-    background-color: black;
-  }
-
+  
   @include desktop {
     .gallery-container {
-      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(6, minmax(0, 1fr));
     }
+    .image-container {
+      &:nth-of-type(1),
+      &:nth-of-type(4),
+      &:nth-of-type(5),
+      &:nth-of-type(8) {
+        grid-row: span 2;
+        grid-column: auto;
+      }
+      &:nth-of-type(3) {
+        grid-row: 2;
+        grid-column: 2;
+        .text-title-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
 
-    .splide {
-      display: none;
+      &:nth-of-type(6),
+      &:nth-of-type(7) {
+        grid-row: span 2;
+        grid-column: span 2;
+      }
+    
+      &:nth-of-type(9) {
+        grid-row: span 2;
+        grid-column: span 3;
+      }
+    }
+    .image-blur {
+      display: block;
     }
   }
 </style>
 
 <script>
-  import Splide from "@splidejs/splide";
-
-  const main = new Splide("#photo-slider", {
-    type: "fade",
-    heightRatio: 0.5,
-    height: "625px",
-    pagination: false,
-    arrows: false,
-    cover: true,
-    breakpoints: {
-      600: {
-        height: "400px",
-      },
-    },
-  });
-
-  const thumbnails = new Splide("#thumbnail-slider", {
-    rewind: true,
-    fixedWidth: 80,
-    fixedHeight: 80,
-    isNavigation: true,
-    gap: 10,
-    arrows: false,
-    pagination: false,
-    cover: true,
-    dragMinThreshold: {
-      mouse: 4,
-      touch: 10,
-    },
-    breakpoints: {
-      640: {
-        fixedWidth: 80,
-        fixedHeight: 80,
-      },
-    },
-  });
-
-  main.sync(thumbnails);
-  main.mount();
-  thumbnails.mount();
+  
 </script>

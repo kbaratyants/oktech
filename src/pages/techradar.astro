@@ -1,12 +1,12 @@
 ---
 import Footer from "@components/footer.astro";
-import TechRadar from "@components/techradar.svelte";
+import TechRadar from "@components/techradar/techradar.svelte";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout>
+<Layout title="Техрадар" ogTitle="Техрадар команды OK.TECH" description="Технологии и инструменты, которые мы используем в разработке и развитии ОК" blackLogoText>
   <div class="tech-container">
-    <TechRadar client:only />
+    <TechRadar client:load />
     <Footer classes="black" />
   </div>
 </Layout>
@@ -14,11 +14,9 @@ import Layout from "@layouts/Layout.astro";
 <style>
   .tech-container {
     display: flex;
+    height: 100vh;
+    justify-content: space-between;
     flex-direction: column;
   }
 </style>
 
-<script>
-  const logo = document.querySelector("#logo") as HTMLElement;
-  logo.classList.toggle("black-text");
-</script>

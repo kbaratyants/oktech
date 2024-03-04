@@ -6,10 +6,10 @@ const about = await getEntryBySlug("e404", "index");
 const { title, subtitle, button_text } = about.data;
 ---
 
-<Layout>
+<Layout title="404" ogTitle="404" description="" blackLogo>
     <div class="container">
         <div class="text">
-            <div class="text-large-title">{title}</div>
+            <h2 class="text-large-title">{title}</h2>
             <div class="text-title-1">{subtitle}</div>
         </div>
         <a href="/">
@@ -39,7 +39,3 @@ const { title, subtitle, button_text } = about.data;
   }
 </style>
 
-<script>
-  const logo = document.querySelector("#logo") as HTMLElement;
-  logo.classList.toggle("black-text");
-</script>
