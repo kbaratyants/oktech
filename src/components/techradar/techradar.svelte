@@ -1,4 +1,5 @@
 <script lang="ts">	
+import { tick, onMount } from 'svelte';
 import type { discipline, category, phase, Item } from './data';
 import { items } from './data';
 
@@ -25,6 +26,7 @@ let posX = 0;
 let posY = 0;
 let activeDiscipline: discipline | null = null;
 let radar;
+let hoverItem;
 
 const radius = 85;
 
@@ -213,15 +215,14 @@ const groupByCategory = (items: Item[]): Record<category, Item[]> => {
 const groupedItems = groupByCategory(items);
 
 // Алгоритм группировки по полю 'phase'
-const groupByPhase = (items: Item[]): Record<string, Item[]> => {
+const groupByPhase = (items: Item[]): Record<phase, Item[]> => {
   return items.reduce((result, item) => {
       const { phase } = item;
-      if (!result[phase]) {
-          result[phase] = [];
-      }
+
       result[phase].push(item);
+
       return result;
-  }, {adopt: [], trial: [], assess: [], hold: []} as Record<string, Item[]>); // Используем явное приведение типа для избежания ошибки
+  }, {adopt: [], trial: [], assess: [], hold: []} as Record<phase, Item[]>); // Используем явное приведение типа для избежания ошибки
 };
 
 const groupByDiscipline = (items: Item[]): Record<discipline, Item[]> => {
@@ -241,7 +242,7 @@ const groupByDiscipline = (items: Item[]): Record<discipline, Item[]> => {
     return result;
 };
 
-const getRandomPos = (a: number, b: number) => {
+const getRandomNumberBetween = (a: number, b: number) => {
   const min = Math.min(a, b);
   const max = Math.max(a, b);
 
@@ -258,13 +259,12 @@ const getRandomCirclePos = (item: Item) => {
     const minAngle = circleBorders[item.category].minAngle;
     const maxAngle = circleBorders[item.category].maxAngle;
     const alpha = minAngle + Math.random() * (maxAngle - minAngle);
+    const distanceFromCenter = getRandomNumberBetween(radius, radius - 60);
     const x = radius * Math.cos(alpha);
     const y = radius * Math.sin(alpha);
 
-    let distanceFromCenter1 = getRandomPos(radius, radius - 60);
-    
     const vectorLength = Math.sqrt(x * x + y * y);
-    const scale = distanceFromCenter1 / vectorLength;
+    const scale = distanceFromCenter / vectorLength;
 
     const newX = centerX + x * scale;
     const newY = centerY + y * scale;
@@ -277,9 +277,14 @@ function getRandomBoolean() {
 }
 
 function getRandomSquarePos(item: Item) {
-    const x = getRandomPos(rectangleBorders[item.phase][item.category].minX, rectangleBorders[item.phase][item.category].maxX)
-    const y = getRandomPos(rectangleBorders[item.phase][item.category].minY, rectangleBorders[item.phase][item.category].maxY)
-    
+    const minX = rectangleBorders[item.phase][item.category].minX;
+    const maxX = rectangleBorders[item.phase][item.category].maxX;
+    const minY = rectangleBorders[item.phase][item.category].minY;
+    const maxY = rectangleBorders[item.phase][item.category].maxY;
+
+    const x = getRandomNumberBetween(minX, maxX);
+    const y = getRandomNumberBetween(minY, maxY)
+
     return {x, y}
 }
 
@@ -291,17 +296,51 @@ function generateRandomPoint(item: Item) {
     }
 }
 
-const onMouseEnter = (evt: MouseEvent, item: Item) => {
-    posX = evt.x;
-    posY = radar.getBoundingClientRect().top < evt.y - 80 ? evt.y : evt.y + 80;
+const onMouseEnter = async (evt: MouseEvent, item: Item) => {
     activeItem = item;
-    active = true
+    active = true;
+    await tick();
+
+    const offset = 5;
+    const target = evt.target as HTMLElement;
+    const targetRect = target.getBoundingClientRect();
+
+    if (!target) {
+        return;
+    }
+
+    const { width, height } = hoverItem.getBoundingClientRect();
+
+    const { right: radarRight, top: radarTop } = radar.getBoundingClientRect();
+    const { width: targetWidth, height: targetHeight, x: targetX, y: targetY } = targetRect;
+
+    posX = radarRight > targetX + offset + width ? targetX + targetWidth + offset : targetX - width - offset;
+    posY = radarTop < targetY - offset - height ? targetY - height : targetY + targetHeight + offset;
 };
 
 const onMouseLeave = () => {
     active = false;
     activeItem = null;
 };
+
+onMount(() => {
+    const header = document.querySelector("#page-header") as HTMLElement;
+    const logo = document.querySelector("#logo") as HTMLElement;
+    const page = document.documentElement;
+
+    const changeLogo = () => {
+        const d = page.scrollTop + header.offsetHeight / 2;
+        logo.classList.toggle("hidden-text", d > 80);
+    }
+
+    if (header) {
+            changeLogo();
+
+            document.addEventListener("scroll", changeLogo);
+        }
+    })
+
+const groupedByDiscipline = groupByDiscipline(items);
 </script>
 
 <div class="techradar" class:column123={activeSection}>
@@ -315,7 +354,7 @@ const onMouseLeave = () => {
                     *
                 </div>
             </div>
-            <img src="images/radar.svg" class="techradar-bg" alt="">
+            <img src="/images/radar.svg" class="techradar-bg" alt="">
         </div>
         <aside>
             {#if !activeMobDiscipline}
@@ -325,17 +364,20 @@ const onMouseLeave = () => {
                     {/each}
                 </div>
             {:else}
-                <img src="images/arrow.svg" on:click={() => activeMobDiscipline=null} aria-hidden="true" alt="">
+                <img src="/images/arrow.svg" on:click={() => activeMobDiscipline=null} aria-hidden="true" alt="">
             {/if}
         </aside>
         {#if activeMobDiscipline}
+            {@const byDisciplineGroup = groupedByDiscipline[activeMobDiscipline]}
+            {@const activeCategoryGroup = groupByCategory(byDisciplineGroup)[activeCategory]}
+            {@const columns = Object.entries(groupByPhase(activeCategoryGroup))}
             <div class="categories">
                 {#each categories as category}
                     <div class="category text-title-2" aria-hidden class:disabled={activeCategory !== category.name} on:click={() => activeCategory = category.name}>{ categoryTitle[category.name] }</div>
                 {/each}
             </div>
             <div class="columns columns1">
-                {#each Object.entries(groupByPhase(groupByCategory(groupByDiscipline(items)[activeMobDiscipline])[activeCategory])) as [phase, group]}
+                {#each columns as [phase, group]}
                     <div class="column">
                         <h2 class="text-title-3">{ phase }</h2>
                         <ul>
@@ -356,7 +398,7 @@ const onMouseLeave = () => {
             <h1 class="text-title-1">{ categoryTitle[activeSection] || 'TechRadar' }</h1>
             <div class="stack">
                 {#each types as type}
-                    <div class="stack-item text-title-3" aria-hidden on:click={() => activeDiscipline === type ? activeDiscipline = null : activeDiscipline = type} class:disabled={activeItem !== null && activeItem.discipline.includes(type) || activeDiscipline !== null && activeDiscipline !== type}> {type} </div>
+                    <div class="stack-item text-title-3" aria-hidden on:click={() => activeDiscipline === type ? activeDiscipline = null : activeDiscipline = type} class:disabled={activeItem !== null && !activeItem.discipline.includes(type) || activeDiscipline !== null && activeDiscipline !== type}> {type} </div>
                 {/each}
             </div>
             {#if !activeSection}
@@ -368,8 +410,9 @@ const onMouseLeave = () => {
             {/if} 
         </aside>
         {#if activeSection}
+        {@const columns = Object.entries(groupByPhase(groupedItems[activeSection]))}
             <div class="columns">
-                {#each Object.entries(groupByPhase(groupedItems[activeSection])) as [phase, items]}
+                {#each columns as [phase, items]}
                     <div class="column">
                         <h2 class="text-title-3">{phase}</h2>
                         <ul>
@@ -406,7 +449,7 @@ const onMouseLeave = () => {
         {/if}
     
         {#if active}
-            <div class="hover-item" style={`left: ${posX + 8}px; top: ${posY - 70}px`}>
+            <div bind:this={hoverItem} class="hover-item" style={`left: ${posX}px; top: ${posY}px`}>
                 <div class="text-title-3"> { activeItem?.name } </div>
                 <div class="text-body"> { activeItem?.discipline.join(', ') } </div>
             </div>
@@ -522,8 +565,15 @@ const onMouseLeave = () => {
         display: flex;
         gap: 12px;
         overflow-x: scroll;
+        overflow-y: hidden;
         min-width: 0;
         margin-top: 20px;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
     .mobile {
         overflow: hidden;

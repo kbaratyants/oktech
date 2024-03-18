@@ -19,6 +19,8 @@
     "astro": "^3.3.3",
     "astro-icon": "^0.8.1",
     "astro-seo": "^0.8.0",
+    "autoprefixer": "^10.4.18",
+    "cssnano": "^6.0.5",
     "modern-css-reset": "^1.4.0",
     "prettier": "^3.0.2",
     "prettier-plugin-astro": "^0.12.0",

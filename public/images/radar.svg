@@ -5,6 +5,7 @@
 <rect x="0.5" y="0.5" width="421.185" height="252.896" rx="126.448" stroke="#BABABA"/>
 <rect x="60.2158" y="60.2158" width="301.754" height="133.464" rx="66.7322" stroke="black"/>
 <rect x="90.2827" y="90.6992" width="241.621" height="72.4961" rx="36.2481" stroke="black"/>
+<path d="M206 1L206 253" stroke="#BABABA" stroke-width="2"/>
 </g>
 <defs>
 <clipPath id="clip0_2995_910">

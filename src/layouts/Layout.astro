@@ -21,13 +21,13 @@ const resolvedImageWithDomain = new URL(
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png"> 
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
     <link rel="manifest" href="/manifest.webmanifest">
 
     <SEO
@@ -71,11 +71,13 @@ const resolvedImageWithDomain = new URL(
   <body>
     <Header {blackLogo} {blackLogoText} />
     <slot />
-  </body><style>
+  </body>
+  <style lang="scss">
     body {
       color: black;
       overflow-x: hidden;
       height: 100%;
+      position: relative;
     }
   </style>
 </html>

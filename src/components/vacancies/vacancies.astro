@@ -17,7 +17,7 @@ const { vacancies } = Astro.props;
           </li>
         ))
       }
-      <li class="scroll-snap-slide vacancy-slide" data-index={4}>
+      <li class="scroll-snap-slide vacancy-slide" data-index={vacancies.length + 1}>
         <AllVacancyItem />
       </li>
     </ul>

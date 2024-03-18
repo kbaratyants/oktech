@@ -1,60 +1,60 @@
 ---
-import First from "@assets/photoes/1.jpeg";
-import Second from "@assets/photoes/2.jpeg";
-import Third from "@assets/photoes/3.jpeg";
-import Fourth from "@assets/photoes/4.jpeg";
-import Fivth from "@assets/photoes/5.jpeg";
-import Sixth from "@assets/photoes/6.jpeg";
-import Seventh from "@assets/photoes/7.jpeg";
-import Eighth from "@assets/photoes/8.jpeg";
-import Nineth from "@assets/photoes/9.jpeg";
+import img1 from "@assets/photoes/1.jpeg";
+import img2 from "@assets/photoes/2.jpeg";
+import img3 from "@assets/photoes/3.jpeg";
+import img4 from "@assets/photoes/4.jpeg";
+import img5 from "@assets/photoes/5.jpeg";
+import img6 from "@assets/photoes/6.jpeg";
+import img7 from "@assets/photoes/7.jpeg";
+import img8 from "@assets/photoes/8.jpeg";
+import img9 from "@assets/photoes/9.jpeg";
 import PhotoesHeader1 from "@assets/photo-header1.svg";
 import PhotoesHeader2 from "@assets/photo-header2.svg";
 import { Image } from "astro:assets";
 
 const images = [
   {
-    src: First,
+    src: img1,
     title: "Команда OK.TECH на CodeFest 2023",
     subtitle: "Стенд OK.TECH",
   },
   {
-    src: Second,
+    src: img2,
     title: "Офис ОК",
     subtitle: 'Санкт-Петербург',
   },
   {
-    src: Third,
+    src: img3,
     title: "Выступление Антона Федчина, руководителя проекта Одноклассники",
     subtitle: "На открытии офиса ВК в Казани",
   },
   {
-    src: Fourth,
+    src: img4,
     title: "Офис ОК",
     subtitle: 'Санкт-Петербург',
   },
   {
-    src: Fivth,
+    src: img5,
     title: "Наша команда OK.TECH на конференции Saint HighLoad++ 2023",
     subtitle: "Saint HighLoad++",
   },
   {
-    src: Sixth,
+    src: img6,
     title: "Кухня в офисе ОК",
     subtitle: "Санкт-Петербург",
   },
   {
-    src: Seventh,
+    src: img7,
     title: "Офис, игровая комната",
     subtitle: "Офис Санкт-Петербурга",
   },
   {
-    src: Eighth,
+    src: img8,
     title: "Свой митап «ML в production»",
     subtitle: "Санкт-Петербург",
   },
   {
-    src: Nineth,
+    src: img9,
     title: "Организуем OK Tech Talk «А/B-тестирование»",
     subtitle: "OK Tech Talk",
   },
@@ -65,12 +65,12 @@ const images = [
   <div class="header text-animation-title">
     <Image
       src={PhotoesHeader1}
-      alt="photo title"
+      alt=""
       class="header-item animate-textAnimation"
     />
     <Image
       src={PhotoesHeader2}
-      alt="photo title"
+      alt=""
       class="header-item animate-textAnimation"
     />
   </div>
@@ -138,7 +138,6 @@ const images = [
       width: 100%;
       border-radius: 8px;
       padding: 24px;
-      -webkit-backdrop-filter: blur(40px);
       backdrop-filter: blur(40px);
       opacity: 0;
       background-color: rgba(0, 0, 0, 0.2);

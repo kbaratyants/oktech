@@ -45,19 +45,19 @@ technologies:
     - title: backend
       subtitle:
         - title: Языки, фреймворки
-          content: Java, Spring, Javascript, Typescript, React, C++, Python
+          content: Java, Spring, Javascript, React, C++, Python
         - title: Инструменты
-          content: Gradle, TeamCity, grafana, graylog+elasticsearch, zeppelin, Docker
+          content: Gradle, TeamCity, grafana, Apache Zeppelin, Docker
         - title: Платформы
-          content: Cassandra, Spring, Kafka, Apache Spark, Apache Airflow...
+          content: Apache Spark, Apache Hadoop, JRE, One-cloud, JVM, graylog+elasticsearch
         - title: Технологии
-          content: Highload, BigData, Online updates, NoSQL storages, Smart Monitoring...
+          content: Highload, BigData, Online updates, NoSQL, Smart Monitoring
     - title: iOS
       subtitle:
         - title: Языки, фреймворки
           content: Swift, Objective-C
         - title: Инструменты
-          content: XCode
+          content: Tracer, XCode
         - title: Технологии
           content: Многомодульность, MVVM
     - title: ML
@@ -105,7 +105,7 @@ blog:
       link_icon: true
       sources:
         - ux-исследования
-        - продуктовая разработка
+        - продукт. разработка
 
 text_block:
   title: Пул задач в ОК шире, чем в большинстве онлайн-сервисов. Это классный драйвер для изучения топовых технологий, подходов и решений в реальных условиях

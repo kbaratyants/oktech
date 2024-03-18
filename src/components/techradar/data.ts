@@ -84,24 +84,24 @@ const androidItems: Item[] = [
     category: "techniques",
     phase: "adopt",
   },
-  {
-    name: "Feature-toggle",
-    discipline: ["android"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Feature-toggle",
+  //   discipline: ["android"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   {
     name: "VK Maps",
     discipline: ["android"],
     category: "techniques",
     phase: "adopt",
   },
-  {
-    name: "Multi-modules",
-    discipline: ["android"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Multi-modules",
+  //   discipline: ["android"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   //   { name: "JUnit4", discipline: ["android"], category: "techniques", phase: "adopt" },
 
   // trial
@@ -127,12 +127,12 @@ const androidItems: Item[] = [
   },
 
   // hold
-  {
-    name: "Firebase Crashlytics",
-    discipline: ["android"],
-    category: "techniques",
-    phase: "hold",
-  },
+  // {
+  //   name: "Firebase Crashlytics",
+  //   discipline: ["android"],
+  //   category: "techniques",
+  //   phase: "hold",
+  // },
 
   // ------
   // tools
@@ -144,7 +144,7 @@ const androidItems: Item[] = [
   //   { name: "Android Studio", discipline: ["android"], category: "tools", phase: "adopt" },
   //   { name: "Git", discipline: ["android"], category: "tools", phase: "adopt" },
   //   { name: "ADB", discipline: ["android"], category: "tools", phase: "adopt" },
-  { name: "Stash", discipline: ["android"], category: "tools", phase: "adopt" },
+  // { name: "Stash", discipline: ["android"], category: "tools", phase: "adopt" },
   //   { name: "Gradle", discipline: ["android"], category: "tools", phase: "adopt" },
   //   { name: "Confluence", discipline: ["android"], category: "tools", phase: "adopt" },
 
@@ -195,12 +195,12 @@ const qaItems: Item[] = [
     category: "techniques",
     phase: "adopt",
   },
-  {
-    name: "UI автотесты/E2E автотесты",
-    discipline: ["QA"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "UI автотесты/E2E автотесты",
+  //   discipline: ["QA"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   //   { "name": "CI/CD", "discipline": ["QA"], "category": "techniques", "phase": "adopt" },
   //   { "name": "Code review", "discipline": ["QA"], "category": "techniques", "phase": "adopt" },
   {
@@ -216,12 +216,14 @@ const qaItems: Item[] = [
   //   { "name": "Intellij IDEA", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   //   { "name": "Android Studio", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   //   { "name": "XCode", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
-  {
-    name: "Stash/BitBucket - Git",
-    discipline: ["QA"],
-    category: "tools",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Stash/BitBucket - Git",
+  //   discipline: ["QA"],
+  //   category: "tools",
+  //   phase: "adopt",
+  // },
+  { name: "BitBucket", discipline: ["QA"], category: "tools", phase: "adopt" },
+  // { name: "Stash", discipline: ["QA"], category: "tools", phase: "adopt" },
   //   { "name": "TeamCity", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   //   { "name": "Jenkins", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   { name: "JUnit5", discipline: ["QA"], category: "tools", phase: "adopt" },
@@ -240,12 +242,12 @@ const qaItems: Item[] = [
   { name: "mainframer", discipline: ["QA"], category: "tools", phase: "adopt" },
   //   { "name": "ADB", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   { name: "mongodb", discipline: ["QA"], category: "tools", phase: "adopt" },
-  { name: "spring", discipline: ["QA"], category: "tools", phase: "adopt" },
+  // { name: "spring", discipline: ["QA"], category: "tools", phase: "adopt" },
   { name: "guice", discipline: ["QA"], category: "tools", phase: "adopt" },
   //   { "name": "jackson", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   { name: "dropwizard", discipline: ["QA"], category: "tools", phase: "adopt" },
   //   { "name": "Mockito", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
-  { name: "quartz", discipline: ["QA"], category: "tools", phase: "adopt" },
+  // { name: "quartz", discipline: ["QA"], category: "tools", phase: "adopt" },
   //   { "name": "Charles", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   //   { "name": "Fastlane", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
   //   { "name": "Tracer", "discipline": ["QA"], "category": "tools", "phase": "adopt" },
@@ -289,12 +291,12 @@ const qaItems: Item[] = [
   // platform
 
   // adopt
-  {
-    name: "one-cloud",
-    discipline: ["QA"],
-    category: "platform",
-    phase: "adopt",
-  },
+  // {
+  //   name: "one-cloud",
+  //   discipline: ["QA"],
+  //   category: "platform",
+  //   phase: "adopt",
+  // },
   //   { "name": "Android SDK", "discipline": ["QA"], "category": "platform", "phase": "adopt" },
 
   // languages
@@ -303,12 +305,12 @@ const qaItems: Item[] = [
   //   { "name": "Java", "discipline": ["QA"], "category": "languages", "phase": "adopt" },
   //   { "name": "Kotlin", "discipline": ["QA"], "category": "languages", "phase": "adopt" },
   //   { "name": "Swift", "discipline": ["QA"], "category": "languages", "phase": "adopt" },
-  {
-    name: "Objective-C",
-    discipline: ["QA"],
-    category: "languages",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Objective-C",
+  //   discipline: ["QA"],
+  //   category: "languages",
+  //   phase: "adopt",
+  // },
   //   { "name": "Groovy", "discipline": ["QA"], "category": "languages", "phase": "adopt" },
   //   { "name": "Ruby", "discipline": ["QA"], "category": "languages", "phase": "adopt" },
   //   { "name": "HTML", "discipline": ["QA"], "category": "languages", "phase": "adopt" },
@@ -501,12 +503,7 @@ const frontendItems: Item[] = [
   // platform
 
   // adopt
-  {
-    name: "GraalVM",
-    discipline: ["frontend"],
-    category: "platform",
-    phase: "adopt",
-  },
+
   //   { "name": "Tomcat", "discipline": ["frontend"], "category": "platform", "phase": "adopt" },
   {
     name: "NPM",
@@ -573,7 +570,7 @@ const frontendItems: Item[] = [
     phase: "adopt",
   },
   {
-    name: "reactiveJS",
+    name: "ReactiveJS",
     discipline: ["frontend"],
     category: "languages",
     phase: "adopt",
@@ -674,12 +671,12 @@ const backendItems: Item[] = [
     category: "techniques",
     phase: "adopt",
   },
-  {
-    name: "DRY",
-    discipline: ["backend"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "DRY",
+  //   discipline: ["backend"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   {
     name: "async processing",
     discipline: ["backend"],
@@ -807,14 +804,20 @@ const backendItems: Item[] = [
   },
   //   { "name": "S3", "discipline": ["backend"], "category": "tools", "phase": "adopt" },
   {
-    name: "OBS,OCS",
+    name: "OCS",
+    discipline: ["backend"],
+    category: "tools",
+    phase: "adopt",
+  },
+  {
+    name: "OBS",
     discipline: ["backend"],
     category: "tools",
     phase: "adopt",
   },
   {
     name: "Quartz job scheduler",
-    discipline: ["backend"],
+    discipline: ["backend", "QA"],
     category: "tools",
     phase: "adopt",
   },
@@ -859,12 +862,12 @@ const backendItems: Item[] = [
     category: "tools",
     phase: "adopt",
   },
-  {
-    name: "graalvm",
-    discipline: ["backend"],
-    category: "tools",
-    phase: "adopt",
-  },
+  // {
+  //   name: "graalvm",
+  //   discipline: ["backend"],
+  //   category: "tools",
+  //   phase: "adopt",
+  // },
   {
     name: "Zookeeper",
     discipline: ["backend"],
@@ -900,7 +903,7 @@ const backendItems: Item[] = [
   },
   {
     name: "Apache Hadoop",
-    discipline: ["backend"],
+    discipline: ["backend", "ML"],
     category: "platform",
     phase: "adopt",
   },
@@ -910,12 +913,12 @@ const backendItems: Item[] = [
     category: "platform",
     phase: "adopt",
   },
-  {
-    name: "One-cloud",
-    discipline: ["backend"],
-    category: "platform",
-    phase: "adopt",
-  },
+  // {
+  //   name: "One-cloud",
+  //   discipline: ["backend"],
+  //   category: "platform",
+  //   phase: "adopt",
+  // },
   {
     name: "JVM",
     discipline: ["backend"],
@@ -934,7 +937,7 @@ const backendItems: Item[] = [
   //   { "name": "Java", "discipline": ["backend"], "category": "languages", "phase": "adopt" },
   {
     name: "Spring",
-    discipline: ["backend"],
+    discipline: ["backend", "QA"],
     category: "languages",
     phase: "adopt",
   },
@@ -973,12 +976,12 @@ const backendItems: Item[] = [
 
 const iosItems: Item[] = [
   // adopt
-  {
-    name: "Многомодульность",
-    discipline: ["iOS"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Многомодульность",
+  //   discipline: ["iOS"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   //   { "name": "MVVM", "discipline": ["iOS"], "category": "techniques", "phase": "adopt" },
   {
     name: "Feature teams",
@@ -986,12 +989,12 @@ const iosItems: Item[] = [
     category: "techniques",
     phase: "adopt",
   },
-  {
-    name: "Feature toggles",
-    discipline: ["iOS"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Feature toggles",
+  //   discipline: ["iOS"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   //   { "name": "Reactive programming", "discipline": ["iOS"], "category": "techniques", "phase": "adopt" },
   {
     name: "Declarative programming",
@@ -999,12 +1002,12 @@ const iosItems: Item[] = [
     category: "techniques",
     phase: "adopt",
   },
-  {
-    name: "UI tests",
-    discipline: ["iOS"],
-    category: "techniques",
-    phase: "adopt",
-  },
+  // {
+  //   name: "UI tests",
+  //   discipline: ["iOS"],
+  //   category: "techniques",
+  //   phase: "adopt",
+  // },
   {
     name: "Dependency Injection",
     discipline: ["iOS"],
@@ -1051,8 +1054,8 @@ const iosItems: Item[] = [
   },
 
   // hold
-  { name: "Firebase", discipline: ["iOS"], category: "tools", phase: "hold" },
-  { name: "Appcenter", discipline: ["iOS"], category: "tools", phase: "hold" },
+  // { name: "Firebase", discipline: ["iOS"], category: "tools", phase: "hold" },
+  { name: "Appcenter", discipline: ["iOS"], category: "techniques", phase: "hold" },
 
   //------
   // platform
@@ -1179,7 +1182,7 @@ const iosItems: Item[] = [
     phase: "hold",
   },
   {
-    name: "Objective-c",
+    name: "Objective-C",
     discipline: ["iOS"],
     category: "languages",
     phase: "hold",
@@ -1262,7 +1265,7 @@ const mlItems: Item[] = [
   // { "name": "Apache Zeppelin", "discipline": ["ML"], "category": "tools", "phase": "adopt" },
   //   { "name": "Kafka", "discipline": ["ML"], "category": "tools", "phase": "adopt" },
   {
-    name: "Streaming index (inner feature store based on Cassandra)",
+    name: "OK Feature store",
     discipline: ["ML"],
     category: "tools",
     phase: "adopt",
@@ -1285,12 +1288,12 @@ const mlItems: Item[] = [
   // platform
 
   //adopt
-  {
-    name: "Hadoop ecosystem",
-    discipline: ["ML"],
-    category: "platform",
-    phase: "adopt",
-  },
+  // {
+  //   name: "Hadoop ecosystem",
+  //   discipline: ["ML"],
+  //   category: "platform",
+  //   phase: "adopt",
+  // },
 
   // languages
 
@@ -1329,13 +1332,13 @@ const multiItems: Item[] = [
   {
     name: "Espresso",
     discipline: ["android", "QA"],
-    category: "techniques",
+    category: "languages",
     phase: "adopt",
   },
   {
     name: "Mockito",
     discipline: ["android", "QA"],
-    category: "techniques",
+    category: "tools",
     phase: "adopt",
   },
   {
@@ -1347,24 +1350,24 @@ const multiItems: Item[] = [
   {
     name: "Groovy",
     discipline: ["android", "backend", "QA"],
-    category: "techniques",
+    category: "languages",
     phase: "adopt",
   },
   {
     name: "Barista",
-    discipline: ["android", "QA"],
-    category: "techniques",
+    discipline: ["android"],
+    category: "languages",
     phase: "adopt",
   },
   {
     name: "JUnit4",
     discipline: ["android", "QA"],
-    category: "techniques",
+    category: "tools",
     phase: "adopt",
   },
   {
     name: "Tracer",
-    discipline: ["android", "iOS", "QA"],
+    discipline: ["android", "iOS", "QA", "backend"],
     category: "tools",
     phase: "adopt",
   },
@@ -1388,7 +1391,7 @@ const multiItems: Item[] = [
   },
   {
     name: "Git",
-    discipline: ["android", "iOS", "backend"],
+    discipline: ["android", "iOS", "backend", "QA"],
     category: "tools",
     phase: "adopt",
   },
@@ -1412,9 +1415,9 @@ const multiItems: Item[] = [
   },
   {
     name: "GrayLog",
-    discipline: ["android", "frontend", "QA"],
+    discipline: ["frontend", "QA"],
     category: "tools",
-    phase: "hold",
+    phase: "adopt",
   },
   {
     name: "Android SDK",
@@ -1424,13 +1427,13 @@ const multiItems: Item[] = [
   },
   {
     name: "Kotlin",
-    discipline: ["android", "backend", "QA"],
+    discipline: ["android", "QA"],
     category: "languages",
     phase: "adopt",
   },
   {
     name: "Java",
-    discipline: ["android", "backend", "frontend", "QA"],
+    discipline: ["android", "backend", "frontend", "QA", "ML"],
     category: "languages",
     phase: "adopt",
   },
@@ -1514,7 +1517,7 @@ const multiItems: Item[] = [
   },
   {
     name: "Kafka",
-    discipline: ["ML", "backend"],
+    discipline: ["QA", "ML", "backend"],
     category: "tools",
     phase: "adopt",
   },
@@ -1550,7 +1553,7 @@ const multiItems: Item[] = [
   },
   {
     name: "Cassandra",
-    discipline: ["backend", "QA"],
+    discipline: ["backend"],
     category: "tools",
     phase: "adopt",
   },
@@ -1573,7 +1576,7 @@ const multiItems: Item[] = [
     phase: "adopt",
   },
   {
-    name: "grafana",
+    name: "Grafana",
     discipline: ["backend", "QA", "ML"],
     category: "tools",
     phase: "adopt",
@@ -1598,7 +1601,7 @@ const multiItems: Item[] = [
   },
   {
     name: "JavaScript",
-    discipline: ["backend", "frontend"],
+    discipline: ["frontend"],
     category: "languages",
     phase: "adopt",
   },
@@ -1621,15 +1624,57 @@ const multiItems: Item[] = [
     phase: "adopt",
   },
   {
-    name: "Intellij IDEA",
+    name: "IntelliJ IDEA",
     discipline: ["QA", "backend"],
     category: "tools",
     phase: "adopt",
   },
   {
-    name: "Charles HTTP proxy",
-    discipline: ["backend", "QA"],
+    name: "Charles proxy",
+    discipline: ["QA"],
     category: "tools",
+    phase: "adopt",
+  },
+  {
+    name: "Multi-modules",
+    discipline: ["android", "iOS"],
+    category: "techniques",
+    phase: "adopt",
+  },
+  {
+    name: "Firebase Crashlytics",
+    discipline: ["android", "iOS"],
+    category: "techniques",
+    phase: "hold",
+  },
+  {
+    name: "Feature-toggle",
+    discipline: ["android", "iOS"],
+    category: "techniques",
+    phase: "adopt",
+  },
+  {
+    name: "UI автотесты/E2E автотесты",
+    discipline: ["QA", "iOS", "android"],
+    category: "techniques",
+    phase: "adopt",
+  },
+  {
+    name: "One-cloud",
+    discipline: ["backend", "QA"],
+    category: "platform",
+    phase: "adopt",
+  },
+  { 
+    name: "Stash", 
+    discipline: ["android", "QA"], 
+    category: "tools",
+    phase: "adopt" 
+  },
+  {
+    name: "GraalVM",
+    discipline: ["frontend", "backend"],
+    category: "platform",
     phase: "adopt",
   },
 ];

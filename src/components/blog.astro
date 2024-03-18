@@ -12,12 +12,12 @@ const { button_text, button_url, first_section, second_section } = blog;
   <div class="header text-animation-title">
     <Image
       src={BlogHeader1}
-      alt="photo title"
+      alt=""
       class="header-item animate-textAnimation"
     />
     <Image
       src={BlogHeader2}
-      alt="photo title"
+      alt=""
       class="header-item animate-textAnimation"
     />
   </div>
@@ -103,6 +103,7 @@ const { button_text, button_url, first_section, second_section } = blog;
 
   .source {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 
     &-item {
@@ -159,7 +160,7 @@ const { button_text, button_url, first_section, second_section } = blog;
         }
 
         &.gray {
-          height: 394px;
+          height: 450px;
           background-color: $c-gray;
 
           &:hover {
@@ -207,6 +208,10 @@ const { button_text, button_url, first_section, second_section } = blog;
 
       &-section {
         gap: 0;
+        
+        &-item.gray {
+          height: 394px;
+        }
       }
     }
   }

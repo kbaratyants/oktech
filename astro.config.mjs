@@ -5,7 +5,7 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-site: "https://test.oktech.ru/",
+site: "https://oktech.ru/",
   integrations: [
     svelte(),
     robotsTxt(),

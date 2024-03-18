@@ -25,8 +25,8 @@ const { intro, product, work, bottom, button } = about.data;
       <div>{intro.subtitle}</div>
       <Icon name="star" class="star" />
     </div>
-    <a href={button.link} target="_blank" rel="nofollow">
-      <button class="main-button text-button"> {button.text}</button>
+    <a class="main-button text-button" href={button.link} target="_blank" rel="nofollow">
+      {button.text}
     </a>
   </section>
 
@@ -78,8 +78,8 @@ const { intro, product, work, bottom, button } = about.data;
       </a>
     </div>
     <Footer classes="absolute transparent" />
-    <Scrollup client:load />
   </div>
+  <Scrollup client:load />
 </Layout>
 
 <style lang="scss">

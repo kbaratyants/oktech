@@ -3,22 +3,15 @@ export interface Props {
   classes: string;
 }
 
+const date = new Date().getFullYear();
+
 const { classes } = Astro.props;
 ---
 
 <footer class={`${classes} text-footer footer`}>
   <a href="mailto:hi@ok.ru"> hi@ok.ru</a>
-  <div>© 2006–<span id="currentYear" />, OK.TECH</div>
+  <div>© 2006–{date}, OK.TECH</div>
 </footer>
-
-<script>
-  const updateYear = () => {
-    const currentYear = new Date().getFullYear().toString();
-    document.getElementById('currentYear').textContent = currentYear;
-  }
-
-  document.addEventListener('DOMContentLoaded', updateYear);
-</script>
 
 <style lang="scss">
   @import "../styles/global.scss";

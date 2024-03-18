@@ -26,30 +26,14 @@ const { teaser, intro, technologies, blog, text_block, vacancies } =
   <TextBlock {text_block} />
   <Vacancies {vacancies} />
   <PhotoGallery />
-  <Footer classes="black" />
   <Scrollup client:load />
+  <Footer classes="black" />
 </Layout>
 
 <script>
   const header = document.querySelector("#page-header") as HTMLElement;
   const logo = document.querySelector("#logo") as HTMLElement;
   const page = document.documentElement;
-
-  const mybutton = document.querySelector(".scroll-top-btn") as HTMLElement;
-  const footer = document.querySelector('.footer');
-  const btnMarginBottom = parseInt(window.getComputedStyle(mybutton).getPropertyValue('bottom'));
-
-  window.onscroll = function() {scrollFunction()};
-
-  function scrollFunction() {
-    const footStartPos = footer.getBoundingClientRect().y;
-
-    if (window.innerHeight > footStartPos) {
-      mybutton.style.bottom = `${(window.innerHeight - footStartPos) + btnMarginBottom}px`;
-    } else {
-      mybutton.style.bottom = '';
-    }
-  }
 
   const changeLogo = () => {
     const d = page.clientHeight - page.scrollTop - header.offsetHeight / 2;
@@ -58,7 +42,11 @@ const { teaser, intro, technologies, blog, text_block, vacancies } =
 
   if (header) {
     changeLogo();
-  
-    document.addEventListener("scroll", changeLogo);
   }
+  
+  document.addEventListener("scroll", () => {
+    if (header) {
+      changeLogo();
+    }
+  });
 </script>
