@@ -35,7 +35,7 @@ const { vacancies } = Astro.props;
     }
     <button
       class={`vacancy-indicator`}
-      data-index={4}
+      data-index={vacancies.length + 1}
       type="button"
     />
   </div>
@@ -102,6 +102,7 @@ const { vacancies } = Astro.props;
   const container = document.querySelector(".vacancy-container");
   const sliderEl = document.querySelector(".vacancy-slider");
   const slides = sliderEl.getElementsByClassName("vacancy-slide");
+  const indicatorsContainer: HTMLElement = document.querySelector(".vacancy-indicators");
   const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
     ".vacancy-indicators .vacancy-indicator",
   );
@@ -122,17 +123,14 @@ const { vacancies } = Astro.props;
     }
   };
 
-  for (const button of buttons) {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-
-      const slideElementIndex = Array.prototype.slice
+  indicatorsContainer.addEventListener('click', (event) => {
+    const button = event.target as HTMLButtonElement;
+    const slideElementIndex = Array.prototype.slice
         .call(slides)
         .findIndex((item) => item?.dataset.index === button?.dataset.index);
 
       slider.slideTo(slideElementIndex);
-    });
-  }
+  })
 
   nextButton.addEventListener("click", () => slider.slideTo(slider.slide + 1));
 
