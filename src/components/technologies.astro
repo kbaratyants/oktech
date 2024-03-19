@@ -1,7 +1,7 @@
 ---
-import First from "@assets/techradar-button/1.svg";
-import Second from "@assets/techradar-button/2.svg";
-import Third from "@assets/techradar-button/3.svg";
+import img1 from "@assets/techradar-button/1.svg";
+import img2 from "@assets/techradar-button/2.svg";
+import img3 from "@assets/techradar-button/3.svg";
 import Image from "astro/components/Image.astro";
 
 const { technologies } = Astro.props;
@@ -9,7 +9,7 @@ const { title, technologies_list, button_text } = technologies;
 ---
 
 <section class="section-y section-x">
-  <div class="text-large-title title">{title}</div>
+  <h2 class="text-large-title title">{title}</h2>
   <div class="technologies">
     {
       technologies_list.map(({ title, subtitle }) => (
@@ -28,9 +28,9 @@ const { title, technologies_list, button_text } = technologies;
   </div>
   <a class="techradar-button" href="/techradar">
     <button class="main-button text-button">{button_text}</button>
-    <Image class="image" src={First} alt="" />
-    <Image class="image" src={Second} alt="" />
-    <Image class="image" src={Third} alt="" />
+    <Image class="image" src={img1} alt="" />
+    <Image class="image" src={img2} alt="" />
+    <Image class="image" src={img3} alt="" />
   </a>
 </section>
 
@@ -54,9 +54,8 @@ const { title, technologies_list, button_text } = technologies;
   }
 
   .techradar-button {
-    display: none;
     position: relative;
-    width: max-content;
+    width: 100%;
   }
   .techradar-button:hover {
     .image {
@@ -97,7 +96,7 @@ const { title, technologies_list, button_text } = technologies;
       grid-template-rows: repeat(2, auto);
     }
     .techradar-button {
-      display: block;
+      width: fit-content;
     }
   }
   @keyframes float {

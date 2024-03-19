@@ -2,8 +2,8 @@
 teaser:
   title: "команда, получающая искренние эмоции и удовольствие от бренда, контента и цифровых технологий с 2006 года"
   links:
-    - link: https://career.habr.com/companies/ratings
-      title: тройка лучших IT-работодателей страны ↗
+    - link: https://www.rbc.ru/industries/news/651fc16d9a7947638644561c
+      title: Входим в топ лучших работодателей России ↗
     - link:
       title: создаем digital-продукты
     - link: mailto:hi@ok.ru
@@ -13,10 +13,10 @@ intro:
   title: кто мы
   subtitle: Каждый из нас влияет на то, каким увидят ОК миллионы пользователей. Мы можем творить историю и делаем это
   stats:
-    - number: "60 млрд"
-      title: "уникального контента в месяц"
-    - number: "30 млрд"
-      title: "отправок подарков  в год"
+    - number: "36 млн"
+      title: "жителей России используют ОК ежемесячно"
+    - number: "42 млрд"
+      title: "отправленных подарков в год"
     - number: "1 эксабайт"
       title: "данных и 50 тысяч Docker-контейнеров"
 
@@ -29,7 +29,7 @@ technologies:
         - title: Языки, фреймворки
           content: TypeScript, JavaScript, React, Endorphin, Java, Spring.
         - title: Инструменты
-          content: Git, Webpack, Lerna, Babel, Gulp, Grunt, CSS-modules, PostCSS, SCSS, Stylus, MobX, Tomcat
+          content: MobX, Webpack, CSS-modules, SCSS, Stylus, Lerna, Babel, PostCSS, Git
         - title: Платформы
           content: GraalVM
         - title: Технологии
@@ -39,25 +39,25 @@ technologies:
         - title: Языки, фреймворки
           content: Kotlin, Java
         - title: Инструменты
-          content: Tracer, ADB, Gradle
+          content: Tracer, Gradle
         - title: Технологии
           content: Fresco, RxJava 3, Kotlin Coroutines, Dagger 2, Groovy
     - title: backend
       subtitle:
         - title: Языки, фреймворки
-          content: Java, Spring, Javascript, Typescript, React, C++, Python
+          content: Java, Spring, Javascript, React, C++, Python
         - title: Инструменты
-          content: Gradle, TeamCity, grafana, graylog+elasticsearch, zeppelin, Docker
+          content: Gradle, TeamCity, grafana, Apache Zeppelin, Docker
         - title: Платформы
-          content: Cassandra, Spring, Kafka, Apache Spark, Apache Airflow...
+          content: Apache Spark, Apache Hadoop, JRE, One-cloud, JVM, graylog+elasticsearch
         - title: Технологии
-          content: Highload, BigData, Online updates, NoSQL storages, Smart Monitoring...
+          content: Highload, BigData, Online updates, NoSQL, Smart Monitoring
     - title: iOS
       subtitle:
         - title: Языки, фреймворки
           content: Swift, Objective-C
         - title: Инструменты
-          content: XCode
+          content: Tracer, XCode
         - title: Технологии
           content: Многомодульность, MVVM
     - title: ML
@@ -68,12 +68,10 @@ technologies:
           content: Jupyter Notebook, Airflow, MLfow, DVC, XGBoost, Apache Zeppelin, ClickHouse, Grafana, FAISS
         - title: Платформы
           content: Hadoop ecosystem
-        - title: Технологии
-          content: XGBoost, Python 3, Scala, Zeppelin, Spark, Hadoop, PyTorch, DVC, Mlflow, Airflow, Kafka
     - title: QA
       subtitle:
         - title: Языки, фреймворки
-          content: Kotlin, Selenium
+          content: Java, Selenide
         - title: Инструменты
           content: Test IT
         - title: Технологии
@@ -84,38 +82,41 @@ blog:
   button_url: https://habr.com/ru/companies/odnoklassniki/articles/
   first_section:
     - type: black
-      title: Новый взгляд на аналитику ошибок в production, или Работающая альтернатива Crashlytics
-      headline: Кирилл Попов, 6 минут
-      link: https://habr.com/ru/companies/vk/articles/757416/
+      title: Анимация в браузерах и как с ней работать
+      headline: Сергей Чикуёнок · 10 мин
+      link: https://habr.com/p/794160/
       sources:
         - хабр
-        - tracer
+        - веб-разработка
+        - браузеры
     - type: accent
-      title: Избранные статьи о рекомендательных системах с конференции KDD 2022
-      headline: Николай Анохин, 19 минут
-      link: https://habr.com/ru/companies/odnoklassniki/articles/705520/
+      title: "Hadoop в Облаке: история миграции сотен петабайт"
+      headline: Михаил Марюфич · 10 мин
+      link: https://habr.com/p/789002/
       link_icon: true
       sources:
-        - хабр
-        - ML
+        - hadoop
+        - big data
   second_section:
     - type: gray
-      title: Канал ML-команды ОК
-      headline: ML - это ОК
-      link: https://t.me/mlvok
+      title: "Проверка продуктовых гипотез и немодерируемые UX-исследования c применением внутренних инструментов: кейс команды OK"
+      headline: Алексей Сенников · 7 мин
+      link: https://habr.com/p/790894/
       link_icon: true
       sources:
-        - TG-канал
-        - ML
+        - ux-исследования
+        - продукт. разработка
 
 text_block:
-  title: Пул задач в ОК шире, чем в большинстве проектов. Это классный драйвер для изучения топовых технологий, подходов и решений в реальных условиях.
+  title: Пул задач в ОК шире, чем в большинстве онлайн-сервисов. Это классный драйвер для изучения топовых технологий, подходов и решений в реальных условиях
 
 vacancies:
-  - title: Разработчик iOS проект "Монетизация"
-    link: https://spb.hh.ru/vacancy/85768446?from=vacancy_search_list&query=одноклассники
-  - title: Java разработчик проект "Игры"
-    link: https://spb.hh.ru/vacancy/87211164?from=vacancy_search_list&query=%D0%BE%D0%B4%D0%BD%D0%BE%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BD%D0%B8%D0%BA%D0%B8
-  - title: Data scientist / Machine learning engineer
-    link: https://spb.hh.ru/vacancy/85772796?from=vacancy_search_list&query=%D0%BE%D0%B4%D0%BD%D0%BE%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BD%D0%B8%D0%BA%D0%B8
+  - title: Аналитик в А/Б платформу
+    link: https://spb.hh.ru/vacancy/85413862?from=employer&hhtmFrom=employer
+  - title: ML Engineer в команду Ленты
+    link: https://spb.hh.ru/vacancy/92823788?from=employer&hhtmFrom=employer
+  - title: Java developer в команду API
+    link: https://spb.hh.ru/vacancy/92463428?from=employer&hhtmFrom=employer
+  - title: Team Lead в команду «Музыки» (Java)
+    link: https://spb.hh.ru/vacancy/92974930?from=employer&hhtmFrom=employer
 ---

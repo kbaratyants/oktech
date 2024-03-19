@@ -1,61 +1,70 @@
 ---
-import { Image } from "astro:assets";
-
 import GurovVideo from "@assets/videos/Gurov.mp4";
-import GurovPreview from "@assets/videos/Gurov.png";
+import GurovPreview from "@assets/videos/Gurov.jpeg";
 import ManevichVideo from "@assets/videos/Manevich.mp4";
-import ManevichPreview from "@assets/videos/Manevich.png";
-import RadchenkovaPreview from "@assets/videos/Radchenkova.png";
+import ManevichPreview from "@assets/videos/Manevich.jpeg";
+import RadchenkovaPreview from "@assets/videos/Radchenkova.jpeg";
 import RadchenkovaVideo from "@assets/videos/Radchenkova.mp4";
-import TomilovPreview from "@assets/videos/Tomilov.png";
+import TomilovPreview from "@assets/videos/Tomilov.jpeg";
 import TomilovVideo from "@assets/videos/Tomilov.mp4";
-import VasilevVideo from "@assets/videos/Vasilev.mp4";
-import VasilevPreview from "@assets/videos/Vasilev.png";
 
-import "@splidejs/splide-extension-video/dist/css/splide-extension-video.min.css";
+import "scroll-snap-slider/dist/scroll-snap-slider.css";
 
 const videos = [
   {
     video: ManevichVideo,
-    preview: ManevichPreview,
+    preview: ManevichPreview.src,
   },
   {
     video: GurovVideo,
-    preview: GurovPreview,
+    preview: GurovPreview.src,
   },
   {
     video: RadchenkovaVideo,
-    preview: RadchenkovaPreview,
+    preview: RadchenkovaPreview.src,
   },
   {
     video: TomilovVideo,
-    preview: TomilovPreview,
-  },
-  {
-    video: VasilevVideo,
-    preview: VasilevPreview,
+    preview: TomilovPreview.src,
   },
 ];
 ---
 
-<section class="section-y">
-  <div id="video-slider" class="splide">
-    <div class="splide__track">
-      <ul class="splide__list">
-        {
-          videos.map((video) => (
-            <li class="splide__slide" data-splide-html-video={video.video}>
-              <Image src={video.preview} alt="video preview" />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+<section class="section-y section-x">
+  <div class="container">
+    <ul class="scroll-snap-slider">
+      {
+        videos.map((video, index) => (
+          <li class="scroll-snap-slide" data-index={index}>
+            <video
+              class="slide-video"
+              poster={video.preview}
+              src={video.video}
+              preload="metadata"
+              controls
+            ></video>
+          </li>
+        ))
+      }
+    </ul>
+    <button class="next-button">следующее видео</button>
+  </div>
+
+  <div class="indicators">
+    {
+      videos.map((video, index) => (
+        <button
+          class={`indicator ${index === 0 ? "-active" : ""}`}
+          data-index={index}
+          type="button"
+        />
+      ))
+    }
   </div>
 </section>
 
 <style lang="scss">
-  @import "../styles/media.scss";
+  @import "../styles/global.scss";
 
   section {
     overflow: hidden;
@@ -63,6 +72,46 @@ const videos = [
     padding-right: 16px;
   }
 
+  .indicator {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+  }
+
+  .indicators {
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .indicators button {
+    flex: 1;
+    max-width: 155px;
+  }
+
+  button.indicator {
+    width: 100%;
+    height: 8px;
+    border-radius: 12px;
+    background-color: #cacaca;
+    &.-active {
+      background-color: black;
+    }
+  }
+
+  .scroll-snap-slider {
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: auto;
+    scroll-snap-stop: always;
+    border-radius: 24px;
+  }
+
+  video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
   .header {
     display: flex;
 
@@ -71,12 +120,26 @@ const videos = [
     }
   }
 
-  .splide {
-    display: block;
+  .container {
+    position: relative;
+  }
+  .next-button {
+    display: none;
+    opacity: 1;
+    position: absolute;
+    right: 25px;
+    bottom: 88px;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    z-index: 5;
+    transition: opacity 0.3s;
 
-    &__slide {
-      border-radius: 24px;
-      overflow: hidden;
+    &.hidden {
+      opacity: 0;
     }
   }
   @include tablet {
@@ -91,22 +154,106 @@ const videos = [
       padding-left: 150px;
       padding-right: 150px;
     }
+    .next-button {
+      display: block;
+    }
   }
 </style>
 
 <script>
-  import { Video } from "@splidejs/splide-extension-video";
-  import { Splide } from "@splidejs/splide";
+  import {
+    ScrollSnapSlider,
+    ScrollSnapLoop,
+    ScrollSnapAutoplay,
+  } from "scroll-snap-slider";
 
-  new Splide("#video-slider", {
-    arrows: false,
-    video: {
-      playerOptions: {
-        htmlVideo: {
-          autoplay: true,
-          loop: true,
-        },
-      },
-    },
-  }).mount({ Video });
+  const autoplayPlugin = new ScrollSnapAutoplay(4000);
+  const element = document.querySelector(".scroll-snap-slider") as HTMLElement;
+  const slider = new ScrollSnapSlider({ element }).with([
+    new ScrollSnapLoop(),
+    autoplayPlugin,
+  ]);
+
+  const container = document.querySelector(".container");
+  const sliderEl = document.querySelector(".scroll-snap-slider");
+  const slides = sliderEl.getElementsByClassName("scroll-snap-slide");
+  const indicatorsContainer = document.querySelector(".indicators");
+  const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
+    ".indicators .indicator",
+  );
+
+  const videos: NodeListOf<HTMLVideoElement> =
+    document.querySelectorAll(".slide-video");
+  const nextButton = document.querySelector(".next-button");
+
+  let videoPlaying = false;
+  let mouseentered = false;
+
+  const setSelected = function (event) {
+    const slideElementIndex = event.detail;
+    const slideElement = slides[slideElementIndex] as HTMLElement;
+
+    for (const button of buttons) {
+      button.classList.toggle(
+        "-active",
+        button.dataset.index === slideElement.dataset.index,
+      );
+    }
+  };
+  
+  indicatorsContainer.addEventListener('click', (event) => {
+    const button = event.target as HTMLButtonElement;
+    const slideElementIndex = Array.from(slides)
+        .findIndex((item) => item.dataset.index === button?.dataset.index);
+
+      slider.slideTo(slideElementIndex);
+  })
+
+  for (const video of videos) {
+    video.addEventListener("play", () => {
+      toggleVisability();
+      disablePlugin(autoplayPlugin);
+      videoPlaying = true;
+    });
+    video.addEventListener("pause", () => {
+      toggleVisability();
+      if (!mouseentered) {
+        enablePlugin(autoplayPlugin);
+      }
+      videoPlaying = false;
+    });
+  }
+
+  const toggleVisability = () => {
+    nextButton.classList.toggle("hidden");
+  };
+
+  nextButton.addEventListener("click", () => slider.slideTo(slider.slide + 1));
+
+  slider.addEventListener("slide-pass", () =>
+    videos.forEach((video) => video.pause()),
+  );
+
+  container.addEventListener("mouseenter", () => {
+    mouseentered = true;
+    disablePlugin(autoplayPlugin);
+  });
+  container.addEventListener("mouseleave", () => {
+    if (!videoPlaying) {
+      enablePlugin(autoplayPlugin);
+    }
+  });
+
+  slider.addEventListener("slide-pass", setSelected);
+  slider.addEventListener("slide-stop", setSelected);
+
+  const enablePlugin = (plugin: ScrollSnapAutoplay) => {
+    plugin.enable();
+    slider.plugins.set(plugin.id, plugin);
+  };
+
+  const disablePlugin = (plugin: ScrollSnapAutoplay) => {
+    plugin.disable();
+    slider.plugins.delete(plugin.id);
+  };
 </script>

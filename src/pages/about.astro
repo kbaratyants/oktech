@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import AboutBg from "@assets/about_bg.png";
-import TeamPhoto from "@assets/team-photo.png";
+import AboutBg from "@assets/about_bg.jpeg";
+import TeamPhoto from "@assets/team-photo.jpeg";
 import Footer from "@components/footer.astro";
-import FooterImage from "@assets/footer-image.png";
+import FooterImage from "@assets/footer-image.jpeg";
 import Scrollup from "@components/scrollup.svelte";
 import { Icon } from "astro-icon";
 import { Image, getImage } from "astro:assets";
@@ -13,24 +13,25 @@ const optimizedImageTop = await getImage({ src: AboutBg });
 const optimizedImageBottom = await getImage({ src: FooterImage });
 
 const about = await getEntryBySlug("about", "index");
-const { intro, product, work, bottom } = about.data;
+const { intro, product, work, bottom, button } = about.data;
 ---
 
-<Layout>
+<Layout title="О нас" ogTitle="О команде OK.TECH" description="Команда OK.TECH: каждый из нас влияет на то, каким увидят ОК миллионы пользователей.">
   <section class="top" style=`background-image: url(${optimizedImageTop.src});`>
   </section>
 
   <section class="about section-x section-y">
-    <div class="text-large-title">{intro.title}</div>
     <div class="text-title-1 about__content">
       <div>{intro.subtitle}</div>
       <Icon name="star" class="star" />
     </div>
-    <button class="main-button text-button"> {intro.button_text}</button>
+    <a class="main-button text-button" href={button.link} target="_blank" rel="nofollow">
+      {button.text}
+    </a>
   </section>
 
   <section class="product section-x section-y">
-    <div class="text-large-title">{product.title}</div>
+    <h2 class="text-large-title">{product.title}</h2>
     <div class="product__content">
       {
         product.stats.map((product) => (
@@ -48,7 +49,7 @@ const { intro, product, work, bottom } = about.data;
   </section>
 
   <section class="work section-x section-y">
-    <div class="text-large-title">{work.title}</div>
+    <h2 class="text-large-title">{work.title}</h2>
     <div class="work__content">
       {
         work.info.map((item) => (
@@ -72,13 +73,13 @@ const { intro, product, work, bottom } = about.data;
         <br />
         {bottom.title2}
       </div>
-      <a href="https://spb.hh.ru/employer/15478" target="_blank">
-        <button class="main-button">хочу к вам</button>
+      <a href={button.link} target="_blank" rel="nofollow">
+        <button class="main-button">{button.text}</button>
       </a>
     </div>
     <Footer classes="absolute transparent" />
-    <Scrollup client:load />
   </div>
+  <Scrollup client:load />
 </Layout>
 
 <style lang="scss">
@@ -148,6 +149,7 @@ const { intro, product, work, bottom } = about.data;
 
   .bottom {
     position: relative;
+    overflow: hidden;
     color: white;
     margin-top: calc(60px + 30 * (100vw - 375px) / 1065);
 
@@ -195,31 +197,19 @@ const { intro, product, work, bottom } = about.data;
 </style>
 
 <script>
-  import invariant from "tiny-invariant";
-
   const top = document.querySelector(".top") as HTMLElement;
-  const bottom = document.querySelector(".bottom") as HTMLElement;
   const header = document.querySelector("#page-header") as HTMLElement;
   const logo = document.querySelector("#logo") as HTMLElement;
   const page = document.documentElement;
 
-  invariant(header, "header should not be null");
-
-  const d = top.offsetHeight - page.scrollTop - header.offsetHeight / 2;
-  const s =
-    page.offsetHeight -
-    bottom.offsetHeight -
-    page.scrollTop -
-    header.offsetHeight / 2;
-  logo.classList.toggle("black-text", d < 0 && s > 0);
-
-  document.addEventListener("scroll", () => {
+  const changeLogo = () => {
     const d = top.offsetHeight - page.scrollTop - header.offsetHeight / 2;
-    const s =
-      page.offsetHeight -
-      bottom.offsetHeight -
-      page.scrollTop -
-      header.offsetHeight / 2;
-    logo.classList.toggle("black-text", d < 0 && s > 0);
-  });
+    logo.classList.toggle("hidden-text", d < 0);
+  }
+  
+  if (header) {
+    changeLogo();
+  
+    document.addEventListener("scroll", changeLogo);
+  }
 </script>

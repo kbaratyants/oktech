@@ -2,6 +2,7 @@
   // "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": "src",
+    "lib": ["es2017", "dom"],
     "paths": {
       "@lib/*": ["lib/*"],
       "@utils/*": ["utils/*"],

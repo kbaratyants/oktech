@@ -1,43 +1,27 @@
 ---
 import { Icon } from "astro-icon";
 
-const navItems = [
-  { title: "GITHUB", url: "https://github.com/odnoklassniki", external: true },
-  { title: "Habr", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true, },
-  { title: "Вакансии", url: "https://spb.hh.ru/employer/15478", external: true },
-  { title: "Тех радар", url: "/techradar" },
-  { title: "О нас", url: "/about" },
-  { title: "Контакты", url: "/contacts" },
-];
+export interface Props {
+  blackLogo?: boolean;
+  blackLogoText?: boolean;
+}
 
-const mobileNavItems = [
-  {
-    title: "Github ↗",
-    url: "https://github.com/odnoklassniki",
-    external: true,
-  },
-  {
-    title: "Habr ↗",
-    url: "https://habr.com/ru/companies/odnoklassniki/articles/",
-    external: true,
-  },
-  {
-    title: "Вакансии",
-    url: "https://spb.hh.ru/employer/15478",
-    external: true,
-  },
+const navItems = [
   { title: "О нас", url: "/about" },
   { title: "Контакты", url: "/contacts" },
+  { title: "Тех радар", url: "/techradar" },
+  { title: "Вакансии", url: "https://spb.hh.ru/employer/15478#ok", external: true },
+  { title: "Github", url: "https://github.com/odnoklassniki", external: true },
+  { title: "Habr", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true, },
 ];
 
 const { pathname } = Astro.url;
+const { blackLogo, blackLogoText } = Astro.props;
 ---
 
 <header id="page-header">
   <a href="/">
-    <h1 class="sr-only">OKTECH</h1>
-    <img src="" />
-    <Icon name="logomark" id="logo" class="icon" />
+    <Icon name="logomark" id="logo" class={`icon ${blackLogo ? 'black-logo' : ''} ${blackLogoText ? 'black-text' : ''}`} />
   </a>
   <div id="menu-modal" class="modal" aria-hidden="true">
     <div class="modal-content">
@@ -60,14 +44,14 @@ const { pathname } = Astro.url;
         <nav class="mobile-nav">
           <ul>
             {
-              mobileNavItems.map(({ title, url, external }) => (
+              navItems.map(({ title, url, external }) => (
                 <li
                   class={`${
                     pathname === `${url}/` || pathname === url ? "active" : ""
                   }`}
                 >
                   <a href={url} target={external ? "_blank" : "_self"}>
-                    {title}
+                    { title }
                   </a>
                 </li>
               ))
@@ -87,13 +71,13 @@ const { pathname } = Astro.url;
             }`}
           >
             <a
-              class="text-button"
+              class="text-button nav-btn"
               href={url}
               target={external ? "_blank" : "_self"}
               data-pathname={pathname}
               data-url={url}
             >
-              <div class="nav-btn">{title}</div>
+              {title}
             </a>
           </li>
         ))
@@ -112,33 +96,30 @@ const { pathname } = Astro.url;
 
 <script>
   import MicroModal from "micromodal";
-  import invariant from "tiny-invariant";
 
   const menuModalId = "menu-modal";
   const menu = document.querySelector(`#${menuModalId} ul`);
   const openNavButton = document.querySelector("#open-nav-button");
   const closeNavButton = document.querySelector("#close-nav-button");
 
-  invariant(menu, "menu should not be null");
-  invariant(openNavButton, "openNavButton should not be null");
-  invariant(closeNavButton, "closeNavButton should not be null");
-
-  const openMenu = () => {
-    MicroModal.show(menuModalId, { disableScroll: true });
-  };
-
-  const closeMenu = () => {
-    MicroModal.close(menuModalId);
-  };
-
-  openNavButton.addEventListener("click", openMenu);
-  closeNavButton.addEventListener("click", closeMenu);
-
-  menu.addEventListener("click", (event) => {
-    if ((event.target as HTMLElement).tagName === "A") {
-      closeMenu();
-    }
-  });
+  if (menu && openNavButton && closeNavButton) {
+    const openMenu = () => {
+      MicroModal.show(menuModalId, { disableScroll: true });
+    };
+  
+    const closeMenu = () => {
+      MicroModal.close(menuModalId);
+    };
+  
+    openNavButton.addEventListener("click", openMenu);
+    closeNavButton.addEventListener("click", closeMenu);
+  
+    menu.addEventListener("click", (event) => {
+      if ((event.target as HTMLElement).tagName === "A") {
+        closeMenu();
+      }
+    });
+  }
 </script>
 
 <style lang="scss">
@@ -208,20 +189,20 @@ const { pathname } = Astro.url;
   }
 
   .nav-btn {
-    position: relative;
-    display: flex;
-    height: 32px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     border-radius: 64px;
     background-color: rgba(44, 44, 44, 0.4);
-    padding: 24px;
+    padding: 10.5px 16px;
+    line-height: 19px;
     backdrop-filter: blur(12px);
+    transition: background-color 0.3s;
 
     &:hover {
       background-color: rgba(44, 44, 44, 0.5);
     }
+  }
+
+  a[target=_blank]::after {
+    content: "↗";
   }
 
   @include desktop {

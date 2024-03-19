@@ -1,8 +1,6 @@
 ---
-import "@splidejs/splide/css/core";
 import Blog from "@components/blog.astro";
 import Intro from "@components/intro.astro";
-import News from "@components/news/news.astro";
 import Technologies from "@components/technologies.astro";
 import TextBlock from "@components/text-block.astro";
 import PhotoGallery from "@components/photo-gallery/photo-gallery.astro";
@@ -19,34 +17,36 @@ const { teaser, intro, technologies, blog, text_block, vacancies } =
   homepage.data;
 ---
 
-<Layout>
+<Layout title=" OK.TECH — команда, которая создает и развивает ОК" ogTitle="OK.TECH" description="Наша команда регулярно сталкивается с амбициозными и сложными задачами, которые встречаются только в проектах масштаба ОК. На сайте найдете информацию о наших проектах, стек технологий и открытые вакансии.">
   <Teaser {teaser} />
   <Intro {intro} />
   <Technologies {technologies} />
   <Videos />
   <Blog {blog} />
   <TextBlock {text_block} />
-  <PhotoGallery />
   <Vacancies {vacancies} />
-  <News />
-  <Footer classes="black" />
+  <PhotoGallery />
   <Scrollup client:load />
+  <Footer classes="black" />
 </Layout>
 
 <script>
-  import invariant from "tiny-invariant";
-
   const header = document.querySelector("#page-header") as HTMLElement;
   const logo = document.querySelector("#logo") as HTMLElement;
   const page = document.documentElement;
 
-  invariant(header, "header should not be null");
-
-  const d = page.clientHeight - page.scrollTop - header.offsetHeight / 2;
-  logo.classList.toggle("black-text", d < 0);
-
-  document.addEventListener("scroll", () => {
+  const changeLogo = () => {
     const d = page.clientHeight - page.scrollTop - header.offsetHeight / 2;
-    logo.classList.toggle("black-text", d < 0);
+    logo.classList.toggle("hidden-text", d < 0);
+  }
+
+  if (header) {
+    changeLogo();
+  }
+  
+  document.addEventListener("scroll", () => {
+    if (header) {
+      changeLogo();
+    }
   });
 </script>

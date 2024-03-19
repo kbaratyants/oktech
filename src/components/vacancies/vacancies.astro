@@ -2,45 +2,157 @@
 import VacancyItem from "./vacancy-item.astro";
 import AllVacancyItem from "./all-vacancy-item.astro";
 
+import "scroll-snap-slider/dist/scroll-snap-slider.css";
+
 const { vacancies } = Astro.props;
 ---
 
 <section class="section-x section-y">
-  <div class="splide" id="vacancies-slider">
-    <div class="splide__track">
-      <ul class="splide__list">
-        {
-          vacancies.map((vacancy) => (
-            <li class="splide__slide">
-              <VacancyItem title={vacancy.title} link={vacancy.link} />
-            </li>
-          ))
-        }
-        <li class="splide__slide">
-          <AllVacancyItem />
-        </li>
-      </ul>
-    </div>
+  <div class="vacancy-container">
+    <ul class="scroll-snap-slider vacancy-slider">
+      {
+        vacancies.map((vacancy, index) => (
+          <li class="scroll-snap-slide vacancy-slide" data-index={index}>
+            <VacancyItem title={vacancy.title} link={vacancy.link} />
+          </li>
+        ))
+      }
+      <li class="scroll-snap-slide vacancy-slide" data-index={vacancies.length + 1}>
+        <AllVacancyItem />
+      </li>
+    </ul>
+  </div>
+
+  <div class="vacancy-indicators">
+    {
+      vacancies.map((video, index) => (
+        <button
+          class={`vacancy-indicator ${index === 0 ? "-active" : ""}`}
+          data-index={index}
+          type="button"
+        />
+      ))
+    }
+    <button
+      class={`vacancy-indicator`}
+      data-index={vacancies.length + 1}
+      type="button"
+    />
   </div>
 </section>
 
 <style lang="scss">
   @import "../../styles/global.scss";
-  .splide__track {
-    border-radius: 16px;
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .vacancy-slider {
+    border-radius: 24px;
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: auto;
+    scroll-snap-stop: always;
+    border-radius: 24px;
+  }
+  
+  .vacancy-indicator {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+  }
+
+  .vacancy-indicators {
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .vacancy-indicators button {
+    flex: 1;
+    max-width: 155px;
+  }
+
+  button.vacancy-indicator {
+    width: 100%;
+    height: 8px;
+    border-radius: 12px;
+    background-color: #cacaca;
+    &.-active {
+      background-color: black;
+    }
   }
 </style>
 
 <script>
-  import Splide from "@splidejs/splide";
+  import {
+    ScrollSnapSlider,
+    ScrollSnapLoop,
+    ScrollSnapAutoplay,
+  } from "scroll-snap-slider";
 
-  const splide = new Splide("#vacancies-slider", {
-    type: "loop",
-    arrows: false,
-    autoplay: true,
-    interval: 3500,
-    pauseOnHover: true,
+  const autoplayPlugin = new ScrollSnapAutoplay(4000);
+  const element = document.querySelector(".vacancy-slider") as HTMLElement;
+  const slider = new ScrollSnapSlider({ element }).with([
+    new ScrollSnapLoop(),
+    autoplayPlugin,
+  ]);
+
+  const container = document.querySelector(".vacancy-container");
+  const sliderEl = document.querySelector(".vacancy-slider");
+  const slides = sliderEl.getElementsByClassName("vacancy-slide");
+  const indicatorsContainer: HTMLElement = document.querySelector(".vacancy-indicators");
+  const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
+    ".vacancy-indicators .vacancy-indicator",
+  );
+  
+  
+  const nextButton = document.querySelector(".next-button");
+  let mouseentered = false;
+
+  const setSelected = function (event) {
+    const slideElementIndex = event.detail;
+    const slideElement = slides[slideElementIndex] as HTMLElement;
+
+    for (const button of buttons) {
+      button.classList.toggle(
+        "-active",
+        button.dataset.index === slideElement.dataset.index,
+      );
+    }
+  };
+
+  indicatorsContainer.addEventListener('click', (event) => {
+    const button = event.target as HTMLButtonElement;
+    const slideElementIndex = Array.prototype.slice
+        .call(slides)
+        .findIndex((item) => item?.dataset.index === button?.dataset.index);
+
+      slider.slideTo(slideElementIndex);
+  })
+
+  nextButton.addEventListener("click", () => slider.slideTo(slider.slide + 1));
+
+  container.addEventListener("mouseenter", () => {
+    mouseentered = true;
+    disablePlugin(autoplayPlugin);
+  });
+  container.addEventListener("mouseleave", () => {
+    mouseentered = false;
+    enablePlugin(autoplayPlugin);
   });
 
-  splide.mount();
+  slider.addEventListener("slide-pass", setSelected);
+  slider.addEventListener("slide-stop", setSelected);
+
+  const enablePlugin = (plugin: ScrollSnapAutoplay) => {
+    plugin.enable();
+    slider.plugins.set(plugin.id, plugin);
+  };
+
+  const disablePlugin = (plugin: ScrollSnapAutoplay) => {
+    plugin.disable();
+    slider.plugins.delete(plugin.id);
+  };
 </script>
