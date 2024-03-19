@@ -5,7 +5,7 @@ teaser:
     - link: https://www.rbc.ru/industries/news/651fc16d9a7947638644561c
       title: Входим в топ лучших работодателей России ↗
     - link:
-      title: создаем digital- продукты
+      title: создаем digital-продукты
     - link: mailto:hi@ok.ru
       title: hi@ok.ru
 
@@ -29,7 +29,7 @@ technologies:
         - title: Языки, фреймворки
           content: TypeScript, JavaScript, React, Endorphin, Java, Spring.
         - title: Инструменты
-          content: MobX, Webpack, CSS-modules, SCSS, Stylus, Lerna, Babel, PostCSS, Gulp, Grunt, Git
+          content: MobX, Webpack, CSS-modules, SCSS, Stylus, Lerna, Babel, PostCSS, Git
         - title: Платформы
           content: GraalVM
         - title: Технологии
@@ -83,7 +83,7 @@ blog:
   first_section:
     - type: black
       title: Анимация в браузерах и как с ней работать
-      headline: Сергей Чикуенок · 10 мин
+      headline: Сергей Чикуёнок · 10 мин
       link: https://habr.com/p/794160/
       sources:
         - хабр

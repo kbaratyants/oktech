@@ -203,9 +203,8 @@ const videos = [
   
   indicatorsContainer.addEventListener('click', (event) => {
     const button = event.target as HTMLButtonElement;
-    const slideElementIndex = Array.prototype.slice
-        .call(slides)
-        .findIndex((item) => item?.dataset.index === button?.dataset.index);
+    const slideElementIndex = Array.from(slides)
+        .findIndex((item) => item.dataset.index === button?.dataset.index);
 
       slider.slideTo(slideElementIndex);
   })

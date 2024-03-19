@@ -491,7 +491,7 @@ const frontendItems: Item[] = [
   //hold
   //   { "name": "GWT", "discipline": ["frontend"], "category": "tools", "phase": "hold" },
   //   { "name": "ant", "discipline": ["frontend"], "category": "tools", "phase": "hold" },
-  { name: "Grunt", discipline: ["frontend"], category: "tools", phase: "hold" },
+  // { name: "Grunt", discipline: ["frontend"], category: "tools", phase: "hold" },
   { name: "Lerna", discipline: ["frontend"], category: "tools", phase: "hold" },
   {
     name: "enzyme",

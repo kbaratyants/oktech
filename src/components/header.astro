@@ -10,9 +10,9 @@ const navItems = [
   { title: "О нас", url: "/about" },
   { title: "Контакты", url: "/contacts" },
   { title: "Тех радар", url: "/techradar" },
-  { title: "Вакансии ↗", url: "https://spb.hh.ru/employer/15478#ok", external: true },
-  { title: "Github ↗", url: "https://github.com/odnoklassniki", external: true },
-  { title: "Habr ↗", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true, },
+  { title: "Вакансии", url: "https://spb.hh.ru/employer/15478#ok", external: true },
+  { title: "Github", url: "https://github.com/odnoklassniki", external: true },
+  { title: "Habr", url: "https://habr.com/ru/companies/odnoklassniki/articles/", external: true, },
 ];
 
 const { pathname } = Astro.url;
@@ -71,13 +71,13 @@ const { blackLogo, blackLogoText } = Astro.props;
             }`}
           >
             <a
-              class="text-button"
+              class="text-button nav-btn"
               href={url}
               target={external ? "_blank" : "_self"}
               data-pathname={pathname}
               data-url={url}
             >
-              <div class="nav-btn">{title}</div>
+              {title}
             </a>
           </li>
         ))
@@ -199,6 +199,10 @@ const { blackLogo, blackLogoText } = Astro.props;
     &:hover {
       background-color: rgba(44, 44, 44, 0.5);
     }
+  }
+
+  a[target=_blank]::after {
+    content: "↗";
   }
 
   @include desktop {
